@@ -12,7 +12,7 @@ import {
   X, CheckCircle2, BarChart3, Globe, Plus, 
   Newspaper, Bell, Camera, Layers, Sun, Moon,
   ClipboardList, Target, TrendingUp, Settings,
-  FlaskConical, Compass
+  FlaskConical, Compass, Heart, Sprout
 } from 'lucide-react';
 import React, { useEffect, useState, useRef } from 'react';
 
@@ -24,12 +24,39 @@ import {
 
 // --- Logic & Data ---
 
-const ArcLogo = ({ className = "", isDark = false }: { className?: string; isDark?: boolean }) => (
-  <div className={`relative w-12 h-12 flex items-center justify-center border-2 ${isDark ? 'border-white' : 'border-[#10307D]'} rounded-full group cursor-pointer ${className}`}>
-    <span className={`text-[10px] font-black ${isDark ? 'text-white' : 'text-[#10307D]'} leading-tight text-center group-hover:scale-110 transition-transform`}>
-      ARC<br/>LAB
-    </span>
-  </div>
+const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
+  <button 
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    className="focus:outline-none transition-all hover:scale-105 active:scale-95 flex items-center justify-center p-2"
+  >
+    <div className="relative h-10 md:h-12 w-20 flex items-center justify-center">
+      {/* Organic Blob Background */}
+      <svg viewBox="0 0 100 60" className="absolute inset-0 w-full h-full drop-shadow-sm">
+        <path 
+          d="M15,30 C15,10 40,5 65,10 C85,15 90,30 85,45 C80,60 50,55 30,50 C10,45 15,40 15,30 Z" 
+          fill={isDark ? "white" : "#10307D"} 
+        />
+        <text 
+          x="48" 
+          y="38" 
+          textAnchor="middle" 
+          fill={isDark ? "#0f1118" : "white"} 
+          className="text-[22px] font-black tracking-tighter"
+          style={{ fontFamily: 'system-ui, sans-serif' }}
+        >
+          ARC
+        </text>
+      </svg>
+      {/* LAB Text outside the blob */}
+      <span 
+        className={`absolute -bottom-1 -right-1 text-[10px] font-black uppercase tracking-tighter ${
+          isDark ? 'text-white' : 'text-[#10307D]'
+        }`}
+      >
+        LAB
+      </span>
+    </div>
+  </button>
 );
 
 // --- Components ---
@@ -53,11 +80,11 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
         <ArcLogo isDark={isDarkMode} />
         <div className="hidden md:flex gap-8">
           {[
-            { id: 'strategy', label: '포트폴리오' },
+            { id: 'news', label: '소식' },
             { id: 'values', label: '가치' },
+            { id: 'strategy', label: '포트폴리오' },
             { id: 'technology', label: '솔루션' },
-            { id: 'teams', label: '팀' },
-            { id: 'news', label: '소식' }
+            { id: 'teams', label: '팀' }
           ].map((item) => (
             <a
               key={item.id}
@@ -81,7 +108,9 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
         >
           {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
         </button>
-        <button className={`px-6 py-2.5 rounded-full text-[12px] font-black tracking-widest uppercase hover:scale-105 active:scale-95 transition-all ${
+        <button 
+          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          className={`px-6 py-2.5 rounded-full text-[12px] font-black tracking-widest uppercase hover:scale-105 active:scale-95 transition-all ${
           isDarkMode ? 'bg-white text-[#0f1118]' : 'bg-[#10307D] text-white'
         }`}>
           Contact
@@ -474,19 +503,19 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
 const CoreValues = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const values = [
     {
-      topic: "진정성 (Authenticity)",
+      topic: "진정성",
       basis: "단순한 감성이 아닌 체크포인트 데이터 모델링과 엔지니어링 분석으로 브랜드의 본질(Origin)을 추출합니다.",
       emotion: "가짜가 판치는 시장에서 '진짜'로 인정받는 사장님의 자부심을 데이터로 완성합니다.",
-      icon: <ShieldCheck className="w-12 h-12" />
+      icon: <Heart className="w-12 h-12" />
     },
     {
-      topic: "자생력 (Self-sustainability)",
+      topic: "자생력",
       basis: "스스로 작동하고 성장하는 지능형 SOP(표준 운영 절차) 시스템을 구축합니다.",
       emotion: "24시간 멈추지 않는 지능형 엔진이 실무를 책임집니다. 이제 현장의 '일'이 아닌, 사업의 '결'을 관리하는 본질적인 경영에만 집중하십시오.",
-      icon: <Zap className="w-12 h-12" />
+      icon: <Sprout className="w-12 h-12" />
     },
     {
-      topic: "트랜드 (Trend Tech)",
+      topic: "트랜드",
       basis: "단순 노출을 넘어 AI 엔진(AEO/GEO)이 브랜드를 지역 내 최우선 정답으로 학습하게 하는 시맨틱 데이터 피딩.",
       emotion: "광고비에 쫓기지 않고도 고객이 알아서 찾아오는 시장 점유의 쾌감을 선사합니다.",
       icon: <TrendingUp className="w-12 h-12" />
@@ -498,7 +527,7 @@ const CoreValues = ({ isDarkMode }: { isDarkMode: boolean }) => {
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-24 space-y-4">
           <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Core Framework</span>
-          <h2 className={`text-4xl md:text-6xl font-black break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>3대 핵심 가치 로직.</h2>
+          <h2 className={`text-4xl md:text-6xl font-black break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>올라운더의 핵심 가치</h2>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
@@ -579,14 +608,14 @@ const Portfolio = ({ isDarkMode }: { isDarkMode: boolean }) => {
       title: "비즈니스 OS",
       tags: ["#Automation", "#System"],
       summary: [
-        "Topic: 자생력 완성. 사장 부재 시에도 작동하는 운영 체계.",
-        "Logical Basis: 전 공정 디지털 SOP 및 지능형 가동 알고리즘.",
-        "Emotion: 현장에서 벗어나 얻게 된 온전한 자유와 안도감."
+        "Topic: 지속 가능한 자생력. 컨설팅 이후에도 스스로 진화하고 성장하는 시스템.",
+        "Logical Basis: 시스템 기반의 구조 설계 및 실무에 완전히 내재화되는 최적화 SOP.",
+        "Emotion: 원칙과 시스템이 작동하는 구조에서 얻는 지속 성장의 확신."
       ],
       details: {
-        analysis: "사장 개입 지표 분석 및 병목 구간 데이터 마이닝.",
-        process: "디지털 SOP 이식 및 노동력 의존도 제로화 설계.",
-        deployment: "지능형 매장 관리 시스템 동시 적용 및 원격 가동.",
+        analysis: "비즈니스 구조의 근본적 병목 진단 및 자생적 성장 지표 분석.",
+        process: "컨설팅의 가치가 영구히 지속되는 자가 진화형 SOP 설계.",
+        deployment: "전문 지식과 경험이 내재화된 운영 체제 구축, 선순환 구조로 전환.",
         chartType: "line",
         chartData: [
           { name: '1주', error: 90, skill: 10 },
@@ -855,21 +884,21 @@ const Solutions = ({ isDarkMode }: { isDarkMode: boolean }) => {
         { name: "Google Maps", url: "https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" }
       ]
     },
-    {
-      id: "infra",
-      title: "인프라",
-      desc: "사장 부재 시에도 24시간 작동하는 지능형 운영 체계.",
-      icon: <Zap className="w-8 h-8 text-[#00D4FF]" />,
-      bg: isDarkMode ? "bg-[#00D4FF]/10" : "bg-[#F0FBFF]",
-      topic: "자생활력 (Self-sustainability) 완성",
-      logicalBasis: "전 공정 디지털 SOP와 물리적 가동 알고리즘을 이식합니다. 머신 설비부터 관리 시스템까지 사장의 노동력이 아닌 시스템의 로직으로 매장이 굴러가게 설계합니다.",
-      emotion: "매장에 묶여있던 고통스러운 노동에서 벗어나, 전략가로서의 사적인 시간과 온전한 자유를 선물합니다.",
-      features: ["지능형 SOP 디지털 시스템", "자율 주행 운영 인프라", "하드웨어-소프트웨어 완전 연동"],
-      logos: [
-        { name: "SystemOS", url: "https://upload.wikimedia.org/wikipedia/commons/1/15/Noun_Project_Coffee_Machine_icon_1180183_cc.svg" },
-        { name: "Automation", url: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Coffee_bean_icon.svg" }
-      ]
-    },
+   {
+  id: "infra",
+  title: "자생적 인프라",
+  desc: "일시적인 처방을 넘어, 컨설팅 종료 후에도 비즈니스가 스스로 성장할 수 있는 체질을 만듭니다.",
+  icon: <Zap className="w-8 h-8 text-[#00D4FF]" />,
+  bg: isDarkMode ? "bg-[#00D4FF]/10" : "bg-[#F0FBFF]",
+  topic: "자생적 성장 동력 확보",
+  logicalBasis: "올라운더 커피랩의 실무 노하우를 디지털 SOP로 구조화하여 비즈니스에 내재화합니다. 구조적 안정이 지속적인 성과로 이어지는 자생적 메커니즘을 설계합니다.",
+  emotion: "잘 짜인 시스템이 성장을 견인하는 과정을 경험하며 느끼는 비즈니스 운영의 안정감과 확신.",
+  features: ["성장을 지속시키는 디지털 SOP", "자생적 비즈니스 메커니즘", "구조적 안정성 중심 시스템"],
+  logos: [
+    { name: "SystemOS", url: "https://upload.wikimedia.org/wikipedia/commons/1/15/Noun_Project_Coffee_Machine_icon_1180183_cc.svg" },
+    { name: "All-rounder", url: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Coffee_bean_icon.svg" }
+  ]
+},
     {
       id: "aeo",
       title: "마케팅 (AEO/GEO/SEO)",
@@ -1181,17 +1210,24 @@ const DarkPhilosophy = () => (
         className="max-w-4xl mx-auto space-y-12"
       >
         <span className="inline-block px-10 py-4 border border-white/20 rounded-full text-white text-[10px] font-bold tracking-[0.5em] uppercase backdrop-blur-xl">
-          Philosophy: Reliability & Intelligence
+          Philosophy: Beyond Survival to Evolution
         </span>
-        <h2 className="text-[32px] md:text-8xl font-black text-white leading-tight break-keep">
-          세상이 믿을 수 있는<br/>
-          비즈니스 구조를<br/>
-          제공합니다.
+        
+        <h2 className="text-[32px] md:text-6xl font-black text-white leading-tight break-keep">
+          누구나 시작할 수 있지만,<br />
+          아무나 살아남을 수는 없는<br />
+          카페 경영의 본질.
         </h2>
+        
         <div className="w-20 h-1 bg-white/30 mx-auto rounded-full" />
-        <p className="text-xl md:text-2xl text-white/60 font-light leading-relaxed max-w-3xl mx-auto">
-          복잡함은 본질을 흐립니다. 우리는 당신의 비즈니스가<br/>
-          가장 정갈하고 강력한 형태로 스스로 작동하도록 설계합니다.
+        
+        <p className="text-lg md:text-xl text-white/70 font-light leading-relaxed max-w-4xl mx-auto break-keep">
+          유행하는 마케팅을 쫓아도 매출은 요지부동이고, 훌륭한 맛을 내놓아도 고객 유입은 막막하며, <br />
+          몸부림치며 매출을 올려도 정작 통장은 비어가는 사장님들의 현실을 잘 알고 있습니다. <br /><br />
+          
+          올라운더 커피랩이 말하는 '자생력'은 일시적인 처방이 아닙니다. <br />
+          사장님의 열정을 정교한 시스템(SOP)으로 내재화하여, <br />
+          <strong>컨설팅이 끝난 뒤에도 비즈니스가 스스로 길을 찾아 성장하는 힘</strong>을 이식하는 것입니다.
         </p>
       </motion.div>
     </div>
@@ -1262,14 +1298,15 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
                 Consulting Request
               </span>
               <h2 className={`text-5xl md:text-7xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-                시스템으로<br/>생존을 증명합니다.
+                사장님의 열정을<br/>'구조'로 번역합니다.
               </h2>
             </div>
             
             <div className="space-y-8">
               <p className={`text-xl font-light leading-relaxed break-keep ${isDarkMode ? 'text-white/60' : 'text-gray-500'}`}>
-                막연한 희망이 아닌, 정교하게 설계된 데이터 기반의 SOP 알고리즘을 제안합니다. 
-                전문적인 시스템 진단을 통해 당신의 비즈니스가 가질 수 있는 최상의 효율을 찾아보세요.
+                카페 창업은 쉽지만, '살아남는 카페'를 만드는 것은 전혀 다른 영역입니다. 
+                훌륭한 커피를 내놓아도 손님이 늘지 않고, 매출은 오르는데 정작 통장은 비어간다면 비즈니스의 설계도(SOP)가 어긋나 있기 때문입니다.<br />
+                올라운더 커피랩은 단순한 조언을 넘어, 컨설팅이 끝난 뒤에도 매장이 <br />스스로 문제를 진단하고 성장을 이어가는 '자율 운영 엔진'을 이식합니다.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-gray-100/10">
