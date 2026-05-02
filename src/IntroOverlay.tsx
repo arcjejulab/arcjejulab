@@ -46,7 +46,7 @@ const IntroOverlay = () => {
               <div className="space-y-6 text-white/70 text-base md:text-lg font-light leading-relaxed break-keep">
                 <p>내 손으로 내린 첫 커피의 설렘과<br />손님들의 웃음으로 가득할 공간을 그리던 그날.</p>
                 <p className="text-white/90 font-medium italic">"그런데 오늘도 마감 후,<br />홀로 매출을 들여다보고 계신가요?"</p>
-                <p>밤잠 설친 메뉴도, 유행하는 마케팅도<br />막막한 현실 앞에서는 무력할 때가 많았습니다.</p>
+                <p>밤잠 설쳐 개발한 메뉴들도, 유행하는 마케팅도<br />막막한 현실 앞에서는 무력할 때가 많았습니다.</p>
                 <p>사장님의 정성과 희생이 성과로 돌아오지 않는 그 마음을 잘 알기에,<br />우리는 당신의 노력을 <span className="text-white font-bold border-b border-white/30">‘시스템’</span>으로 바꾸려 합니다.</p>
               </div>
             </motion.div>
@@ -58,7 +58,7 @@ const IntroOverlay = () => {
               className="space-y-8 pt-8"
             >
               <p className="text-white text-lg md:text-xl font-light tracking-wide">
-                성공은 당신의 희생이 아니라,<br />잘 짜인 구조가 주는 선물이어야 하니까요.
+                성공은 당신의 희생이 아니라,<br />잘 짜인 시스템이 주는 선물이어야 하니까요.
               </p>
               <div className="w-12 h-[1px] bg-white/20 mx-auto" />
               <p className="text-white/30 text-[11px] tracking-[0.3em] animate-pulse">
