@@ -15,6 +15,8 @@ import {
   FlaskConical, Compass, Heart, Sprout
 } from 'lucide-react';
 import React, { useEffect, useState, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminLogin from './pages/Admin/Login';
 
 import { 
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, 
@@ -1485,7 +1487,7 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
   </footer>
 );
 
-export default function App() {
+function Home() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
     return saved === 'dark';
@@ -1515,5 +1517,19 @@ export default function App() {
       <ConsultingRequest isDarkMode={isDarkMode} />
       <Footer isDarkMode={isDarkMode} />
     </div>
+  );
+}
+// 파일 맨 마지막에 추가
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        {/* 기본 주소: 기존 홈페이지(Home) 연결 */}
+        <Route path="/" element={<Home />} />
+        
+        {/* 관리자 주소: 우리가 만든 로그인 페이지 연결 */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+      </Routes>
+    </Router>
   );
 }
