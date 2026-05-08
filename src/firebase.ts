@@ -1,21 +1,21 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// 파이어베이스 프로젝트 설정값
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyArv8j1o77v4_vY0u6oDq_m7I3H0l4vQ4",
-  authDomain: "allroundercoffeelab.firebaseapp.com",
-  projectId: "allroundercoffeelab",
-  storageBucket: "allroundercoffeelab.appspot.com",
-  messagingSenderId: "38515029415",
-  appId: "1:38515029415:web:86e2467d3637648358482d",
-  measurementId: "G-815Q47291B"
+  apiKey: "AIzaSyAzrj1ItQU3eXUqXiwRoCFbq_hbioPbxSw",
+  authDomain: "allrounder-admi.firebaseapp.com",
+  projectId: "allrounder-admi",
+  storageBucket: "allrounder-admi.firebasestorage.app",
+  messagingSenderId: "731726433487",
+  appId: "1:731726433487:web:f8f336f77449f343137bba",
+  measurementId: "G-259H8JXTGG"
 };
 
-// 시스템 초기화
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// 보안 인증 및 데이터베이스 엔진 내보내기
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+const analytics = getAnalytics(app);
