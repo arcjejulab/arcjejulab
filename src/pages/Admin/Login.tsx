@@ -1,39 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../lib/firebase'; // 아까 만든 설정파일 연결
 
 const AdminLogin = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      // 구글 서버에 "이 사람 사장님 맞아?"라고 물어보는 명령
+      await signInWithEmailAndPassword(auth, email, password);
+      
+      // 로그인 성공 시 대시보드로 이동
+      navigate('/admin/dashboard');
+    } catch (err: any) {
+      console.error(err);
+      setError('이메일 또는 비밀번호가 일치하지 않습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 font-sans">
-      <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-black text-gray-900 tracking-tight">ARC ADMIN</h1>
-          <p className="text-gray-500 mt-2 italic">올라운더 커피랩 비즈니스 관제 시스템</p>
-        </div>
+    <div style={{ 
+      display: 'flex', justifyContent: 'center', alignItems: 'center', 
+      height: '100vh', backgroundColor: '#f5f5f5', fontFamily: 'sans-serif' 
+    }}>
+      <div style={{ 
+        width: '100%', maxWidth: '400px', padding: '40px', 
+        backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' 
+      }}>
+        <h1 style={{ textAlign: 'center', color: '#333', marginBottom: '10px' }}>ARC ADMIN</h1>
+        <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>관제 시스템 로그인</p>
         
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">관리자 인증</label>
+        <form onSubmit={handleLogin}>
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', color: '#555' }}>Admin Email</label>
             <input 
               type="email" 
-              placeholder="admin@allrounder.com" 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black outline-none transition"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@example.com"
+              required
+              style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #ddd', boxSizing: 'border-box' }}
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">보안 암호</label>
+          
+          <div style={{ marginBottom: '25px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', color: '#555' }}>Password</label>
             <input 
               type="password" 
-              placeholder="••••••••" 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black outline-none transition"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+              style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #ddd', boxSizing: 'border-box' }}
             />
           </div>
-          <button className="w-full bg-black text-white p-4 rounded-xl font-bold hover:bg-gray-800 transition shadow-lg mt-4">
-            시스템 엔진 가동
+
+          {error && <p style={{ color: '#e74c3c', fontSize: '14px', marginBottom: '20px', textAlign: 'center' }}>{error}</p>}
+
+          <button 
+            type="submit" 
+            disabled={loading}
+            style={{ 
+              width: '100%', padding: '14px', borderRadius: '6px', border: 'none', 
+              backgroundColor: '#333', color: 'white', fontWeight: 'bold', cursor: 'pointer',
+              transition: 'background-color 0.2s'
+            }}
+          >
+            {loading ? '인증 중...' : '관리자 로그인'}
           </button>
-        </div>
-        
-        <div className="mt-8 text-center text-xs text-gray-400">
-          © {new Date().getFullYear()} ALLROUNDER COFFEE LAB. Business OS v1.0
-        </div>
+        </form>
       </div>
     </div>
   );
