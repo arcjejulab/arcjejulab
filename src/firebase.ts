@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics, isSupported } from "firebase/analytics";
@@ -13,13 +12,10 @@ const firebaseConfig = {
   measurementId: "G-259H8JXTGG"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Auth
 const auth = getAuth(app);
 
-// Initialize Analytics only when supported
 isSupported().then((supported) => {
   if (supported) {
     getAnalytics(app);
