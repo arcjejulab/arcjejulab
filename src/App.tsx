@@ -20,6 +20,7 @@ import AdminLogin from './pages/Admin/Login';
 import Dashboard from './pages/Admin/Dashboard';
 import Schedule from './pages/Admin/Schedule';
 import Clients from './pages/Admin/Clients';
+import ProtectedRoute from './pages/Admin/ProtectedRoute';
 
 import { 
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, 
@@ -1532,9 +1533,32 @@ export default function App() {
         
         {/* 관리자 주소: 우리가 만든 로그인 페이지 연결 */}
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/schedule" element={<Schedule />} />
-        <Route path="/admin/clients" element={<Clients />} />
+        <Route
+  path="/admin/dashboard"
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin/schedule"
+  element={
+    <ProtectedRoute>
+      <Schedule />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin/clients"
+  element={
+    <ProtectedRoute>
+      <Clients />
+    </ProtectedRoute>
+  }
+/>
       </Routes>
     </Router>
   );
