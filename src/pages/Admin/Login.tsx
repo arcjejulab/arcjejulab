@@ -22,8 +22,9 @@ const AdminLogin = () => {
       // 로그인 성공 시 대시보드로 이동
       navigate('/admin/dashboard');
     } catch (err: any) {
-      console.error(err);
-      setError('이메일 또는 비밀번호가 일치하지 않습니다.');
+  console.error("Firebase Login Error:", err.code, err.message);
+  setError(`${err.code} / ${err.message}`);
+}
     } finally {
       setLoading(false);
     }
