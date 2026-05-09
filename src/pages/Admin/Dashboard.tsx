@@ -113,6 +113,33 @@ const Dashboard = () => {
               상담 기록 열기
             </button>
           </div>
+          <div
+  style={{
+    backgroundColor: '#fff',
+    border: '1px solid #ddd',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+  }}
+>
+  <h3 style={{ marginTop: 0 }}>📚 영업 자료 게시판</h3>
+  <p style={{ color: '#666' }}>
+    영업 상품, 제안 방법, 고객 반박 대응, 영업 스크립트를 정리합니다.
+  </p>
+  <button
+    onClick={() => navigate('/admin/sales-notes')}
+    style={{
+      marginTop: '12px',
+      padding: '10px 14px',
+      borderRadius: '8px',
+      border: '1px solid #333',
+      backgroundColor: '#fff',
+      cursor: 'pointer'
+    }}
+  >
+    영업 자료 열기
+  </button>
+</div>
         </div>
       </div>
     </div>
