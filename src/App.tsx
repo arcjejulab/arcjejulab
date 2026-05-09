@@ -21,6 +21,7 @@ import Dashboard from './pages/Admin/Dashboard';
 import Schedule from './pages/Admin/Schedule';
 import Clients from './pages/Admin/Clients';
 import ProtectedRoute from './pages/Admin/ProtectedRoute';
+import SalesNotes from './pages/Admin/SalesNotes';
 
 import { 
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, 
@@ -1556,6 +1557,14 @@ export default function App() {
   element={
     <ProtectedRoute>
       <Clients />
+    </ProtectedRoute>
+  }
+/>
+        <Route
+  path="/admin/sales-notes"
+  element={
+    <ProtectedRoute>
+      <SalesNotes />
     </ProtectedRoute>
   }
 />
