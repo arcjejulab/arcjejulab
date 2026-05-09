@@ -100,7 +100,7 @@ const Dashboard = () => {
             <h3 style={{ marginTop: 0 }}>📝 거래처 상담 기록</h3>
             <p style={{ color: '#666' }}>거래처별 상담 내용, 견적, 다음 액션을 기록합니다.</p>
             <button
-              onClick={() => alert('다음 단계에서 거래처 기록 페이지를 연결합니다.')}
+              onClick={() => navigate('/admin/schedule')}
               style={{
                 marginTop: '12px',
                 padding: '10px 14px',
