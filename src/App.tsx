@@ -18,6 +18,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AdminLogin from './pages/Admin/Login';
 import Dashboard from './pages/Admin/Dashboard';
+import Schedule from './pages/Admin/Schedule';
 
 import { 
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, 
@@ -1531,6 +1532,7 @@ export default function App() {
         {/* 관리자 주소: 우리가 만든 로그인 페이지 연결 */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/schedule" element={<Schedule />} />
       </Routes>
     </Router>
   );
