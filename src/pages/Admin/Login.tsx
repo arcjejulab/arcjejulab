@@ -25,7 +25,7 @@ const AdminLogin = () => {
   console.error("Firebase Login Error:", err.code, err.message);
   setError(`${err.code} / ${err.message}`);
 }
-    } finally {
+     finally {
       setLoading(false);
     }
   };
