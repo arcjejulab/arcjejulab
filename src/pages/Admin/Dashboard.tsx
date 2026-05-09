@@ -74,7 +74,7 @@ const Dashboard = () => {
             <h3 style={{ marginTop: 0 }}>📅 영업 스케줄러</h3>
             <p style={{ color: '#666' }}>방문 일정, 미팅 일정, 계약 예정일을 관리합니다.</p>
             <button
-              onClick={() => alert('다음 단계에서 스케줄러 페이지를 연결합니다.')}
+              onClick={() => navigate('/admin/schedule')}
               style={{
                 marginTop: '12px',
                 padding: '10px 14px',
@@ -100,7 +100,7 @@ const Dashboard = () => {
             <h3 style={{ marginTop: 0 }}>📝 거래처 상담 기록</h3>
             <p style={{ color: '#666' }}>거래처별 상담 내용, 견적, 다음 액션을 기록합니다.</p>
             <button
-              onClick={() => navigate('/admin/schedule')}
+              onClick={() => navigate('/admin/clients')}
               style={{
                 marginTop: '12px',
                 padding: '10px 14px',
