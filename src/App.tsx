@@ -19,6 +19,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AdminLogin from './pages/Admin/Login';
 import Dashboard from './pages/Admin/Dashboard';
 import Schedule from './pages/Admin/Schedule';
+import Clients from './pages/Admin/Clients';
 
 import { 
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, 
@@ -1533,6 +1534,7 @@ export default function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/schedule" element={<Schedule />} />
+        <Route path="/admin/clients" element={<Clients />} />
       </Routes>
     </Router>
   );
