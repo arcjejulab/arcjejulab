@@ -1,8 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc, getDocs, orderBy, query, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase';
+
+type ScheduleItem = {
+  id: string;
+  date: string;
+  time: string;
+  clientName: string;
+  title: string;
+  memo: string;
+};
 
 const Schedule = () => {
   const navigate = useNavigate();
+
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [clientName, setClientName] = useState('');
+  const [title, setTitle] = useState('');
+  const [memo, setMemo] = useState('');
+  const [schedules, setSchedules] = useState<ScheduleItem[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchSchedules = async () => {
+    const q = query(collection(db, 'schedules'), orderBy('createdAt', 'desc'));
+    const querySnapshot = await getDocs(q);
+
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<ScheduleItem, 'id'>)
+    }));
+
+    setSchedules(data);
+  };
+
+  useEffect(() => {
+    fetchSchedules();
+  }, []);
+
+  const handleSave = async () => {
+    if (!date || !time || !clientName || !title) {
+      alert('날짜, 시간, 거래처명, 일정 제목은 꼭 입력해주세요.');
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await addDoc(collection(db, 'schedules'), {
+        date,
+        time,
+        clientName,
+        title,
+        memo,
+        createdAt: serverTimestamp()
+      });
+
+      setDate('');
+      setTime('');
+      setClientName('');
+      setTitle('');
+      setMemo('');
+
+      await fetchSchedules();
+
+      alert('일정이 저장되었습니다.');
+    } catch (error) {
+      console.error('Schedule Save Error:', error);
+      alert('일정 저장 중 오류가 발생했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div style={{ padding: '32px', fontFamily: 'sans-serif', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
@@ -43,6 +113,8 @@ const Schedule = () => {
           <div style={{ display: 'grid', gap: '14px' }}>
             <input
               type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
               style={{
                 padding: '12px',
                 borderRadius: '8px',
@@ -52,6 +124,8 @@ const Schedule = () => {
 
             <input
               type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
               style={{
                 padding: '12px',
                 borderRadius: '8px',
@@ -61,6 +135,8 @@ const Schedule = () => {
 
             <input
               type="text"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
               placeholder="거래처명 또는 방문 업체명"
               style={{
                 padding: '12px',
@@ -71,6 +147,8 @@ const Schedule = () => {
 
             <input
               type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               placeholder="일정 제목 예: 커피머신 상담, 마케팅 미팅"
               style={{
                 padding: '12px',
@@ -80,6 +158,8 @@ const Schedule = () => {
             />
 
             <textarea
+              value={memo}
+              onChange={(e) => setMemo(e.target.value)}
               placeholder="메모 예: 견적 전달 예정, 재방문 필요, 계약 가능성 높음"
               rows={5}
               style={{
@@ -91,7 +171,8 @@ const Schedule = () => {
             />
 
             <button
-              onClick={() => alert('다음 단계에서 Firebase 저장 기능을 연결합니다.')}
+              onClick={handleSave}
+              disabled={loading}
               style={{
                 padding: '14px',
                 borderRadius: '8px',
@@ -102,7 +183,7 @@ const Schedule = () => {
                 cursor: 'pointer'
               }}
             >
-              일정 저장
+              {loading ? '저장 중...' : '일정 저장'}
             </button>
           </div>
         </div>
@@ -117,9 +198,34 @@ const Schedule = () => {
           }}
         >
           <h2 style={{ marginTop: 0 }}>등록된 일정</h2>
-          <p style={{ color: '#666' }}>
-            아직 저장 기능은 연결하지 않았습니다. 다음 단계에서 Firestore와 연결합니다.
-          </p>
+
+          {schedules.length === 0 ? (
+            <p style={{ color: '#666' }}>아직 등록된 일정이 없습니다.</p>
+          ) : (
+            <div style={{ display: 'grid', gap: '12px' }}>
+              {schedules.map((item) => (
+                <div
+                  key={item.id}
+                  style={{
+                    border: '1px solid #eee',
+                    borderRadius: '10px',
+                    padding: '16px',
+                    backgroundColor: '#fafafa'
+                  }}
+                >
+                  <strong>{item.date} {item.time}</strong>
+                  <p style={{ margin: '8px 0 4px', fontWeight: 'bold' }}>
+                    {item.clientName} · {item.title}
+                  </p>
+                  {item.memo && (
+                    <p style={{ margin: 0, color: '#666', whiteSpace: 'pre-wrap' }}>
+                      {item.memo}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
