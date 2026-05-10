@@ -12,6 +12,7 @@ import {
   deleteDoc
 } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { getAdminTheme, getSavedAdminTheme, AdminThemeMode } from './adminTheme';
 
 type WorkStatusType = '대기' | '진행' | '완료';
 
@@ -27,6 +28,9 @@ type WorkItem = {
 const WorkStatus = () => {
   const navigate = useNavigate();
 
+  const [themeMode] = useState<AdminThemeMode>(getSavedAdminTheme());
+  const theme = getAdminTheme(themeMode);
+
   const [clientName, setClientName] = useState('');
   const [workTitle, setWorkTitle] = useState('');
   const [status, setStatus] = useState<WorkStatusType>('대기');
@@ -36,6 +40,35 @@ const WorkStatus = () => {
   const [works, setWorks] = useState<WorkItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+
+  const inputStyle = {
+    width: '100%',
+    boxSizing: 'border-box' as const,
+    padding: '12px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.cardBgSoft,
+    color: theme.text
+  };
+
+  const cardStyle = {
+    backgroundColor: theme.cardBg,
+    border: `1px solid ${theme.border}`,
+    borderRadius: '12px',
+    padding: '24px',
+    marginBottom: '24px',
+    boxShadow: theme.shadow
+  };
+
+  const outlineButtonStyle = {
+    padding: '10px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.outlineButtonBg,
+    color: theme.text,
+    cursor: 'pointer',
+    fontWeight: 'bold'
+  };
 
   const fetchWorks = async () => {
     const q = query(collection(db, 'workStatus'), orderBy('createdAt', 'desc'));
@@ -65,24 +98,24 @@ const WorkStatus = () => {
   const getStatusStyle = (value: WorkStatusType) => {
     if (value === '완료') {
       return {
-        backgroundColor: '#e8f8ef',
-        color: '#1e8449',
-        border: '1px solid #a9dfbf'
+        backgroundColor: theme.isDark ? '#123524' : '#e8f8ef',
+        color: theme.isDark ? '#7ee2a8' : '#1e8449',
+        border: theme.isDark ? '1px solid #1e8449' : '1px solid #a9dfbf'
       };
     }
 
     if (value === '진행') {
       return {
-        backgroundColor: '#eaf2ff',
-        color: '#1f5fbf',
-        border: '1px solid #b7d4ff'
+        backgroundColor: theme.isDark ? '#12243f' : '#eaf2ff',
+        color: theme.isDark ? '#93c5fd' : '#1f5fbf',
+        border: theme.isDark ? '1px solid #2563eb' : '1px solid #b7d4ff'
       };
     }
 
     return {
-      backgroundColor: '#f2f2f2',
-      color: '#666',
-      border: '1px solid #ddd'
+      backgroundColor: theme.isDark ? '#374151' : '#f2f2f2',
+      color: theme.isDark ? '#d1d5db' : '#666',
+      border: theme.isDark ? '1px solid #4b5563' : '1px solid #ddd'
     };
   };
 
@@ -167,25 +200,29 @@ const WorkStatus = () => {
   const doneCount = works.filter((work) => work.status === '완료').length;
 
   return (
-    <div style={{ padding: '32px', fontFamily: 'sans-serif', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
+    <div
+      style={{
+        padding: '32px',
+        fontFamily: 'sans-serif',
+        backgroundColor: theme.pageBg,
+        color: theme.text,
+        minHeight: '100vh'
+      }}
+    >
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ marginBottom: '32px' }}>
           <button
             onClick={() => navigate('/admin/dashboard')}
             style={{
-              padding: '10px 16px',
-              borderRadius: '8px',
-              border: '1px solid #333',
-              backgroundColor: '#fff',
-              cursor: 'pointer',
+              ...outlineButtonStyle,
               marginBottom: '20px'
             }}
           >
             ← 대시보드로 돌아가기
           </button>
 
-          <h1 style={{ margin: 0, color: '#222' }}>📌 작업 현황 관리</h1>
-          <p style={{ marginTop: '8px', color: '#666' }}>
+          <h1 style={{ margin: 0, color: theme.text }}>📌 작업 현황 관리</h1>
+          <p style={{ marginTop: '8px', color: theme.subText }}>
             거래처별 작업 진행 상태를 대기, 진행, 완료로 관리합니다.
           </p>
         </div>
@@ -198,38 +235,56 @@ const WorkStatus = () => {
             marginBottom: '24px'
           }}
         >
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #ddd' }}>
-            <p style={{ margin: 0, color: '#666' }}>대기</p>
-            <strong style={{ fontSize: '28px', color: '#666' }}>{waitingCount}건</strong>
+          <div
+            style={{
+              backgroundColor: theme.cardBg,
+              borderRadius: '12px',
+              padding: '20px',
+              border: `1px solid ${theme.border}`
+            }}
+          >
+            <p style={{ margin: 0, color: theme.subText }}>대기</p>
+            <strong style={{ fontSize: '28px', color: theme.subText }}>
+              {waitingCount}건
+            </strong>
           </div>
 
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #b7d4ff' }}>
-            <p style={{ margin: 0, color: '#1f5fbf' }}>진행</p>
-            <strong style={{ fontSize: '28px', color: '#1f5fbf' }}>{progressCount}건</strong>
+          <div
+            style={{
+              backgroundColor: theme.cardBg,
+              borderRadius: '12px',
+              padding: '20px',
+              border: theme.isDark ? '1px solid #2563eb' : '1px solid #b7d4ff'
+            }}
+          >
+            <p style={{ margin: 0, color: theme.isDark ? '#93c5fd' : '#1f5fbf' }}>진행</p>
+            <strong style={{ fontSize: '28px', color: theme.isDark ? '#93c5fd' : '#1f5fbf' }}>
+              {progressCount}건
+            </strong>
           </div>
 
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #a9dfbf' }}>
-            <p style={{ margin: 0, color: '#1e8449' }}>완료</p>
-            <strong style={{ fontSize: '28px', color: '#1e8449' }}>{doneCount}건</strong>
+          <div
+            style={{
+              backgroundColor: theme.cardBg,
+              borderRadius: '12px',
+              padding: '20px',
+              border: theme.isDark ? '1px solid #1e8449' : '1px solid #a9dfbf'
+            }}
+          >
+            <p style={{ margin: 0, color: theme.isDark ? '#7ee2a8' : '#1e8449' }}>완료</p>
+            <strong style={{ fontSize: '28px', color: theme.isDark ? '#7ee2a8' : '#1e8449' }}>
+              {doneCount}건
+            </strong>
           </div>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>
             {editingId ? '작업 현황 수정' : '새 작업 현황 등록'}
           </h2>
 
           {editingId && (
-            <p style={{ color: '#666', marginTop: '-8px' }}>
+            <p style={{ color: theme.subText, marginTop: '-8px' }}>
               현재 기존 작업 현황을 수정하는 중입니다.
             </p>
           )}
@@ -240,11 +295,7 @@ const WorkStatus = () => {
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               placeholder="거래처명 예: 블리스풀, 올라운더커피랩"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -252,32 +303,20 @@ const WorkStatus = () => {
               value={workTitle}
               onChange={(e) => setWorkTitle(e.target.value)}
               placeholder="작업명 예: 홈페이지 수정, 견적서 발송, 마케팅 제안"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
               type="date"
               value={workDate}
               onChange={(e) => setWorkDate(e.target.value)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value as WorkStatusType)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             >
               <option value="대기">대기</option>
               <option value="진행">진행</option>
@@ -290,9 +329,7 @@ const WorkStatus = () => {
               placeholder="메모 예: 자료 전달 대기, 고객 확인 중, 작업 완료 후 연락 필요"
               rows={5}
               style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd',
+                ...inputStyle,
                 resize: 'vertical'
               }}
             />
@@ -306,8 +343,8 @@ const WorkStatus = () => {
                   padding: '14px',
                   borderRadius: '8px',
                   border: 'none',
-                  backgroundColor: '#333',
-                  color: '#fff',
+                  backgroundColor: theme.buttonBg,
+                  color: theme.buttonText,
                   fontWeight: 'bold',
                   cursor: 'pointer'
                 }}
@@ -319,15 +356,7 @@ const WorkStatus = () => {
                 <button
                   onClick={resetForm}
                   type="button"
-                  style={{
-                    padding: '14px',
-                    borderRadius: '8px',
-                    border: '1px solid #999',
-                    backgroundColor: '#fff',
-                    color: '#333',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-                  }}
+                  style={outlineButtonStyle}
                 >
                   수정 취소
                 </button>
@@ -336,29 +365,21 @@ const WorkStatus = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>등록된 작업 현황</h2>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>등록된 작업 현황</h2>
 
           {works.length === 0 ? (
-            <p style={{ color: '#666' }}>아직 등록된 작업 현황이 없습니다.</p>
+            <p style={{ color: theme.subText }}>아직 등록된 작업 현황이 없습니다.</p>
           ) : (
             <div style={{ display: 'grid', gap: '12px' }}>
               {works.map((work) => (
                 <div
                   key={work.id}
                   style={{
-                    border: '1px solid #eee',
+                    border: `1px solid ${theme.border}`,
                     borderRadius: '10px',
                     padding: '16px',
-                    backgroundColor: '#fafafa'
+                    backgroundColor: theme.cardBgSoft
                   }}
                 >
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -375,21 +396,21 @@ const WorkStatus = () => {
                       {work.status || '대기'}
                     </span>
 
-                    <strong>
+                    <strong style={{ color: theme.text }}>
                       [{work.status || '대기'}] {work.clientName}
                     </strong>
                   </div>
 
-                  <p style={{ margin: '10px 0 4px', fontWeight: 'bold' }}>
+                  <p style={{ margin: '10px 0 4px', fontWeight: 'bold', color: theme.text }}>
                     {work.workTitle}
                   </p>
 
-                  <p style={{ margin: '0 0 8px', color: '#666' }}>
+                  <p style={{ margin: '0 0 8px', color: theme.subText }}>
                     작업일자: {work.workDate}
                   </p>
 
                   {work.memo && (
-                    <p style={{ margin: 0, color: '#666', whiteSpace: 'pre-wrap' }}>
+                    <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
                       {work.memo}
                     </p>
                   )}
@@ -397,13 +418,7 @@ const WorkStatus = () => {
                   <div style={{ display: 'flex', gap: '8px', marginTop: '14px', flexWrap: 'wrap' }}>
                     <button
                       onClick={() => handleEdit(work)}
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        border: '1px solid #333',
-                        backgroundColor: '#fff',
-                        cursor: 'pointer'
-                      }}
+                      style={outlineButtonStyle}
                     >
                       수정
                     </button>
@@ -414,9 +429,10 @@ const WorkStatus = () => {
                         padding: '8px 12px',
                         borderRadius: '6px',
                         border: '1px solid #e74c3c',
-                        backgroundColor: '#fff',
+                        backgroundColor: theme.outlineButtonBg,
                         color: '#e74c3c',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
                       }}
                     >
                       삭제
