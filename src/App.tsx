@@ -255,7 +255,7 @@ const ConsultingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
     {
       icon: <Layout className="w-8 h-8" />,
       title: '브랜드 구조 정리',
-      desc: '대표님이 하고 싶은 이야기와 고객이 <br />이해해야 할 메시지를 하나로 정리합니다.',
+      desc: '대표님의 방향성과 고객이 이해해야 할 메시지를 하나의 브랜드 구조로 정리합니다.',
       points: ['브랜드 문장 정리', '대표 메뉴 포지셔닝', '고객 경험 설계'],
     },
   ];
@@ -266,7 +266,7 @@ const ConsultingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
         <div className="mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div className="space-y-4">
             <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Cafe Consulting</span>
-            <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>카페를 시작하기 전,<br />운영 구조부터 봅니다.</h2>
+            <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>카페를 시작하기 전,<br />운영 구조부터 설계합니다.</h2>
           </div>
           <p className={`max-w-xl text-base leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
             예쁜 인테리어와 좋은 장비만으로 매장이 살아남지는 않습니다. 올라운더 커피랩은 창업, 장비, 메뉴, 동선, 운영까지 연결해 실제로 굴러가는 구조를 만듭니다.
@@ -365,9 +365,9 @@ const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
 const ProofSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const proofItems = [
     { title: '직접 운영 경험', desc: '카페와 외식 매장을 직접 운영하며 현장의 문제를 경험했습니다.', icon: <Users className="w-8 h-8" /> },
-    { title: '장비·A/S 이해도', desc: '커피머신, 제빙기, 주방 장비의 설치와 유지관리까지 함께 봅니다.', icon: <Cpu className="w-8 h-8" /> },
+    { title: '장비·A/S 이해도', desc: '커피머신, 제빙기, 주방 장비의 설치와 유지관리까지 함께 관리합니다.', icon: <Cpu className="w-8 h-8" /> },
     { title: '콘텐츠 제작 역량', desc: '매장 사진, 릴스, 리뷰 답글, 블로그 문구까지 실무형 콘텐츠로 연결합니다.', icon: <TrendingUp className="w-8 h-8" /> },
-    { title: '로컬 상권 감각', desc: '제주 지역의 관광 동선, 로컬 고객, 플랫폼 노출 구조를 함께 고려합니다.', icon: <Compass className="w-8 h-8" /> },
+    { title: '로컬 상권 감각', desc: '제주 지역의 관광 동선과 로컬 고객 흐름에 맞춰 플랫폼 노출 구조를 설계합니다.', icon: <Compass className="w-8 h-8" /> },
   ];
 
   return (
@@ -377,7 +377,7 @@ const ProofSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
           <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Proof & Positioning</span>
           <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>우리는 광고만 보는 회사가 아니라<br />매장의 구조를 보는 회사입니다.</h2>
           <p className={`max-w-3xl mx-auto text-base leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
-            올라운더 커피랩의 차별점은 현장 운영, 장비, 메뉴, 마케팅을 따로 보지 않는다는 점입니다.<br /> 좋은 매장이 지속 가능한 사업이 되도록 한 번에 연결합니다.
+            올라운더 커피랩의 차별점은 현장 운영, 장비, 메뉴, 마케팅을 따로 보지 않는다는 점입니다.<br /> 좋은 매장이 지속 가능한 브랜드로 성장할 수 있도록 운영과 마케팅의 기준을 세웁니다.
           </p>
         </div>
 
