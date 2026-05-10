@@ -122,6 +122,32 @@ const Dashboard = () => {
     boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
   }}
 >
+  <h3 style={{ marginTop: 0 }}>💰 매출 관리</h3>
+  <p style={{ color: '#666' }}>
+    월매출, 연매출, 컨설팅·마케팅·상품 매출을 관리합니다.
+  </p>
+  <button
+    onClick={() => navigate('/admin/sales-ledger')}
+    style={{
+      marginTop: '12px',
+      padding: '10px 14px',
+      borderRadius: '8px',
+      border: '1px solid #333',
+      backgroundColor: '#fff',
+      cursor: 'pointer'
+    }}
+  >
+    매출 관리 열기
+  </button>
+</div>
+  style={{
+    backgroundColor: '#fff',
+    border: '1px solid #ddd',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+  }}
+>
   <h3 style={{ marginTop: 0 }}>📚 영업 자료 게시판</h3>
   <p style={{ color: '#666' }}>
     영업 상품, 제안 방법, 고객 반박 대응, 영업 스크립트를 정리합니다.
