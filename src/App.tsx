@@ -315,20 +315,31 @@ const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <section id="marketing" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
-          <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Local Marketing</span>
-          <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>좋은 매장을<br />고객이 발견하게 만듭니다.</h2>
-          <p className={`text-lg leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
-            마케팅은 화려한 광고 문구가 아니라 고객이 검색하고, 비교하고, 방문을 결정하는 흐름을 설계하는 일입니다.
-          </p>
-          <div className={`p-8 rounded-[2rem] border ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5'}`}>
-            <BarChart3 className="w-9 h-9 text-[#007AFF] mb-5" />
-            <p className={`text-xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>검색 노출 → 신뢰 형성 → 방문 결정</p>
-            <p className={`text-sm mt-3 leading-relaxed break-keep ${isDarkMode ? 'text-white/45' : 'text-gray-500'}`}>플랫폼마다 흩어진 정보를 하나의 브랜드 경험으로 정리합니다.</p>
-          </div>
-        </div>
+        <div className="lg:col-span-5 lg:sticky lg:top-28">
+  <div className="lg:min-h-[524px] lg:flex lg:flex-col lg:justify-between">
+    <div className="space-y-8">
+      <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Local Marketing</span>
+      <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+        좋은 매장을<br />고객이 발견하게 만듭니다.
+      </h2>
+      <p className={`text-lg leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
+        마케팅은 화려한 광고 문구가 아니라 고객이 검색하고, 비교하고, 방문을 결정하는 흐름을 설계하는 일입니다.
+      </p>
+    </div>
 
-        <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className={`mt-8 lg:mt-0 p-8 rounded-[2rem] border ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5'}`}>
+      <BarChart3 className="w-9 h-9 text-[#007AFF] mb-5" />
+      <p className={`text-xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+        검색 노출 → 신뢰 형성 → 방문 결정
+      </p>
+      <p className={`text-sm mt-3 leading-relaxed break-keep ${isDarkMode ? 'text-white/45' : 'text-gray-500'}`}>
+        플랫폼마다 흩어진 정보를 하나의 브랜드 경험으로 정리합니다.
+      </p>
+    </div>
+  </div>
+</div>
+
+        <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6 md:auto-rows-fr">
           {platforms.map((item, idx) => (
             <motion.div
               key={item.title}
@@ -336,7 +347,7 @@ const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.08 }}
               viewport={{ once: true }}
-              className={`p-8 rounded-[2.5rem] border min-h-[250px] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5 shadow-sm'}`}
+              className={`h-full p-8 rounded-[2.5rem] border min-h-[250px] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5 shadow-sm'}`}
             >
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'}`}>
                 {item.icon}
