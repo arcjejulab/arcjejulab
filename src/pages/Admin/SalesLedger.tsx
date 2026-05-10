@@ -97,40 +97,40 @@ const SalesLedger = () => {
     .reduce((sum, record) => sum + Number(record.amount || 0), 0);
 
   const partnershipSales = records
-  .filter((record) => record.category === '제휴')
-  .reduce((sum, record) => sum + Number(record.amount || 0), 0);
+    .filter((record) => record.category === '제휴')
+    .reduce((sum, record) => sum + Number(record.amount || 0), 0);
 
   const getCategoryStyle = (value: SalesCategory) => {
-  if (value === '컨설팅') {
-    return {
-      backgroundColor: '#fff5e6',
-      color: '#b26a00',
-      border: '1px solid #ffd699'
-    };
-  }
+    if (value === '컨설팅') {
+      return {
+        backgroundColor: '#fff5e6',
+        color: '#b26a00',
+        border: '1px solid #ffd699'
+      };
+    }
 
-  if (value === '마케팅') {
-    return {
-      backgroundColor: '#f0eaff',
-      color: '#5b35b1',
-      border: '1px solid #d1c2ff'
-    };
-  }
+    if (value === '마케팅') {
+      return {
+        backgroundColor: '#f0eaff',
+        color: '#5b35b1',
+        border: '1px solid #d1c2ff'
+      };
+    }
 
-  if (value === '제휴') {
-    return {
-      backgroundColor: '#eaf2ff',
-      color: '#1f5fbf',
-      border: '1px solid #b7d4ff'
-    };
-  }
+    if (value === '제휴') {
+      return {
+        backgroundColor: '#eaf2ff',
+        color: '#1f5fbf',
+        border: '1px solid #b7d4ff'
+      };
+    }
 
-  return {
-    backgroundColor: '#eafaf8',
-    color: '#117864',
-    border: '1px solid #a3e4d7'
+    return {
+      backgroundColor: '#eafaf8',
+      color: '#117864',
+      border: '1px solid #a3e4d7'
+    };
   };
-};
 
   const handleSave = async () => {
     if (!salesDate || !clientName || !amount) {
@@ -269,6 +269,7 @@ const SalesLedger = () => {
             <p style={{ margin: 0, color: '#1f5fbf' }}>제휴</p>
             <strong style={{ fontSize: '24px', color: '#1f5fbf' }}>{formatNumber(partnershipSales)}원</strong>
           </div>
+        </div>
 
         <div
           style={{
@@ -326,7 +327,7 @@ const SalesLedger = () => {
               <option value="컨설팅">컨설팅</option>
               <option value="마케팅">마케팅</option>
               <option value="상품">상품</option>
-              <option value="제">상품</option>
+              <option value="제휴">제휴</option>
             </select>
 
             <input
@@ -344,7 +345,7 @@ const SalesLedger = () => {
             <textarea
               value={memo}
               onChange={(e) => setMemo(e.target.value)}
-              placeholder="메모 예: 홈페이지 제작 계약금, 마케팅 월 관리비, 커피머신 판매"
+              placeholder="메모 예: 홈페이지 제작 착수금, 마케팅 월 관리비, 커피머신 판매, 상품 연결 수수료"
               rows={5}
               style={{
                 padding: '12px',
@@ -408,77 +409,81 @@ const SalesLedger = () => {
             <p style={{ color: '#666' }}>아직 등록된 매출 기록이 없습니다.</p>
           ) : (
             <div style={{ display: 'grid', gap: '12px' }}>
-              {records.map((record) => (
-                <div
-                  key={record.id}
-                  style={{
-                    border: '1px solid #eee',
-                    borderRadius: '10px',
-                    padding: '16px',
-                    backgroundColor: '#fafafa'
-                  }}
-                >
-                  <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        padding: '5px 10px',
-                        borderRadius: '999px',
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        ...getCategoryStyle(record.category || '상품')
-                      }}
-                    >
-                      {record.category || '상품'}
-                    </span>
+              {records.map((record) => {
+                const recordCategory = record.category || '상품';
 
-                    <strong>{record.clientName}</strong>
-                  </div>
+                return (
+                  <div
+                    key={record.id}
+                    style={{
+                      border: '1px solid #eee',
+                      borderRadius: '10px',
+                      padding: '16px',
+                      backgroundColor: '#fafafa'
+                    }}
+                  >
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          padding: '5px 10px',
+                          borderRadius: '999px',
+                          fontSize: '12px',
+                          fontWeight: 'bold',
+                          ...getCategoryStyle(recordCategory)
+                        }}
+                      >
+                        {recordCategory}
+                      </span>
 
-                  <p style={{ margin: '10px 0 4px', fontWeight: 'bold' }}>
-                    {formatNumber(Number(record.amount || 0))}원
-                  </p>
+                      <strong>{record.clientName}</strong>
+                    </div>
 
-                  <p style={{ margin: '0 0 8px', color: '#666' }}>
-                    매출일자: {record.salesDate}
-                  </p>
-
-                  {record.memo && (
-                    <p style={{ margin: 0, color: '#666', whiteSpace: 'pre-wrap' }}>
-                      {record.memo}
+                    <p style={{ margin: '10px 0 4px', fontWeight: 'bold' }}>
+                      {formatNumber(Number(record.amount || 0))}원
                     </p>
-                  )}
 
-                  <div style={{ display: 'flex', gap: '8px', marginTop: '14px', flexWrap: 'wrap' }}>
-                    <button
-                      onClick={() => handleEdit(record)}
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        border: '1px solid #333',
-                        backgroundColor: '#fff',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      수정
-                    </button>
+                    <p style={{ margin: '0 0 8px', color: '#666' }}>
+                      매출일자: {record.salesDate}
+                    </p>
 
-                    <button
-                      onClick={() => handleDelete(record.id)}
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        border: '1px solid #e74c3c',
-                        backgroundColor: '#fff',
-                        color: '#e74c3c',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      삭제
-                    </button>
+                    {record.memo && (
+                      <p style={{ margin: 0, color: '#666', whiteSpace: 'pre-wrap' }}>
+                        {record.memo}
+                      </p>
+                    )}
+
+                    <div style={{ display: 'flex', gap: '8px', marginTop: '14px', flexWrap: 'wrap' }}>
+                      <button
+                        onClick={() => handleEdit(record)}
+                        style={{
+                          padding: '8px 12px',
+                          borderRadius: '6px',
+                          border: '1px solid #333',
+                          backgroundColor: '#fff',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        수정
+                      </button>
+
+                      <button
+                        onClick={() => handleDelete(record.id)}
+                        style={{
+                          padding: '8px 12px',
+                          borderRadius: '6px',
+                          border: '1px solid #e74c3c',
+                          backgroundColor: '#fff',
+                          color: '#e74c3c',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        삭제
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
