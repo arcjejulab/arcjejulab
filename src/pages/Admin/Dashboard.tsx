@@ -21,23 +21,27 @@ const Dashboard = () => {
   };
 
   const cardStyle = {
-    backgroundColor: theme.cardBg,
-    border: `1px solid ${theme.border}`,
-    borderRadius: '12px',
-    padding: '24px',
-    boxShadow: theme.shadow
-  };
+  backgroundColor: theme.cardBg,
+  border: `1px solid ${theme.border}`,
+  borderRadius: '12px',
+  padding: '24px',
+  boxShadow: theme.shadow,
+  display: 'flex',
+  flexDirection: 'column' as const,
+  minHeight: '170px'
+};
 
   const outlineButtonStyle = {
-    marginTop: '12px',
-    padding: '10px 14px',
-    borderRadius: '8px',
-    border: `1px solid ${theme.border}`,
-    backgroundColor: theme.outlineButtonBg,
-    color: theme.text,
-    cursor: 'pointer',
-    fontWeight: 'bold'
-  };
+  marginTop: 'auto',
+  padding: '10px 14px',
+  borderRadius: '8px',
+  border: `1px solid ${theme.border}`,
+  backgroundColor: theme.outlineButtonBg,
+  color: theme.text,
+  cursor: 'pointer',
+  fontWeight: 'bold',
+  alignSelf: 'flex-start'
+};
 
   return (
     <div
