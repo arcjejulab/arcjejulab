@@ -394,8 +394,8 @@ const getVat = (estimateItems: EstimateItem[]) => {
                 <th>No</th>
                 <th>품목명</th>
                 <th>수량</th>
-                <th>단가</th>
-                <th>금액</th>
+                <th>세금포함 단가</th>
+                <th>합</th>
                 <th>비고</th>
               </tr>
             </thead>
@@ -606,7 +606,7 @@ const getVat = (estimateItems: EstimateItem[]) => {
                     type="number"
                     value={item.unitPrice}
                     onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
-                    placeholder="단가"
+                    placeholder="세금포함 단가"
                     style={{
                       padding: '10px',
                       borderRadius: '8px',
