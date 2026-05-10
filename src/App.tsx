@@ -24,6 +24,7 @@ import ProtectedRoute from './pages/Admin/ProtectedRoute';
 import SalesNotes from './pages/Admin/SalesNotes';
 import Estimates from './pages/Admin/Estimates';
 import WorkStatus from './pages/Admin/WorkStatus';
+import SalesLedger from './pages/Admin/SalesLedger';
 
 import { 
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, 
@@ -1583,6 +1584,14 @@ export default function App() {
   element={
     <ProtectedRoute>
       <WorkStatus />
+    </ProtectedRoute>
+  }
+/>
+        <Route
+  path="/admin/sales-ledger"
+  element={
+    <ProtectedRoute>
+      <SalesLedger />
     </ProtectedRoute>
   }
 />
