@@ -167,6 +167,33 @@ const Dashboard = () => {
     견적서 열기
   </button>
 </div>
+          <div
+  style={{
+    backgroundColor: '#fff',
+    border: '1px solid #ddd',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+  }}
+>
+  <h3 style={{ marginTop: 0 }}>📌 작업 현황 관리</h3>
+  <p style={{ color: '#666' }}>
+    거래처별 작업을 대기, 진행, 완료 상태로 관리합니다.
+  </p>
+  <button
+    onClick={() => navigate('/admin/work-status')}
+    style={{
+      marginTop: '12px',
+      padding: '10px 14px',
+      borderRadius: '8px',
+      border: '1px solid #333',
+      backgroundColor: '#fff',
+      cursor: 'pointer'
+    }}
+  >
+    작업 현황 열기
+  </button>
+</div>
         </div>
       </div>
     </div>
