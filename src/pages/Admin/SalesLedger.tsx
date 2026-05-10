@@ -13,7 +13,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 
-type SalesCategory = '컨설팅' | '마케팅' | '상품';
+type SalesCategory = '컨설팅' | '마케팅' | '상품' | '제휴';
 
 type SalesRecord = {
   id: string;
@@ -96,29 +96,41 @@ const SalesLedger = () => {
     .filter((record) => record.category === '상품')
     .reduce((sum, record) => sum + Number(record.amount || 0), 0);
 
+  const partnershipSales = records
+  .filter((record) => record.category === '제휴')
+  .reduce((sum, record) => sum + Number(record.amount || 0), 0);
+
   const getCategoryStyle = (value: SalesCategory) => {
-    if (value === '컨설팅') {
-      return {
-        backgroundColor: '#fff5e6',
-        color: '#b26a00',
-        border: '1px solid #ffd699'
-      };
-    }
-
-    if (value === '마케팅') {
-      return {
-        backgroundColor: '#f0eaff',
-        color: '#5b35b1',
-        border: '1px solid #d1c2ff'
-      };
-    }
-
+  if (value === '컨설팅') {
     return {
-      backgroundColor: '#eafaf8',
-      color: '#117864',
-      border: '1px solid #a3e4d7'
+      backgroundColor: '#fff5e6',
+      color: '#b26a00',
+      border: '1px solid #ffd699'
     };
+  }
+
+  if (value === '마케팅') {
+    return {
+      backgroundColor: '#f0eaff',
+      color: '#5b35b1',
+      border: '1px solid #d1c2ff'
+    };
+  }
+
+  if (value === '제휴') {
+    return {
+      backgroundColor: '#eaf2ff',
+      color: '#1f5fbf',
+      border: '1px solid #b7d4ff'
+    };
+  }
+
+  return {
+    backgroundColor: '#eafaf8',
+    color: '#117864',
+    border: '1px solid #a3e4d7'
   };
+};
 
   const handleSave = async () => {
     if (!salesDate || !clientName || !amount) {
@@ -216,7 +228,7 @@ const SalesLedger = () => {
 
           <h1 style={{ margin: 0, color: '#222' }}>💰 매출 관리</h1>
           <p style={{ marginTop: '8px', color: '#666' }}>
-            월매출, 연매출, 컨설팅·마케팅·상품 매출을 기록하고 관리합니다.
+            월매출, 연매출, 컨설팅·마케팅·상품·제휴 매출을 기록하고 관리합니다.
           </p>
         </div>
 
@@ -252,7 +264,11 @@ const SalesLedger = () => {
             <p style={{ margin: 0, color: '#117864' }}>상품</p>
             <strong style={{ fontSize: '24px', color: '#117864' }}>{formatNumber(productSales)}원</strong>
           </div>
-        </div>
+
+          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #b7d4ff' }}>
+            <p style={{ margin: 0, color: '#1f5fbf' }}>제휴</p>
+            <strong style={{ fontSize: '24px', color: '#1f5fbf' }}>{formatNumber(partnershipSales)}원</strong>
+          </div>
 
         <div
           style={{
@@ -310,6 +326,7 @@ const SalesLedger = () => {
               <option value="컨설팅">컨설팅</option>
               <option value="마케팅">마케팅</option>
               <option value="상품">상품</option>
+              <option value="제">상품</option>
             </select>
 
             <input
