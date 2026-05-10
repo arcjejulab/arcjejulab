@@ -322,12 +322,14 @@ const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
       <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
         좋은 매장을<br />고객이 발견하게 만듭니다.
       </h2>
-      <p className={`text-lg leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
-        마케팅은 화려한 광고 문구가 아니라 고객이 검색하고, 비교하고, <br />방문을 결정하는 흐름을 설계하는 일입니다.
+      <p className={`max-w-[430px] text-lg leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
+        마케팅은 화려한 광고 문구가 아니라<br />
+        고객이 검색하고, 비교하고, 방문을 결정하는<br />
+        흐름을 설계하는 일입니다.
       </p>
     </div>
 
-    <div className={`mt-8 lg:mt-0 p-8 rounded-[2rem] border ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5'}`}>
+    <div className={`mt-12 lg:mt-10 p-8 rounded-[2rem] border max-w-[460px] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5'}`}>
       <BarChart3 className="w-9 h-9 text-[#007AFF] mb-5" />
       <p className={`text-xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
         검색 노출 → 신뢰 형성 → 방문 결정
