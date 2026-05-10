@@ -167,7 +167,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </h1>
 
             <p className={`text-lg md:text-2xl font-light leading-relaxed max-w-3xl break-keep ${isDarkMode ? 'text-white/65' : 'text-gray-600'}`}>
-              올라운더 커피랩은 카페 창업, 운영 개선, 장비 세팅, 온라인 마케팅을 하나의 시스템으로 연결하는 실전형 컨설팅 회사입니다.
+              올라운더 커피랩은 카페 창업, 운영 개선, 장비 세팅, 온라인 마케팅을 <br />하나의 시스템으로 연결하는 실전형 컨설팅 회사입니다.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -255,7 +255,7 @@ const ConsultingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
     {
       icon: <Layout className="w-8 h-8" />,
       title: '브랜드 구조 정리',
-      desc: '대표님이 하고 싶은 이야기와 고객이 이해해야 할 메시지를 하나로 정리합니다.',
+      desc: '대표님이 하고 싶은 이야기와 고객이 <br />이해해야 할 메시지를 하나로 정리합니다.',
       points: ['브랜드 문장 정리', '대표 메뉴 포지셔닝', '고객 경험 설계'],
     },
   ];
@@ -323,7 +323,7 @@ const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
         좋은 매장을<br />고객이 발견하게 만듭니다.
       </h2>
       <p className={`text-lg leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
-        마케팅은 화려한 광고 문구가 아니라 고객이 검색하고, 비교하고, 방문을 결정하는 흐름을 설계하는 일입니다.
+        마케팅은 화려한 광고 문구가 아니라 고객이 검색하고, 비교하고, <br />방문을 결정하는 흐름을 설계하는 일입니다.
       </p>
     </div>
 
@@ -377,7 +377,7 @@ const ProofSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
           <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Proof & Positioning</span>
           <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>우리는 광고만 보는 회사가 아니라<br />매장의 구조를 보는 회사입니다.</h2>
           <p className={`max-w-3xl mx-auto text-base leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
-            올라운더 커피랩의 차별점은 현장 운영, 장비, 메뉴, 마케팅을 따로 보지 않는다는 점입니다. 좋은 매장이 지속 가능한 사업이 되도록 한 번에 연결합니다.
+            올라운더 커피랩의 차별점은 현장 운영, 장비, 메뉴, 마케팅을 따로 보지 않는다는 점입니다.<br /> 좋은 매장이 지속 가능한 사업이 되도록 한 번에 연결합니다.
           </p>
         </div>
 
@@ -523,7 +523,7 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
                   rows={5}
                   value={formData.inquiry}
                   onChange={handleChange}
-                  placeholder="현재 고민 중인 문제를 자유롭게 적어주세요. 예: 창업 준비, 매출 정체, 스마트플레이스 노출, 인스타그램 운영, 장비 세팅 등"
+                  placeholder="현재 고민 중인 문제를 자유롭게 적어주세요. 예: 창업 준비, 매출 정체, 스마트플레이스 <br />노출, 인스타그램 운영, 장비 세팅 등"
                   className={`w-full px-6 py-4 rounded-2xl border bg-transparent outline-none transition-all text-sm resize-none ${
                     isDarkMode ? 'border-white/10 focus:border-white/40 text-white placeholder-white/20' : 'border-[#10307D]/10 focus:border-[#10307D]/40 text-[#10307D] placeholder-gray-400'
                   }`}
