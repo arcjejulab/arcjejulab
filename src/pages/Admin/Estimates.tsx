@@ -34,6 +34,14 @@ type Estimate = {
   note: string;
 };
 
+const emptyItem: EstimateItem = {
+  productName: '',
+  quantity: 1,
+  unitPrice: 0,
+  servicePeriod: '',
+  memo: ''
+};
+
 const Estimates = () => {
   const navigate = useNavigate();
 
@@ -46,16 +54,7 @@ const Estimates = () => {
   const [paymentTerms, setPaymentTerms] = useState('');
   const [note, setNote] = useState('');
 
-  const [items, setItems] = useState<EstimateItem[]>([
-    {
-  productName: '',
-  quantity: 1,
-  unitPrice: 0,
-  servicePeriod: '',
-  memo: ''
-}
-  ]);
-
+  const [items, setItems] = useState<EstimateItem[]>([emptyItem]);
   const [estimates, setEstimates] = useState<Estimate[]>([]);
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -85,15 +84,7 @@ const Estimates = () => {
     setValidUntil('');
     setPaymentTerms('');
     setNote('');
-    setItems([
-      {
-  productName: '',
-  quantity: 1,
-  unitPrice: 0,
-  servicePeriod: '',
-  memo: ''
-}
-    ]);
+    setItems([emptyItem]);
     setEditingId(null);
   };
 
@@ -102,18 +93,18 @@ const Estimates = () => {
   };
 
   const getTotal = (estimateItems: EstimateItem[]) => {
-  return estimateItems.reduce((sum, item) => {
-    return sum + Number(item.quantity || 0) * Number(item.unitPrice || 0);
-  }, 0);
-};
+    return estimateItems.reduce((sum, item) => {
+      return sum + Number(item.quantity || 0) * Number(item.unitPrice || 0);
+    }, 0);
+  };
 
-const getSubtotal = (estimateItems: EstimateItem[]) => {
-  return Math.round(getTotal(estimateItems) / 1.1);
-};
+  const getSubtotal = (estimateItems: EstimateItem[]) => {
+    return Math.round(getTotal(estimateItems) / 1.1);
+  };
 
-const getVat = (estimateItems: EstimateItem[]) => {
-  return getTotal(estimateItems) - getSubtotal(estimateItems);
-};
+  const getVat = (estimateItems: EstimateItem[]) => {
+    return getTotal(estimateItems) - getSubtotal(estimateItems);
+  };
 
   const handleItemChange = (
     index: number,
@@ -141,12 +132,12 @@ const getVat = (estimateItems: EstimateItem[]) => {
     setItems([
       ...items,
       {
-  productName: '',
-  quantity: 1,
-  unitPrice: 0,
-  servicePeriod: '',
-  memo: ''
-}
+        productName: '',
+        quantity: 1,
+        unitPrice: 0,
+        servicePeriod: '',
+        memo: ''
+      }
     ]);
   };
 
@@ -225,7 +216,15 @@ const getVat = (estimateItems: EstimateItem[]) => {
     setEstimateDate(estimate.estimateDate || '');
     setValidUntil(estimate.validUntil || '');
     setPaymentTerms(estimate.paymentTerms || '');
-    setItems(estimate.items || []);
+    setItems(
+      (estimate.items || []).map((item) => ({
+        productName: item.productName || '',
+        quantity: item.quantity || 1,
+        unitPrice: item.unitPrice || 0,
+        servicePeriod: item.servicePeriod || '',
+        memo: item.memo || ''
+      }))
+    );
     setNote(estimate.note || '');
 
     window.scrollTo({
@@ -268,16 +267,16 @@ const getVat = (estimateItems: EstimateItem[]) => {
         const amount = Number(item.quantity || 0) * Number(item.unitPrice || 0);
 
         return `
-  <tr>
-    <td>${index + 1}</td>
-    <td>${item.productName}</td>
-    <td>${formatNumber(Number(item.quantity || 0))}</td>
-    <td>${formatNumber(Number(item.unitPrice || 0))}원</td>
-    <td>${item.servicePeriod || '-'}</td>
-    <td>${formatNumber(amount)}원</td>
-    <td>${item.memo || ''}</td>
-  </tr>
-`;
+          <tr>
+            <td>${index + 1}</td>
+            <td>${item.productName}</td>
+            <td>${formatNumber(Number(item.quantity || 0))}</td>
+            <td>${formatNumber(Number(item.unitPrice || 0))}원</td>
+            <td>${item.servicePeriod || '-'}</td>
+            <td>${formatNumber(amount)}원</td>
+            <td>${item.memo || ''}</td>
+          </tr>
+        `;
       })
       .join('');
 
@@ -401,7 +400,7 @@ const getVat = (estimateItems: EstimateItem[]) => {
                 <th>수량</th>
                 <th>세금포함 단가</th>
                 <th>서비스기간</th>
-                <th>합</th>
+                <th>합계</th>
                 <th>비고</th>
               </tr>
             </thead>
@@ -574,111 +573,111 @@ const getVat = (estimateItems: EstimateItem[]) => {
             <div style={{ border: '1px solid #eee', borderRadius: '10px', padding: '16px' }}>
               <h3 style={{ marginTop: 0 }}>견적 품목</h3>
 
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '2fr 1fr 1fr 1.5fr 2fr auto',
+                  gap: '8px',
+                  marginBottom: '8px',
+                  fontWeight: 'bold',
+                  fontSize: '13px',
+                  color: '#555'
+                }}
+              >
+                <div>품목명</div>
+                <div>수량</div>
+                <div>세금포함 단가</div>
+                <div>서비스기간</div>
+                <div>비고</div>
+                <div>삭제</div>
+              </div>
+
               {items.map((item, index) => (
-               <div
-  style={{
-    display: 'grid',
-    gridTemplateColumns: '2fr 1fr 1fr 1.5fr 2fr auto',
-    gap: '8px',
-    marginBottom: '8px',
-    fontWeight: 'bold',
-    fontSize: '13px',
-    color: '#555'
-  }}
->
-  <div>품목명</div>
-  <div>수량</div>
-  <div>세금포함 단가</div>
-  <div>서비스기간</div>
-  <div>비고</div>
-  <div>삭제</div>
-</div>
+                <div
+                  key={index}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 1fr 1fr 1.5fr 2fr auto',
+                    gap: '8px',
+                    marginBottom: '10px'
+                  }}
+                >
+                  <input
+                    type="text"
+                    value={item.productName}
+                    onChange={(e) => handleItemChange(index, 'productName', e.target.value)}
+                    placeholder="품목명"
+                    style={{
+                      padding: '10px',
+                      borderRadius: '8px',
+                      border: '1px solid #ddd'
+                    }}
+                  />
 
-{items.map((item, index) => (
-  <div
-    key={index}
-    style={{
-      display: 'grid',
-      gridTemplateColumns: '2fr 1fr 1fr 1.5fr 2fr auto',
-      gap: '8px',
-      marginBottom: '10px'
-    }}
-  >
-    <input
-      type="text"
-      value={item.productName}
-      onChange={(e) => handleItemChange(index, 'productName', e.target.value)}
-      placeholder="품목명"
-      style={{
-        padding: '10px',
-        borderRadius: '8px',
-        border: '1px solid #ddd'
-      }}
-    />
+                  <input
+                    type="number"
+                    value={item.quantity}
+                    onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
+                    placeholder="수량"
+                    style={{
+                      padding: '10px',
+                      borderRadius: '8px',
+                      border: '1px solid #ddd'
+                    }}
+                  />
 
-    <input
-      type="number"
-      value={item.quantity}
-      onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
-      placeholder="수량"
-      style={{
-        padding: '10px',
-        borderRadius: '8px',
-        border: '1px solid #ddd'
-      }}
-    />
+                  <input
+                    type="number"
+                    value={item.unitPrice}
+                    onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
+                    placeholder="세금포함 단가"
+                    style={{
+                      padding: '10px',
+                      borderRadius: '8px',
+                      border: '1px solid #ddd'
+                    }}
+                  />
 
-    <input
-      type="number"
-      value={item.unitPrice}
-      onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
-      placeholder="세금포함 단가"
-      style={{
-        padding: '10px',
-        borderRadius: '8px',
-        border: '1px solid #ddd'
-      }}
-    />
+                  <input
+                    type="text"
+                    value={item.servicePeriod || ''}
+                    onChange={(e) => handleItemChange(index, 'servicePeriod', e.target.value)}
+                    placeholder="예: 1개월, 3개월, 1년"
+                    style={{
+                      padding: '10px',
+                      borderRadius: '8px',
+                      border: '1px solid #ddd'
+                    }}
+                  />
 
-    <input
-      type="text"
-      value={item.servicePeriod}
-      onChange={(e) => handleItemChange(index, 'servicePeriod', e.target.value)}
-      placeholder="예: 1개월, 3개월, 1년"
-      style={{
-        padding: '10px',
-        borderRadius: '8px',
-        border: '1px solid #ddd'
-      }}
-    />
+                  <input
+                    type="text"
+                    value={item.memo}
+                    onChange={(e) => handleItemChange(index, 'memo', e.target.value)}
+                    placeholder="비고"
+                    style={{
+                      padding: '10px',
+                      borderRadius: '8px',
+                      border: '1px solid #ddd'
+                    }}
+                  />
 
-    <input
-      type="text"
-      value={item.memo}
-      onChange={(e) => handleItemChange(index, 'memo', e.target.value)}
-      placeholder="비고"
-      style={{
-        padding: '10px',
-        borderRadius: '8px',
-        border: '1px solid #ddd'
-      }}
-    />
+                  <button
+                    onClick={() => removeItem(index)}
+                    style={{
+                      padding: '10px',
+                      borderRadius: '8px',
+                      border: '1px solid #e74c3c',
+                      backgroundColor: '#fff',
+                      color: '#e74c3c',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    삭제
+                  </button>
+                </div>
+              ))}
 
-    <button
-      onClick={() => removeItem(index)}
-      style={{
-        padding: '10px',
-        borderRadius: '8px',
-        border: '1px solid #e74c3c',
-        backgroundColor: '#fff',
-        color: '#e74c3c',
-        cursor: 'pointer'
-      }}
-    >
-      삭제
-    </button>
-  </div>
-))}
               <button
                 onClick={addItem}
                 style={{
