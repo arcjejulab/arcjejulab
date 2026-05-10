@@ -12,6 +12,7 @@ import {
   deleteDoc
 } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { getAdminTheme, getSavedAdminTheme, AdminThemeMode } from './adminTheme';
 
 type ScheduleItem = {
   id: string;
@@ -25,6 +26,9 @@ type ScheduleItem = {
 const Schedule = () => {
   const navigate = useNavigate();
 
+  const [themeMode] = useState<AdminThemeMode>(getSavedAdminTheme());
+  const theme = getAdminTheme(themeMode);
+
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [clientName, setClientName] = useState('');
@@ -35,13 +39,42 @@ const Schedule = () => {
 
   const [editingId, setEditingId] = useState<string | null>(null);
 
+  const inputStyle = {
+    width: '100%',
+    boxSizing: 'border-box' as const,
+    padding: '12px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.cardBgSoft,
+    color: theme.text
+  };
+
+  const cardStyle = {
+    backgroundColor: theme.cardBg,
+    border: `1px solid ${theme.border}`,
+    borderRadius: '12px',
+    padding: '24px',
+    marginBottom: '24px',
+    boxShadow: theme.shadow
+  };
+
+  const outlineButtonStyle = {
+    padding: '10px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.outlineButtonBg,
+    color: theme.text,
+    cursor: 'pointer',
+    fontWeight: 'bold'
+  };
+
   const fetchSchedules = async () => {
     const q = query(collection(db, 'schedules'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
 
-    const data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...(doc.data() as Omit<ScheduleItem, 'id'>)
+    const data = querySnapshot.docs.map((document) => ({
+      id: document.id,
+      ...(document.data() as Omit<ScheduleItem, 'id'>)
     }));
 
     setSchedules(data);
@@ -137,45 +170,40 @@ const Schedule = () => {
   };
 
   return (
-    <div style={{ padding: '32px', fontFamily: 'sans-serif', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
+    <div
+      style={{
+        padding: '32px',
+        fontFamily: 'sans-serif',
+        backgroundColor: theme.pageBg,
+        color: theme.text,
+        minHeight: '100vh'
+      }}
+    >
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         <div style={{ marginBottom: '32px' }}>
           <button
             onClick={() => navigate('/admin/dashboard')}
             style={{
-              padding: '10px 16px',
-              borderRadius: '8px',
-              border: '1px solid #333',
-              backgroundColor: '#fff',
-              cursor: 'pointer',
+              ...outlineButtonStyle,
               marginBottom: '20px'
             }}
           >
             ← 대시보드로 돌아가기
           </button>
 
-          <h1 style={{ margin: 0, color: '#222' }}>📅 영업 스케줄러</h1>
-          <p style={{ marginTop: '8px', color: '#666' }}>
+          <h1 style={{ margin: 0, color: theme.text }}>📅 영업 스케줄러</h1>
+          <p style={{ marginTop: '8px', color: theme.subText }}>
             방문 일정, 미팅 일정, 계약 예정일을 관리하는 페이지입니다.
           </p>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>
             {editingId ? '일정 수정' : '새 일정 등록'}
           </h2>
 
           {editingId && (
-            <p style={{ color: '#666', marginTop: '-8px' }}>
+            <p style={{ color: theme.subText, marginTop: '-8px' }}>
               현재 기존 일정을 수정하는 중입니다.
             </p>
           )}
@@ -185,22 +213,14 @@ const Schedule = () => {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -208,11 +228,7 @@ const Schedule = () => {
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               placeholder="거래처명 또는 방문 업체명"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -220,11 +236,7 @@ const Schedule = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="일정 제목 예: 커피머신 상담, 마케팅 미팅"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <textarea
@@ -233,9 +245,7 @@ const Schedule = () => {
               placeholder="메모 예: 견적 전달 예정, 재방문 필요, 계약 가능성 높음"
               rows={5}
               style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd',
+                ...inputStyle,
                 resize: 'vertical'
               }}
             />
@@ -249,8 +259,8 @@ const Schedule = () => {
                   padding: '14px',
                   borderRadius: '8px',
                   border: 'none',
-                  backgroundColor: '#333',
-                  color: '#fff',
+                  backgroundColor: theme.buttonBg,
+                  color: theme.buttonText,
                   fontWeight: 'bold',
                   cursor: 'pointer'
                 }}
@@ -262,15 +272,7 @@ const Schedule = () => {
                 <button
                   onClick={resetForm}
                   type="button"
-                  style={{
-                    padding: '14px',
-                    borderRadius: '8px',
-                    border: '1px solid #999',
-                    backgroundColor: '#fff',
-                    color: '#333',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-                  }}
+                  style={outlineButtonStyle}
                 >
                   수정 취소
                 </button>
@@ -279,52 +281,41 @@ const Schedule = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>등록된 일정</h2>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>등록된 일정</h2>
 
           {schedules.length === 0 ? (
-            <p style={{ color: '#666' }}>아직 등록된 일정이 없습니다.</p>
+            <p style={{ color: theme.subText }}>아직 등록된 일정이 없습니다.</p>
           ) : (
             <div style={{ display: 'grid', gap: '12px' }}>
               {schedules.map((item) => (
                 <div
                   key={item.id}
                   style={{
-                    border: '1px solid #eee',
+                    border: `1px solid ${theme.border}`,
                     borderRadius: '10px',
                     padding: '16px',
-                    backgroundColor: '#fafafa'
+                    backgroundColor: theme.cardBgSoft
                   }}
                 >
-                  <strong>{item.date} {item.time}</strong>
-                  <p style={{ margin: '8px 0 4px', fontWeight: 'bold' }}>
+                  <strong style={{ color: theme.text }}>
+                    {item.date} {item.time}
+                  </strong>
+
+                  <p style={{ margin: '8px 0 4px', fontWeight: 'bold', color: theme.text }}>
                     {item.clientName} · {item.title}
                   </p>
 
                   {item.memo && (
-                    <p style={{ margin: 0, color: '#666', whiteSpace: 'pre-wrap' }}>
+                    <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
                       {item.memo}
                     </p>
                   )}
 
-                  <div style={{ display: 'flex', gap: '8px', marginTop: '14px' }}>
+                  <div style={{ display: 'flex', gap: '8px', marginTop: '14px', flexWrap: 'wrap' }}>
                     <button
                       onClick={() => handleEdit(item)}
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        border: '1px solid #333',
-                        backgroundColor: '#fff',
-                        cursor: 'pointer'
-                      }}
+                      style={outlineButtonStyle}
                     >
                       수정
                     </button>
@@ -335,9 +326,10 @@ const Schedule = () => {
                         padding: '8px 12px',
                         borderRadius: '6px',
                         border: '1px solid #e74c3c',
-                        backgroundColor: '#fff',
+                        backgroundColor: theme.outlineButtonBg,
                         color: '#e74c3c',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
                       }}
                     >
                       삭제
