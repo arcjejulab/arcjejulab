@@ -226,7 +226,7 @@ const Dashboard = () => {
           >
             <h3 style={{ marginTop: 0 }}>💰 매출 관리</h3>
             <p style={{ color: '#666' }}>
-              월매출, 연매출, 컨설팅·마케팅·상품 매출을 관리합니다.
+              월매출, 연매출, 컨설팅·마케팅·상품·제휴 매출을 관리합니다.
             </p>
             <button
               onClick={() => navigate('/admin/sales-ledger')}
