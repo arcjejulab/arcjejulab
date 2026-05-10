@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase'; // 아까 만든 설정파일 연결
+import { auth } from '../../firebase';
+import { getAdminTheme, getSavedAdminTheme, saveAdminTheme, AdminThemeMode } from './adminTheme';
 
 const AdminLogin = () => {
+  const navigate = useNavigate();
+
+  const [themeMode, setThemeMode] = useState<AdminThemeMode>(getSavedAdminTheme());
+  const theme = getAdminTheme(themeMode);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
+  const toggleTheme = () => {
+    const nextTheme = themeMode === 'dark' ? 'light' : 'dark';
+    setThemeMode(nextTheme);
+    saveAdminTheme(nextTheme);
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,66 +27,130 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      // 구글 서버에 "이 사람 사장님 맞아?"라고 물어보는 명령
       await signInWithEmailAndPassword(auth, email, password);
-      
-      // 로그인 성공 시 대시보드로 이동
       navigate('/admin/dashboard');
     } catch (err: any) {
-  console.error("Firebase Login Error:", err.code, err.message);
-  setError('이메일 또는 비밀번호가 일치하지 않습니다.');
-}
-     finally {
+      console.error('Firebase Login Error:', err.code, err.message);
+      setError('이메일 또는 비밀번호가 일치하지 않습니다.');
+    } finally {
       setLoading(false);
     }
   };
 
+  const inputStyle = {
+    width: '100%',
+    padding: '12px',
+    borderRadius: '6px',
+    border: `1px solid ${theme.border}`,
+    boxSizing: 'border-box' as const,
+    backgroundColor: theme.cardBgSoft,
+    color: theme.text
+  };
+
   return (
-    <div style={{ 
-      display: 'flex', justifyContent: 'center', alignItems: 'center', 
-      height: '100vh', backgroundColor: '#f5f5f5', fontFamily: 'sans-serif' 
-    }}>
-      <div style={{ 
-        width: '100%', maxWidth: '400px', padding: '40px', 
-        backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' 
-      }}>
-        <h1 style={{ textAlign: 'center', color: '#333', marginBottom: '10px' }}>ARC ADMIN</h1>
-        <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>관제 시스템 로그인</p>
-        
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        backgroundColor: theme.pageBg,
+        fontFamily: 'sans-serif',
+        color: theme.text,
+        padding: '24px'
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '400px',
+          padding: '40px',
+          backgroundColor: theme.cardBg,
+          borderRadius: '12px',
+          border: `1px solid ${theme.border}`,
+          boxShadow: theme.shadow
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
+          <button
+            onClick={toggleTheme}
+            type="button"
+            style={{
+              padding: '9px 12px',
+              borderRadius: '8px',
+              border: `1px solid ${theme.border}`,
+              backgroundColor: theme.outlineButtonBg,
+              color: theme.text,
+              cursor: 'pointer',
+              fontWeight: 'bold'
+            }}
+          >
+            {themeMode === 'dark' ? '☀️ 라이트모드' : '🌙 다크모드'}
+          </button>
+        </div>
+
+        <h1 style={{ textAlign: 'center', color: theme.text, marginBottom: '10px' }}>
+          ARC ADMIN
+        </h1>
+
+        <p style={{ textAlign: 'center', color: theme.subText, marginBottom: '30px' }}>
+          관제 시스템 로그인
+        </p>
+
         <form onSubmit={handleLogin}>
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', color: '#555' }}>Admin Email</label>
-            <input 
-              type="email" 
+            <label style={{ display: 'block', marginBottom: '8px', color: theme.subText }}>
+              Admin Email
+            </label>
+            <input
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@example.com"
               required
-              style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #ddd', boxSizing: 'border-box' }}
+              style={inputStyle}
             />
           </div>
-          
+
           <div style={{ marginBottom: '25px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', color: '#555' }}>Password</label>
-            <input 
-              type="password" 
+            <label style={{ display: 'block', marginBottom: '8px', color: theme.subText }}>
+              Password
+            </label>
+            <input
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #ddd', boxSizing: 'border-box' }}
+              style={inputStyle}
             />
           </div>
 
-          {error && <p style={{ color: '#e74c3c', fontSize: '14px', marginBottom: '20px', textAlign: 'center' }}>{error}</p>}
+          {error && (
+            <p
+              style={{
+                color: '#e74c3c',
+                fontSize: '14px',
+                marginBottom: '20px',
+                textAlign: 'center'
+              }}
+            >
+              {error}
+            </p>
+          )}
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={loading}
-            style={{ 
-              width: '100%', padding: '14px', borderRadius: '6px', border: 'none', 
-              backgroundColor: '#333', color: 'white', fontWeight: 'bold', cursor: 'pointer',
-              transition: 'background-color 0.2s'
+            style={{
+              width: '100%',
+              padding: '14px',
+              borderRadius: '6px',
+              border: 'none',
+              backgroundColor: theme.buttonBg,
+              color: theme.buttonText,
+              fontWeight: 'bold',
+              cursor: 'pointer'
             }}
           >
             {loading ? '인증 중...' : '관리자 로그인'}
