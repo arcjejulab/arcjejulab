@@ -140,6 +140,33 @@ const Dashboard = () => {
     영업 자료 열기
   </button>
 </div>
+          <div
+  style={{
+    backgroundColor: '#fff',
+    border: '1px solid #ddd',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+  }}
+>
+  <h3 style={{ marginTop: 0 }}>📄 견적서 관리</h3>
+  <p style={{ color: '#666' }}>
+    거래처별 견적서를 작성하고 PDF로 저장합니다.
+  </p>
+  <button
+    onClick={() => navigate('/admin/estimates')}
+    style={{
+      marginTop: '12px',
+      padding: '10px 14px',
+      borderRadius: '8px',
+      border: '1px solid #333',
+      backgroundColor: '#fff',
+      cursor: 'pointer'
+    }}
+  >
+    견적서 열기
+  </button>
+</div>
         </div>
       </div>
     </div>
