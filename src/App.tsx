@@ -525,7 +525,7 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
                   rows={5}
                   value={formData.inquiry}
                   onChange={handleChange}
-                  placeholder="현재 고민 중인 문제를 자유롭게 적어주세요. 예: 창업 준비, 매출 정체, 스마트플레이스 <br />노출, 인스타그램 운영, 장비 세팅 등"
+                  placeholder="현재 고민 중인 문제를 자유롭게 적어주세요. 예: 창업 준비, 매출 정체, 스마트플레이스 노출, 인스타그램 운영, 장비 세팅 등"
                   className={`w-full px-6 py-4 rounded-2xl border bg-transparent outline-none transition-all text-sm resize-none ${
                     isDarkMode ? 'border-white/10 focus:border-white/40 text-white placeholder-white/20' : 'border-[#10307D]/10 focus:border-[#10307D]/40 text-[#10307D] placeholder-gray-400'
                   }`}
