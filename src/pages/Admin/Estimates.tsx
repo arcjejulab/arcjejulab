@@ -34,13 +34,13 @@ type Estimate = {
   note: string;
 };
 
-const emptyItem: EstimateItem = {
+const createEmptyItem = (): EstimateItem => ({
   productName: '',
   quantity: 1,
   unitPrice: 0,
   servicePeriod: '',
   memo: ''
-};
+});
 
 const Estimates = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Estimates = () => {
   const [paymentTerms, setPaymentTerms] = useState('');
   const [note, setNote] = useState('');
 
-  const [items, setItems] = useState<EstimateItem[]>([emptyItem]);
+  const [items, setItems] = useState<EstimateItem[]>([createEmptyItem()]);
   const [estimates, setEstimates] = useState<Estimate[]>([]);
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -63,9 +63,9 @@ const Estimates = () => {
     const q = query(collection(db, 'estimates'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
 
-    const data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...(doc.data() as Omit<Estimate, 'id'>)
+    const data = querySnapshot.docs.map((document) => ({
+      id: document.id,
+      ...(document.data() as Omit<Estimate, 'id'>)
     }));
 
     setEstimates(data);
@@ -84,12 +84,12 @@ const Estimates = () => {
     setValidUntil('');
     setPaymentTerms('');
     setNote('');
-    setItems([emptyItem]);
+    setItems([createEmptyItem()]);
     setEditingId(null);
   };
 
   const formatNumber = (value: number) => {
-    return value.toLocaleString('ko-KR');
+    return Number(value || 0).toLocaleString('ko-KR');
   };
 
   const getTotal = (estimateItems: EstimateItem[]) => {
@@ -129,16 +129,7 @@ const Estimates = () => {
   };
 
   const addItem = () => {
-    setItems([
-      ...items,
-      {
-        productName: '',
-        quantity: 1,
-        unitPrice: 0,
-        servicePeriod: '',
-        memo: ''
-      }
-    ]);
+    setItems([...items, createEmptyItem()]);
   };
 
   const removeItem = (index: number) => {
@@ -216,6 +207,8 @@ const Estimates = () => {
     setEstimateDate(estimate.estimateDate || '');
     setValidUntil(estimate.validUntil || '');
     setPaymentTerms(estimate.paymentTerms || '');
+    setNote(estimate.note || '');
+
     setItems(
       (estimate.items || []).map((item) => ({
         productName: item.productName || '',
@@ -225,7 +218,6 @@ const Estimates = () => {
         memo: item.memo || ''
       }))
     );
-    setNote(estimate.note || '');
 
     window.scrollTo({
       top: 0,
@@ -251,9 +243,17 @@ const Estimates = () => {
   };
 
   const handlePrint = (estimate: Estimate) => {
-    const subtotal = getSubtotal(estimate.items || []);
-    const vat = getVat(estimate.items || []);
-    const total = getTotal(estimate.items || []);
+    const estimateItems = (estimate.items || []).map((item) => ({
+      productName: item.productName || '',
+      quantity: item.quantity || 1,
+      unitPrice: item.unitPrice || 0,
+      servicePeriod: item.servicePeriod || '',
+      memo: item.memo || ''
+    }));
+
+    const subtotal = getSubtotal(estimateItems);
+    const vat = getVat(estimateItems);
+    const total = getTotal(estimateItems);
 
     const printWindow = window.open('', '_blank');
 
@@ -262,7 +262,7 @@ const Estimates = () => {
       return;
     }
 
-    const rows = (estimate.items || [])
+    const rows = estimateItems
       .map((item, index) => {
         const amount = Number(item.quantity || 0) * Number(item.unitPrice || 0);
 
@@ -570,155 +570,139 @@ const Estimates = () => {
               }}
             />
 
-           <div style={{ border: '1px solid #eee', borderRadius: '10px', padding: '16px' }}>
-  <h3 style={{ marginTop: 0 }}>견적 품목</h3>
+            <div style={{ border: '1px solid #eee', borderRadius: '10px', padding: '16px' }}>
+              <h3 style={{ marginTop: 0 }}>견적 품목</h3>
 
-  {items.map((item, index) => (
-    <div
-      key={index}
-      style={{
-        border: '1px solid #eee',
-        borderRadius: '10px',
-        padding: '14px',
-        marginBottom: '12px',
-        backgroundColor: '#fafafa'
-      }}
-    >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-          gap: '12px',
-          alignItems: 'end'
-        }}
-      >
-        <div>
-          <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
-            품목명
-          </label>
-          <input
-            type="text"
-            value={item.productName}
-            onChange={(e) => handleItemChange(index, 'productName', e.target.value)}
-            placeholder="품목명"
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: '10px',
-              borderRadius: '8px',
-              border: '1px solid #ddd'
-            }}
-          />
-        </div>
+              {items.map((item, index) => (
+                <div
+                  key={index}
+                  style={{
+                    border: '1px solid #eee',
+                    borderRadius: '10px',
+                    padding: '14px',
+                    marginBottom: '12px',
+                    backgroundColor: '#fafafa'
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+                      gap: '12px',
+                      alignItems: 'end'
+                    }}
+                  >
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                        품목명
+                      </label>
+                      <input
+                        type="text"
+                        value={item.productName}
+                        onChange={(e) => handleItemChange(index, 'productName', e.target.value)}
+                        placeholder="품목명"
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          padding: '10px',
+                          borderRadius: '8px',
+                          border: '1px solid #ddd'
+                        }}
+                      />
+                    </div>
 
-        <div>
-          <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
-            수량
-          </label>
-          <input
-            type="number"
-            value={item.quantity}
-            onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
-            placeholder="수량"
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: '10px',
-              borderRadius: '8px',
-              border: '1px solid #ddd'
-            }}
-          />
-        </div>
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                        수량
+                      </label>
+                      <input
+                        type="number"
+                        value={item.quantity}
+                        onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
+                        placeholder="수량"
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          padding: '10px',
+                          borderRadius: '8px',
+                          border: '1px solid #ddd'
+                        }}
+                      />
+                    </div>
 
-        <div>
-          <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
-            세금포함 단가
-          </label>
-          <input
-            type="number"
-            value={item.unitPrice}
-            onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
-            placeholder="세금포함 단가"
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: '10px',
-              borderRadius: '8px',
-              border: '1px solid #ddd'
-            }}
-          />
-        </div>
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                        세금포함 단가
+                      </label>
+                      <input
+                        type="number"
+                        value={item.unitPrice}
+                        onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
+                        placeholder="세금포함 단가"
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          padding: '10px',
+                          borderRadius: '8px',
+                          border: '1px solid #ddd'
+                        }}
+                      />
+                    </div>
 
-        <div>
-          <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
-            서비스기간
-          </label>
-          <input
-            type="text"
-            value={item.servicePeriod || ''}
-            onChange={(e) => handleItemChange(index, 'servicePeriod', e.target.value)}
-            placeholder="예: 1개월, 3개월, 1년"
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: '10px',
-              borderRadius: '8px',
-              border: '1px solid #ddd'
-            }}
-          />
-        </div>
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                        서비스기간
+                      </label>
+                      <input
+                        type="text"
+                        value={item.servicePeriod || ''}
+                        onChange={(e) => handleItemChange(index, 'servicePeriod', e.target.value)}
+                        placeholder="예: 1개월, 3개월, 1년"
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          padding: '10px',
+                          borderRadius: '8px',
+                          border: '1px solid #ddd'
+                        }}
+                      />
+                    </div>
 
-        <div>
-          <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
-            비고
-          </label>
-          <input
-            type="text"
-            value={item.memo}
-            onChange={(e) => handleItemChange(index, 'memo', e.target.value)}
-            placeholder="비고"
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: '10px',
-              borderRadius: '8px',
-              border: '1px solid #ddd'
-            }}
-          />
-        </div>
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                        비고
+                      </label>
+                      <input
+                        type="text"
+                        value={item.memo}
+                        onChange={(e) => handleItemChange(index, 'memo', e.target.value)}
+                        placeholder="비고"
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          padding: '10px',
+                          borderRadius: '8px',
+                          border: '1px solid #ddd'
+                        }}
+                      />
+                    </div>
 
-        <button
-          onClick={() => removeItem(index)}
-          style={{
-            padding: '10px',
-            borderRadius: '8px',
-            border: '1px solid #e74c3c',
-            backgroundColor: '#fff',
-            color: '#e74c3c',
-            cursor: 'pointer',
-            height: '40px'
-          }}
-        >
-          삭제
-        </button>
-      </div>
-    </div>
-  ))}
-
-  <button
-    onClick={addItem}
-    style={{
-      padding: '10px 14px',
-      borderRadius: '8px',
-      border: '1px solid #333',
-      backgroundColor: '#fff',
-      cursor: 'pointer',
-      marginTop: '8px'
-    }}
-  >
-    + 품목 추가
-  </button>
-</div>
+                    <button
+                      onClick={() => removeItem(index)}
+                      style={{
+                        padding: '10px',
+                        borderRadius: '8px',
+                        border: '1px solid #e74c3c',
+                        backgroundColor: '#fff',
+                        color: '#e74c3c',
+                        cursor: 'pointer',
+                        height: '40px'
+                      }}
+                    >
+                      삭제
+                    </button>
+                  </div>
+                </div>
               ))}
 
               <button
