@@ -377,7 +377,7 @@ const ProofSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-16 space-y-5">
           <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Proof & Positioning</span>
-          <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>우리는 광고만 보는 회사가 아니라<br />매장의 구조를 보는 회사입니다.</h2>
+          <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>우리는 광고만 다루는 회사가 아니라, 매장의 구조를 설계하는 회사입니다.</h2>
           <p className={`max-w-3xl mx-auto text-base leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
             올라운더 커피랩의 차별점은 현장 운영, 장비, 메뉴, 마케팅을 따로 보지 않는다는 점입니다.<br /> 좋은 매장이 지속 가능한 브랜드로 성장할 수 있도록 운영과 마케팅의 기준을 세웁니다.
           </p>
