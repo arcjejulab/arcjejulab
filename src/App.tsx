@@ -221,7 +221,10 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent flex items-end p-10">
                 <div className="text-white space-y-4">
                   <p className="text-[10px] font-black tracking-[0.35em] uppercase text-white/55">Allrounder Coffee Lab</p>
-                  <h2 className="text-3xl font-black leading-tight break-keep">좋은 매장이 더 잘 발견되고, 더 오래 운영되도록.</h2>
+                  <h2 className="text-3xl font-black leading-tight break-keep">
+                    사장님의 진심이 고객에게 닿고,<br />
+                    오래 사랑받는 매장이 되도록.
+                  </h2>
                 </div>
               </div>
             </div>
