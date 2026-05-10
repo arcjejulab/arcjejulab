@@ -465,7 +465,7 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
 
   return (
     <section id="contact" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start overflow-hidden">
         <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-10">
           <div className="space-y-6">
             <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Consulting Request</span>
@@ -487,9 +487,10 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 24 }}
+          initial={{ opacity: 0, x: 80 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.35 }}
           className={`p-8 md:p-12 rounded-[3rem] border shadow-2xl ${
             isDarkMode ? 'bg-white/5 border-white/10 shadow-black/40' : 'bg-white border-[#10307D]/5 shadow-[#10307D]/10'
           }`}
