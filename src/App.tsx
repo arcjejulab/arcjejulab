@@ -314,9 +314,9 @@ const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
 
   return (
     <section id="marketing" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div className="lg:col-span-5 lg:sticky lg:top-28">
-  <div className="lg:min-h-[420px] lg:flex lg:flex-col lg:justify-between">
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+        <div className="lg:col-span-5">
+  <div className="h-full flex flex-col justify-between">
     <div className="space-y-8">
       <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Local Marketing</span>
       <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
@@ -329,7 +329,7 @@ const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
       </p>
     </div>
 
-    <div className={`mt-10 lg:mt-0 p-8 rounded-[2rem] border max-w-[460px] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5'}`}>
+    <div className={`mt-9 p-8 rounded-[2rem] border max-w-[420px] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5'}`}>
       <BarChart3 className="w-9 h-9 text-[#007AFF] mb-5" />
       <p className={`text-xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
         검색 노출 → 신뢰 형성 → 방문 결정
