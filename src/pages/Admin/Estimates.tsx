@@ -12,6 +12,7 @@ import {
   deleteDoc
 } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { getAdminTheme, getSavedAdminTheme, AdminThemeMode } from './adminTheme';
 
 type EstimateItem = {
   productName: string;
@@ -45,6 +46,9 @@ const createEmptyItem = (): EstimateItem => ({
 const Estimates = () => {
   const navigate = useNavigate();
 
+  const [themeMode] = useState<AdminThemeMode>(getSavedAdminTheme());
+  const theme = getAdminTheme(themeMode);
+
   const [estimateNo, setEstimateNo] = useState('');
   const [clientName, setClientName] = useState('');
   const [managerName, setManagerName] = useState('');
@@ -58,6 +62,45 @@ const Estimates = () => {
   const [estimates, setEstimates] = useState<Estimate[]>([]);
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+
+  const inputStyle = {
+    width: '100%',
+    boxSizing: 'border-box' as const,
+    padding: '12px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.cardBgSoft,
+    color: theme.text
+  };
+
+  const smallInputStyle = {
+    width: '100%',
+    boxSizing: 'border-box' as const,
+    padding: '10px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.cardBg,
+    color: theme.text
+  };
+
+  const cardStyle = {
+    backgroundColor: theme.cardBg,
+    border: `1px solid ${theme.border}`,
+    borderRadius: '12px',
+    padding: '24px',
+    marginBottom: '24px',
+    boxShadow: theme.shadow
+  };
+
+  const outlineButtonStyle = {
+    padding: '10px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.outlineButtonBg,
+    color: theme.text,
+    cursor: 'pointer',
+    fontWeight: 'bold'
+  };
 
   const fetchEstimates = async () => {
     const q = query(collection(db, 'estimates'), orderBy('createdAt', 'desc'));
@@ -443,45 +486,40 @@ const Estimates = () => {
   };
 
   return (
-    <div style={{ padding: '32px', fontFamily: 'sans-serif', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
+    <div
+      style={{
+        padding: '32px',
+        fontFamily: 'sans-serif',
+        backgroundColor: theme.pageBg,
+        color: theme.text,
+        minHeight: '100vh'
+      }}
+    >
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ marginBottom: '32px' }}>
           <button
             onClick={() => navigate('/admin/dashboard')}
             style={{
-              padding: '10px 16px',
-              borderRadius: '8px',
-              border: '1px solid #333',
-              backgroundColor: '#fff',
-              cursor: 'pointer',
+              ...outlineButtonStyle,
               marginBottom: '20px'
             }}
           >
             ← 대시보드로 돌아가기
           </button>
 
-          <h1 style={{ margin: 0, color: '#222' }}>📄 견적서 관리</h1>
-          <p style={{ marginTop: '8px', color: '#666' }}>
+          <h1 style={{ margin: 0, color: theme.text }}>📄 견적서 관리</h1>
+          <p style={{ marginTop: '8px', color: theme.subText }}>
             거래처별 견적서를 작성하고 PDF로 저장할 수 있습니다.
           </p>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>
             {editingId ? '견적서 수정' : '새 견적서 작성'}
           </h2>
 
           {editingId && (
-            <p style={{ color: '#666', marginTop: '-8px' }}>
+            <p style={{ color: theme.subText, marginTop: '-8px' }}>
               현재 기존 견적서를 수정하는 중입니다.
             </p>
           )}
@@ -492,11 +530,7 @@ const Estimates = () => {
               value={estimateNo}
               onChange={(e) => setEstimateNo(e.target.value)}
               placeholder="견적번호 비워두면 자동 생성"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -504,11 +538,7 @@ const Estimates = () => {
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               placeholder="거래처명"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -516,11 +546,7 @@ const Estimates = () => {
               value={managerName}
               onChange={(e) => setManagerName(e.target.value)}
               placeholder="담당자명"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -528,33 +554,21 @@ const Estimates = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="연락처"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
               type="date"
               value={estimateDate}
               onChange={(e) => setEstimateDate(e.target.value)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
               type="date"
               value={validUntil}
               onChange={(e) => setValidUntil(e.target.value)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <textarea
@@ -563,25 +577,30 @@ const Estimates = () => {
               placeholder="결제 조건 예: 계약금 50%, 잔금 설치 완료 후 결제"
               rows={3}
               style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd',
+                ...inputStyle,
                 resize: 'vertical'
               }}
             />
 
-            <div style={{ border: '1px solid #eee', borderRadius: '10px', padding: '16px' }}>
-              <h3 style={{ marginTop: 0 }}>견적 품목</h3>
+            <div
+              style={{
+                border: `1px solid ${theme.border}`,
+                borderRadius: '10px',
+                padding: '16px',
+                backgroundColor: theme.cardBgSoft
+              }}
+            >
+              <h3 style={{ marginTop: 0, color: theme.text }}>견적 품목</h3>
 
               {items.map((item, index) => (
                 <div
                   key={index}
                   style={{
-                    border: '1px solid #eee',
+                    border: `1px solid ${theme.border}`,
                     borderRadius: '10px',
                     padding: '14px',
                     marginBottom: '12px',
-                    backgroundColor: '#fafafa'
+                    backgroundColor: theme.cardBg
                   }}
                 >
                   <div
@@ -593,7 +612,7 @@ const Estimates = () => {
                     }}
                   >
                     <div>
-                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold', color: theme.text }}>
                         품목명
                       </label>
                       <input
@@ -601,18 +620,12 @@ const Estimates = () => {
                         value={item.productName}
                         onChange={(e) => handleItemChange(index, 'productName', e.target.value)}
                         placeholder="품목명"
-                        style={{
-                          width: '100%',
-                          boxSizing: 'border-box',
-                          padding: '10px',
-                          borderRadius: '8px',
-                          border: '1px solid #ddd'
-                        }}
+                        style={smallInputStyle}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold', color: theme.text }}>
                         수량
                       </label>
                       <input
@@ -620,18 +633,12 @@ const Estimates = () => {
                         value={item.quantity}
                         onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
                         placeholder="수량"
-                        style={{
-                          width: '100%',
-                          boxSizing: 'border-box',
-                          padding: '10px',
-                          borderRadius: '8px',
-                          border: '1px solid #ddd'
-                        }}
+                        style={smallInputStyle}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold', color: theme.text }}>
                         세금포함 단가
                       </label>
                       <input
@@ -639,18 +646,12 @@ const Estimates = () => {
                         value={item.unitPrice}
                         onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
                         placeholder="세금포함 단가"
-                        style={{
-                          width: '100%',
-                          boxSizing: 'border-box',
-                          padding: '10px',
-                          borderRadius: '8px',
-                          border: '1px solid #ddd'
-                        }}
+                        style={smallInputStyle}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold', color: theme.text }}>
                         서비스기간
                       </label>
                       <input
@@ -658,18 +659,12 @@ const Estimates = () => {
                         value={item.servicePeriod || ''}
                         onChange={(e) => handleItemChange(index, 'servicePeriod', e.target.value)}
                         placeholder="예: 1개월, 3개월, 1년"
-                        style={{
-                          width: '100%',
-                          boxSizing: 'border-box',
-                          padding: '10px',
-                          borderRadius: '8px',
-                          border: '1px solid #ddd'
-                        }}
+                        style={smallInputStyle}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold' }}>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 'bold', color: theme.text }}>
                         비고
                       </label>
                       <input
@@ -677,13 +672,7 @@ const Estimates = () => {
                         value={item.memo}
                         onChange={(e) => handleItemChange(index, 'memo', e.target.value)}
                         placeholder="비고"
-                        style={{
-                          width: '100%',
-                          boxSizing: 'border-box',
-                          padding: '10px',
-                          borderRadius: '8px',
-                          border: '1px solid #ddd'
-                        }}
+                        style={smallInputStyle}
                       />
                     </div>
 
@@ -693,10 +682,11 @@ const Estimates = () => {
                         padding: '10px',
                         borderRadius: '8px',
                         border: '1px solid #e74c3c',
-                        backgroundColor: '#fff',
+                        backgroundColor: theme.outlineButtonBg,
                         color: '#e74c3c',
                         cursor: 'pointer',
-                        height: '40px'
+                        height: '40px',
+                        fontWeight: 'bold'
                       }}
                     >
                       삭제
@@ -708,11 +698,7 @@ const Estimates = () => {
               <button
                 onClick={addItem}
                 style={{
-                  padding: '10px 14px',
-                  borderRadius: '8px',
-                  border: '1px solid #333',
-                  backgroundColor: '#fff',
-                  cursor: 'pointer',
+                  ...outlineButtonStyle,
                   marginTop: '8px'
                 }}
               >
@@ -722,19 +708,19 @@ const Estimates = () => {
 
             <div
               style={{
-                backgroundColor: '#fafafa',
-                border: '1px solid #eee',
+                backgroundColor: theme.cardBgSoft,
+                border: `1px solid ${theme.border}`,
                 borderRadius: '10px',
                 padding: '16px'
               }}
             >
-              <p style={{ margin: '0 0 6px' }}>
-                공급가액: <strong>{formatNumber(getSubtotal(items))}원</strong>
+              <p style={{ margin: '0 0 6px', color: theme.subText }}>
+                공급가액: <strong style={{ color: theme.text }}>{formatNumber(getSubtotal(items))}원</strong>
               </p>
-              <p style={{ margin: '0 0 6px' }}>
-                부가세: <strong>{formatNumber(getVat(items))}원</strong>
+              <p style={{ margin: '0 0 6px', color: theme.subText }}>
+                부가세: <strong style={{ color: theme.text }}>{formatNumber(getVat(items))}원</strong>
               </p>
-              <p style={{ margin: 0, fontSize: '20px' }}>
+              <p style={{ margin: 0, fontSize: '20px', color: theme.text }}>
                 합계: <strong>{formatNumber(getTotal(items))}원</strong>
               </p>
             </div>
@@ -745,9 +731,7 @@ const Estimates = () => {
               placeholder="특이사항 예: 설치비 별도, 배송비 포함, 유효기간 이후 금액 변동 가능"
               rows={4}
               style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd',
+                ...inputStyle,
                 resize: 'vertical'
               }}
             />
@@ -761,8 +745,8 @@ const Estimates = () => {
                   padding: '14px',
                   borderRadius: '8px',
                   border: 'none',
-                  backgroundColor: '#333',
-                  color: '#fff',
+                  backgroundColor: theme.buttonBg,
+                  color: theme.buttonText,
                   fontWeight: 'bold',
                   cursor: 'pointer'
                 }}
@@ -774,15 +758,7 @@ const Estimates = () => {
                 <button
                   onClick={resetForm}
                   type="button"
-                  style={{
-                    padding: '14px',
-                    borderRadius: '8px',
-                    border: '1px solid #999',
-                    backgroundColor: '#fff',
-                    color: '#333',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-                  }}
+                  style={outlineButtonStyle}
                 >
                   수정 취소
                 </button>
@@ -791,56 +767,42 @@ const Estimates = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>등록된 견적서</h2>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>등록된 견적서</h2>
 
           {estimates.length === 0 ? (
-            <p style={{ color: '#666' }}>아직 등록된 견적서가 없습니다.</p>
+            <p style={{ color: theme.subText }}>아직 등록된 견적서가 없습니다.</p>
           ) : (
             <div style={{ display: 'grid', gap: '12px' }}>
               {estimates.map((estimate) => (
                 <div
                   key={estimate.id}
                   style={{
-                    border: '1px solid #eee',
+                    border: `1px solid ${theme.border}`,
                     borderRadius: '10px',
                     padding: '16px',
-                    backgroundColor: '#fafafa'
+                    backgroundColor: theme.cardBgSoft
                   }}
                 >
-                  <strong>{estimate.estimateNo}</strong>
+                  <strong style={{ color: theme.text }}>{estimate.estimateNo}</strong>
 
-                  <p style={{ margin: '8px 0 4px', fontWeight: 'bold' }}>
+                  <p style={{ margin: '8px 0 4px', fontWeight: 'bold', color: theme.text }}>
                     {estimate.clientName}
                     {estimate.managerName && ` · ${estimate.managerName}`}
                   </p>
 
-                  <p style={{ margin: '0 0 6px', color: '#666' }}>
+                  <p style={{ margin: '0 0 6px', color: theme.subText }}>
                     견적일자: {estimate.estimateDate}
                   </p>
 
-                  <p style={{ margin: '0 0 6px', color: '#666' }}>
-                    합계: {formatNumber(getTotal(estimate.items || []))}원
+                  <p style={{ margin: '0 0 6px', color: theme.subText }}>
+                    합계: <strong style={{ color: theme.text }}>{formatNumber(getTotal(estimate.items || []))}원</strong>
                   </p>
 
                   <div style={{ display: 'flex', gap: '8px', marginTop: '14px', flexWrap: 'wrap' }}>
                     <button
                       onClick={() => handleEdit(estimate)}
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        border: '1px solid #333',
-                        backgroundColor: '#fff',
-                        cursor: 'pointer'
-                      }}
+                      style={outlineButtonStyle}
                     >
                       수정
                     </button>
@@ -850,10 +812,11 @@ const Estimates = () => {
                       style={{
                         padding: '8px 12px',
                         borderRadius: '6px',
-                        border: '1px solid #10307D',
-                        backgroundColor: '#fff',
-                        color: '#10307D',
-                        cursor: 'pointer'
+                        border: '1px solid #60a5fa',
+                        backgroundColor: theme.outlineButtonBg,
+                        color: '#60a5fa',
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
                       }}
                     >
                       PDF 저장
@@ -865,9 +828,10 @@ const Estimates = () => {
                         padding: '8px 12px',
                         borderRadius: '6px',
                         border: '1px solid #e74c3c',
-                        backgroundColor: '#fff',
+                        backgroundColor: theme.outlineButtonBg,
                         color: '#e74c3c',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
                       }}
                     >
                       삭제
