@@ -12,14 +12,23 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={{ padding: '32px', fontFamily: 'sans-serif', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          marginBottom: '32px'
-        }}>
+    <div
+      style={{
+        padding: '32px',
+        fontFamily: 'sans-serif',
+        backgroundColor: '#f7f7f7',
+        minHeight: '100vh'
+      }}
+    >
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '32px'
+          }}
+        >
           <div>
             <h1 style={{ margin: 0, color: '#222' }}>🚀 ARC ADMIN DASHBOARD</h1>
             <p style={{ marginTop: '8px', color: '#666' }}>
@@ -30,13 +39,13 @@ const Dashboard = () => {
           <button
             onClick={handleLogout}
             style={{
-              padding: '10px 18px',
+              padding: '12px 18px',
               borderRadius: '8px',
               border: 'none',
               backgroundColor: '#333',
               color: '#fff',
-              cursor: 'pointer',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              cursor: 'pointer'
             }}
           >
             로그아웃
@@ -53,15 +62,19 @@ const Dashboard = () => {
             boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
           }}
         >
-          <h2 style={{ marginTop: 0 }}>[ 오늘의 업무 현황 ]</h2>
-          <p>환영합니다, 사장님. 현재 시스템 정상 가동 중입니다.</p>
+          <h3 style={{ marginTop: 0 }}>오늘의 업무 현황</h3>
+          <p style={{ margin: 0 }}>
+            환영합니다, 사장님. 현재 시스템 정상 가동 중입니다.
+          </p>
         </div>
 
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-          gap: '16px' 
-        }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '16px'
+          }}
+        >
           <div
             style={{
               backgroundColor: '#fff',
@@ -72,7 +85,9 @@ const Dashboard = () => {
             }}
           >
             <h3 style={{ marginTop: 0 }}>📅 영업 스케줄러</h3>
-            <p style={{ color: '#666' }}>방문 일정, 미팅 일정, 계약 예정일을 관리합니다.</p>
+            <p style={{ color: '#666' }}>
+              방문 일정, 미팅 일정, 계약 예정일을 관리합니다.
+            </p>
             <button
               onClick={() => navigate('/admin/schedule')}
               style={{
@@ -98,7 +113,9 @@ const Dashboard = () => {
             }}
           >
             <h3 style={{ marginTop: 0 }}>📝 거래처 상담 기록</h3>
-            <p style={{ color: '#666' }}>거래처별 상담 내용, 견적, 다음 액션을 기록합니다.</p>
+            <p style={{ color: '#666' }}>
+              거래처별 상담 내용, 견적, 다음 액션을 기록합니다.
+            </p>
             <button
               onClick={() => navigate('/admin/clients')}
               style={{
@@ -113,113 +130,118 @@ const Dashboard = () => {
               상담 기록 열기
             </button>
           </div>
+
           <div
-  style={{
-    backgroundColor: '#fff',
-    border: '1px solid #ddd',
-    borderRadius: '12px',
-    padding: '24px',
-    boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-  }}
->
-  <h3 style={{ marginTop: 0 }}>💰 매출 관리</h3>
-  <p style={{ color: '#666' }}>
-    월매출, 연매출, 컨설팅·마케팅·상품 매출을 관리합니다.
-  </p>
-  <button
-    onClick={() => navigate('/admin/sales-ledger')}
-    style={{
-      marginTop: '12px',
-      padding: '10px 14px',
-      borderRadius: '8px',
-      border: '1px solid #333',
-      backgroundColor: '#fff',
-      cursor: 'pointer'
-    }}
-  >
-    매출 관리 열기
-  </button>
-</div>
-  style={{
-    backgroundColor: '#fff',
-    border: '1px solid #ddd',
-    borderRadius: '12px',
-    padding: '24px',
-    boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-  }}
->
-  <h3 style={{ marginTop: 0 }}>📚 영업 자료 게시판</h3>
-  <p style={{ color: '#666' }}>
-    영업 상품, 제안 방법, 고객 반박 대응, 영업 스크립트를 정리합니다.
-  </p>
-  <button
-    onClick={() => navigate('/admin/sales-notes')}
-    style={{
-      marginTop: '12px',
-      padding: '10px 14px',
-      borderRadius: '8px',
-      border: '1px solid #333',
-      backgroundColor: '#fff',
-      cursor: 'pointer'
-    }}
-  >
-    영업 자료 열기
-  </button>
-</div>
+            style={{
+              backgroundColor: '#fff',
+              border: '1px solid #ddd',
+              borderRadius: '12px',
+              padding: '24px',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+            }}
+          >
+            <h3 style={{ marginTop: 0 }}>📚 영업 자료 게시판</h3>
+            <p style={{ color: '#666' }}>
+              영업 상품, 제안 방법, 고객 반박 대응, 영업 스크립트를 정리합니다.
+            </p>
+            <button
+              onClick={() => navigate('/admin/sales-notes')}
+              style={{
+                marginTop: '12px',
+                padding: '10px 14px',
+                borderRadius: '8px',
+                border: '1px solid #333',
+                backgroundColor: '#fff',
+                cursor: 'pointer'
+              }}
+            >
+              영업 자료 열기
+            </button>
+          </div>
+
           <div
-  style={{
-    backgroundColor: '#fff',
-    border: '1px solid #ddd',
-    borderRadius: '12px',
-    padding: '24px',
-    boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-  }}
->
-  <h3 style={{ marginTop: 0 }}>📄 견적서 관리</h3>
-  <p style={{ color: '#666' }}>
-    거래처별 견적서를 작성하고 PDF로 저장합니다.
-  </p>
-  <button
-    onClick={() => navigate('/admin/estimates')}
-    style={{
-      marginTop: '12px',
-      padding: '10px 14px',
-      borderRadius: '8px',
-      border: '1px solid #333',
-      backgroundColor: '#fff',
-      cursor: 'pointer'
-    }}
-  >
-    견적서 열기
-  </button>
-</div>
+            style={{
+              backgroundColor: '#fff',
+              border: '1px solid #ddd',
+              borderRadius: '12px',
+              padding: '24px',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+            }}
+          >
+            <h3 style={{ marginTop: 0 }}>📄 견적서 관리</h3>
+            <p style={{ color: '#666' }}>
+              거래처별 견적서를 작성하고 PDF로 저장합니다.
+            </p>
+            <button
+              onClick={() => navigate('/admin/estimates')}
+              style={{
+                marginTop: '12px',
+                padding: '10px 14px',
+                borderRadius: '8px',
+                border: '1px solid #333',
+                backgroundColor: '#fff',
+                cursor: 'pointer'
+              }}
+            >
+              견적서 열기
+            </button>
+          </div>
+
           <div
-  style={{
-    backgroundColor: '#fff',
-    border: '1px solid #ddd',
-    borderRadius: '12px',
-    padding: '24px',
-    boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-  }}
->
-  <h3 style={{ marginTop: 0 }}>📌 작업 현황 관리</h3>
-  <p style={{ color: '#666' }}>
-    거래처별 작업을 대기, 진행, 완료 상태로 관리합니다.
-  </p>
-  <button
-    onClick={() => navigate('/admin/work-status')}
-    style={{
-      marginTop: '12px',
-      padding: '10px 14px',
-      borderRadius: '8px',
-      border: '1px solid #333',
-      backgroundColor: '#fff',
-      cursor: 'pointer'
-    }}
-  >
-    작업 현황 열기
-  </button>
-</div>
+            style={{
+              backgroundColor: '#fff',
+              border: '1px solid #ddd',
+              borderRadius: '12px',
+              padding: '24px',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+            }}
+          >
+            <h3 style={{ marginTop: 0 }}>📌 작업 현황 관리</h3>
+            <p style={{ color: '#666' }}>
+              거래처별 작업을 대기, 진행, 완료 상태로 관리합니다.
+            </p>
+            <button
+              onClick={() => navigate('/admin/work-status')}
+              style={{
+                marginTop: '12px',
+                padding: '10px 14px',
+                borderRadius: '8px',
+                border: '1px solid #333',
+                backgroundColor: '#fff',
+                cursor: 'pointer'
+              }}
+            >
+              작업 현황 열기
+            </button>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: '#fff',
+              border: '1px solid #ddd',
+              borderRadius: '12px',
+              padding: '24px',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+            }}
+          >
+            <h3 style={{ marginTop: 0 }}>💰 매출 관리</h3>
+            <p style={{ color: '#666' }}>
+              월매출, 연매출, 컨설팅·마케팅·상품 매출을 관리합니다.
+            </p>
+            <button
+              onClick={() => navigate('/admin/sales-ledger')}
+              style={{
+                marginTop: '12px',
+                padding: '10px 14px',
+                borderRadius: '8px',
+                border: '1px solid #333',
+                backgroundColor: '#fff',
+                cursor: 'pointer'
+              }}
+            >
+              매출 관리 열기
+            </button>
+          </div>
         </div>
       </div>
     </div>
