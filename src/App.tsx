@@ -590,7 +590,7 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
       <div className="flex flex-col md:flex-row gap-8 md:gap-16 text-center md:text-left">
         <div className="space-y-4">
           <h5 className={`text-[12px] font-black uppercase tracking-widest break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Service</h5>
-          <p className="text-sm text-gray-500 font-medium break-keep">제주 카페컨설팅 · 로컬 마케팅<br />스마트플레이스 · 인스타그램 · 구글 SEO</p>
+          <p className="text-sm text-gray-500 font-medium break-keep">제주 카페컨설팅 · 로컬 마케팅<br />스마트플레이스 · 당근 비즈프로필 · AI 검색 최적화</p>
         </div>
         <div className="space-y-4">
           <h5 className={`text-[12px] font-black uppercase tracking-widest break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Office</h5>
