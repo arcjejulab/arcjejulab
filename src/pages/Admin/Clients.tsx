@@ -12,6 +12,7 @@ import {
   deleteDoc
 } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { getAdminTheme, getSavedAdminTheme, AdminThemeMode } from './adminTheme';
 
 type ClientRecord = {
   id: string;
@@ -26,6 +27,9 @@ type ClientRecord = {
 const Clients = () => {
   const navigate = useNavigate();
 
+  const [themeMode] = useState<AdminThemeMode>(getSavedAdminTheme());
+  const theme = getAdminTheme(themeMode);
+
   const [companyName, setCompanyName] = useState('');
   const [managerName, setManagerName] = useState('');
   const [phone, setPhone] = useState('');
@@ -37,13 +41,42 @@ const Clients = () => {
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
+  const inputStyle = {
+    width: '100%',
+    boxSizing: 'border-box' as const,
+    padding: '12px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.cardBgSoft,
+    color: theme.text
+  };
+
+  const cardStyle = {
+    backgroundColor: theme.cardBg,
+    border: `1px solid ${theme.border}`,
+    borderRadius: '12px',
+    padding: '24px',
+    marginBottom: '24px',
+    boxShadow: theme.shadow
+  };
+
+  const outlineButtonStyle = {
+    padding: '10px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.outlineButtonBg,
+    color: theme.text,
+    cursor: 'pointer',
+    fontWeight: 'bold'
+  };
+
   const fetchRecords = async () => {
     const q = query(collection(db, 'clients'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
 
-    const data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...(doc.data() as Omit<ClientRecord, 'id'>)
+    const data = querySnapshot.docs.map((document) => ({
+      id: document.id,
+      ...(document.data() as Omit<ClientRecord, 'id'>)
     }));
 
     setRecords(data);
@@ -112,11 +145,11 @@ const Clients = () => {
 
   const handleEdit = (record: ClientRecord) => {
     setEditingId(record.id);
-    setCompanyName(record.companyName);
+    setCompanyName(record.companyName || '');
     setManagerName(record.managerName || '');
     setPhone(record.phone || '');
-    setConsultDate(record.consultDate);
-    setConsultContent(record.consultContent);
+    setConsultDate(record.consultDate || '');
+    setConsultContent(record.consultContent || '');
     setNextAction(record.nextAction || '');
 
     window.scrollTo({
@@ -143,45 +176,40 @@ const Clients = () => {
   };
 
   return (
-    <div style={{ padding: '32px', fontFamily: 'sans-serif', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
+    <div
+      style={{
+        padding: '32px',
+        fontFamily: 'sans-serif',
+        backgroundColor: theme.pageBg,
+        color: theme.text,
+        minHeight: '100vh'
+      }}
+    >
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         <div style={{ marginBottom: '32px' }}>
           <button
             onClick={() => navigate('/admin/dashboard')}
             style={{
-              padding: '10px 16px',
-              borderRadius: '8px',
-              border: '1px solid #333',
-              backgroundColor: '#fff',
-              cursor: 'pointer',
+              ...outlineButtonStyle,
               marginBottom: '20px'
             }}
           >
             ← 대시보드로 돌아가기
           </button>
 
-          <h1 style={{ margin: 0, color: '#222' }}>📝 거래처 상담 기록</h1>
-          <p style={{ marginTop: '8px', color: '#666' }}>
+          <h1 style={{ margin: 0, color: theme.text }}>📝 거래처 상담 기록</h1>
+          <p style={{ marginTop: '8px', color: theme.subText }}>
             거래처별 상담 내용, 견적, 다음 액션을 기록하는 페이지입니다.
           </p>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>
             {editingId ? '상담 기록 수정' : '새 상담 기록 등록'}
           </h2>
 
           {editingId && (
-            <p style={{ color: '#666', marginTop: '-8px' }}>
+            <p style={{ color: theme.subText, marginTop: '-8px' }}>
               현재 기존 상담 기록을 수정하는 중입니다.
             </p>
           )}
@@ -192,11 +220,7 @@ const Clients = () => {
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="거래처명 예: 제주 ○○카페"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -204,11 +228,7 @@ const Clients = () => {
               value={managerName}
               onChange={(e) => setManagerName(e.target.value)}
               placeholder="담당자명"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -216,22 +236,14 @@ const Clients = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="연락처"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
               type="date"
               value={consultDate}
               onChange={(e) => setConsultDate(e.target.value)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <textarea
@@ -240,9 +252,7 @@ const Clients = () => {
               placeholder="상담 내용 예: 커피머신 교체 상담, 마케팅 운영 제안, 견적 전달 예정"
               rows={5}
               style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd',
+                ...inputStyle,
                 resize: 'vertical'
               }}
             />
@@ -253,9 +263,7 @@ const Clients = () => {
               placeholder="다음 액션 예: 다음 주 재방문, 견적서 발송, 계약서 준비"
               rows={4}
               style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd',
+                ...inputStyle,
                 resize: 'vertical'
               }}
             />
@@ -269,8 +277,8 @@ const Clients = () => {
                   padding: '14px',
                   borderRadius: '8px',
                   border: 'none',
-                  backgroundColor: '#333',
-                  color: '#fff',
+                  backgroundColor: theme.buttonBg,
+                  color: theme.buttonText,
                   fontWeight: 'bold',
                   cursor: 'pointer'
                 }}
@@ -282,15 +290,7 @@ const Clients = () => {
                 <button
                   onClick={resetForm}
                   type="button"
-                  style={{
-                    padding: '14px',
-                    borderRadius: '8px',
-                    border: '1px solid #999',
-                    backgroundColor: '#fff',
-                    color: '#333',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-                  }}
+                  style={outlineButtonStyle}
                 >
                   수정 취소
                 </button>
@@ -299,70 +299,60 @@ const Clients = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>등록된 상담 기록</h2>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>등록된 상담 기록</h2>
 
           {records.length === 0 ? (
-            <p style={{ color: '#666' }}>아직 등록된 상담 기록이 없습니다.</p>
+            <p style={{ color: theme.subText }}>아직 등록된 상담 기록이 없습니다.</p>
           ) : (
             <div style={{ display: 'grid', gap: '12px' }}>
               {records.map((record) => (
                 <div
                   key={record.id}
                   style={{
-                    border: '1px solid #eee',
+                    border: `1px solid ${theme.border}`,
                     borderRadius: '10px',
                     padding: '16px',
-                    backgroundColor: '#fafafa'
+                    backgroundColor: theme.cardBgSoft
                   }}
                 >
-                  <strong>{record.consultDate}</strong>
+                  <strong style={{ color: theme.text }}>{record.consultDate}</strong>
 
-                  <p style={{ margin: '8px 0 4px', fontWeight: 'bold' }}>
+                  <p style={{ margin: '8px 0 4px', fontWeight: 'bold', color: theme.text }}>
                     {record.companyName}
                     {record.managerName && ` · ${record.managerName}`}
                   </p>
 
                   {record.phone && (
-                    <p style={{ margin: '0 0 8px', color: '#666' }}>
+                    <p style={{ margin: '0 0 8px', color: theme.subText }}>
                       연락처: {record.phone}
                     </p>
                   )}
 
                   <div style={{ marginTop: '10px' }}>
-                    <p style={{ margin: '0 0 4px', fontWeight: 'bold' }}>상담 내용</p>
-                    <p style={{ margin: 0, color: '#666', whiteSpace: 'pre-wrap' }}>
+                    <p style={{ margin: '0 0 4px', fontWeight: 'bold', color: theme.text }}>
+                      상담 내용
+                    </p>
+                    <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
                       {record.consultContent}
                     </p>
                   </div>
 
                   {record.nextAction && (
                     <div style={{ marginTop: '12px' }}>
-                      <p style={{ margin: '0 0 4px', fontWeight: 'bold' }}>다음 액션</p>
-                      <p style={{ margin: 0, color: '#666', whiteSpace: 'pre-wrap' }}>
+                      <p style={{ margin: '0 0 4px', fontWeight: 'bold', color: theme.text }}>
+                        다음 액션
+                      </p>
+                      <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
                         {record.nextAction}
                       </p>
                     </div>
                   )}
 
-                  <div style={{ display: 'flex', gap: '8px', marginTop: '14px' }}>
+                  <div style={{ display: 'flex', gap: '8px', marginTop: '14px', flexWrap: 'wrap' }}>
                     <button
                       onClick={() => handleEdit(record)}
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        border: '1px solid #333',
-                        backgroundColor: '#fff',
-                        cursor: 'pointer'
-                      }}
+                      style={outlineButtonStyle}
                     >
                       수정
                     </button>
@@ -373,9 +363,10 @@ const Clients = () => {
                         padding: '8px 12px',
                         borderRadius: '6px',
                         border: '1px solid #e74c3c',
-                        backgroundColor: '#fff',
+                        backgroundColor: theme.outlineButtonBg,
                         color: '#e74c3c',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
                       }}
                     >
                       삭제
