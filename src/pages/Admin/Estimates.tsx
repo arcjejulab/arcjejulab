@@ -98,19 +98,19 @@ const Estimates = () => {
     return value.toLocaleString('ko-KR');
   };
 
-  const getSubtotal = (estimateItems: EstimateItem[]) => {
-    return estimateItems.reduce((sum, item) => {
-      return sum + Number(item.quantity || 0) * Number(item.unitPrice || 0);
-    }, 0);
-  };
-
-  const getVat = (estimateItems: EstimateItem[]) => {
-    return Math.round(getSubtotal(estimateItems) * 0.1);
-  };
-
   const getTotal = (estimateItems: EstimateItem[]) => {
-    return getSubtotal(estimateItems) + getVat(estimateItems);
-  };
+  return estimateItems.reduce((sum, item) => {
+    return sum + Number(item.quantity || 0) * Number(item.unitPrice || 0);
+  }, 0);
+};
+
+const getSubtotal = (estimateItems: EstimateItem[]) => {
+  return Math.round(getTotal(estimateItems) / 1.1);
+};
+
+const getVat = (estimateItems: EstimateItem[]) => {
+  return getTotal(estimateItems) - getSubtotal(estimateItems);
+};
 
   const handleItemChange = (
     index: number,
