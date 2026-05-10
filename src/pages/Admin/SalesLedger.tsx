@@ -12,6 +12,7 @@ import {
   deleteDoc
 } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { getAdminTheme, getSavedAdminTheme, AdminThemeMode } from './adminTheme';
 
 type SalesCategory = '컨설팅' | '마케팅' | '상품' | '제휴';
 
@@ -27,6 +28,9 @@ type SalesRecord = {
 const SalesLedger = () => {
   const navigate = useNavigate();
 
+  const [themeMode] = useState<AdminThemeMode>(getSavedAdminTheme());
+  const theme = getAdminTheme(themeMode);
+
   const [salesDate, setSalesDate] = useState('');
   const [clientName, setClientName] = useState('');
   const [category, setCategory] = useState<SalesCategory>('상품');
@@ -36,6 +40,35 @@ const SalesLedger = () => {
   const [records, setRecords] = useState<SalesRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+
+  const inputStyle = {
+    width: '100%',
+    boxSizing: 'border-box' as const,
+    padding: '12px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.cardBgSoft,
+    color: theme.text
+  };
+
+  const cardStyle = {
+    backgroundColor: theme.cardBg,
+    border: `1px solid ${theme.border}`,
+    borderRadius: '12px',
+    padding: '24px',
+    marginBottom: '24px',
+    boxShadow: theme.shadow
+  };
+
+  const outlineButtonStyle = {
+    padding: '10px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${theme.border}`,
+    backgroundColor: theme.outlineButtonBg,
+    color: theme.text,
+    cursor: 'pointer',
+    fontWeight: 'bold'
+  };
 
   const fetchRecords = async () => {
     const q = query(collection(db, 'salesLedger'), orderBy('createdAt', 'desc'));
@@ -103,32 +136,32 @@ const SalesLedger = () => {
   const getCategoryStyle = (value: SalesCategory) => {
     if (value === '컨설팅') {
       return {
-        backgroundColor: '#fff5e6',
-        color: '#b26a00',
-        border: '1px solid #ffd699'
+        backgroundColor: theme.isDark ? '#3a2508' : '#fff5e6',
+        color: theme.isDark ? '#fbbf24' : '#b26a00',
+        border: theme.isDark ? '1px solid #b26a00' : '1px solid #ffd699'
       };
     }
 
     if (value === '마케팅') {
       return {
-        backgroundColor: '#f0eaff',
-        color: '#5b35b1',
-        border: '1px solid #d1c2ff'
+        backgroundColor: theme.isDark ? '#261b4d' : '#f0eaff',
+        color: theme.isDark ? '#c4b5fd' : '#5b35b1',
+        border: theme.isDark ? '1px solid #7c3aed' : '1px solid #d1c2ff'
       };
     }
 
     if (value === '제휴') {
       return {
-        backgroundColor: '#eaf2ff',
-        color: '#1f5fbf',
-        border: '1px solid #b7d4ff'
+        backgroundColor: theme.isDark ? '#12243f' : '#eaf2ff',
+        color: theme.isDark ? '#93c5fd' : '#1f5fbf',
+        border: theme.isDark ? '1px solid #2563eb' : '1px solid #b7d4ff'
       };
     }
 
     return {
-      backgroundColor: '#eafaf8',
-      color: '#117864',
-      border: '1px solid #a3e4d7'
+      backgroundColor: theme.isDark ? '#123c36' : '#eafaf8',
+      color: theme.isDark ? '#5eead4' : '#117864',
+      border: theme.isDark ? '1px solid #0f766e' : '1px solid #a3e4d7'
     };
   };
 
@@ -208,26 +241,38 @@ const SalesLedger = () => {
     }
   };
 
+  const summaryCardStyle = {
+    backgroundColor: theme.cardBg,
+    borderRadius: '12px',
+    padding: '20px',
+    border: `1px solid ${theme.border}`,
+    boxShadow: theme.shadow
+  };
+
   return (
-    <div style={{ padding: '32px', fontFamily: 'sans-serif', backgroundColor: '#f7f7f7', minHeight: '100vh' }}>
+    <div
+      style={{
+        padding: '32px',
+        fontFamily: 'sans-serif',
+        backgroundColor: theme.pageBg,
+        color: theme.text,
+        minHeight: '100vh'
+      }}
+    >
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ marginBottom: '32px' }}>
           <button
             onClick={() => navigate('/admin/dashboard')}
             style={{
-              padding: '10px 16px',
-              borderRadius: '8px',
-              border: '1px solid #333',
-              backgroundColor: '#fff',
-              cursor: 'pointer',
+              ...outlineButtonStyle,
               marginBottom: '20px'
             }}
           >
             ← 대시보드로 돌아가기
           </button>
 
-          <h1 style={{ margin: 0, color: '#222' }}>💰 매출 관리</h1>
-          <p style={{ marginTop: '8px', color: '#666' }}>
+          <h1 style={{ margin: 0, color: theme.text }}>💰 매출 관리</h1>
+          <p style={{ marginTop: '8px', color: theme.subText }}>
             월매출, 연매출, 컨설팅·마케팅·상품·제휴 매출을 기록하고 관리합니다.
           </p>
         </div>
@@ -240,53 +285,76 @@ const SalesLedger = () => {
             marginBottom: '24px'
           }}
         >
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #ddd' }}>
-            <p style={{ margin: 0, color: '#666' }}>이번 달 매출</p>
-            <strong style={{ fontSize: '24px', color: '#222' }}>{formatNumber(monthlySales)}원</strong>
+          <div style={summaryCardStyle}>
+            <p style={{ margin: 0, color: theme.subText }}>이번 달 매출</p>
+            <strong style={{ fontSize: '24px', color: theme.text }}>
+              {formatNumber(monthlySales)}원
+            </strong>
           </div>
 
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #ddd' }}>
-            <p style={{ margin: 0, color: '#666' }}>올해 매출</p>
-            <strong style={{ fontSize: '24px', color: '#222' }}>{formatNumber(yearlySales)}원</strong>
+          <div style={summaryCardStyle}>
+            <p style={{ margin: 0, color: theme.subText }}>올해 매출</p>
+            <strong style={{ fontSize: '24px', color: theme.text }}>
+              {formatNumber(yearlySales)}원
+            </strong>
           </div>
 
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #ffd699' }}>
-            <p style={{ margin: 0, color: '#b26a00' }}>컨설팅</p>
-            <strong style={{ fontSize: '24px', color: '#b26a00' }}>{formatNumber(consultingSales)}원</strong>
+          <div
+            style={{
+              ...summaryCardStyle,
+              border: theme.isDark ? '1px solid #b26a00' : '1px solid #ffd699'
+            }}
+          >
+            <p style={{ margin: 0, color: theme.isDark ? '#fbbf24' : '#b26a00' }}>컨설팅</p>
+            <strong style={{ fontSize: '24px', color: theme.isDark ? '#fbbf24' : '#b26a00' }}>
+              {formatNumber(consultingSales)}원
+            </strong>
           </div>
 
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #d1c2ff' }}>
-            <p style={{ margin: 0, color: '#5b35b1' }}>마케팅</p>
-            <strong style={{ fontSize: '24px', color: '#5b35b1' }}>{formatNumber(marketingSales)}원</strong>
+          <div
+            style={{
+              ...summaryCardStyle,
+              border: theme.isDark ? '1px solid #7c3aed' : '1px solid #d1c2ff'
+            }}
+          >
+            <p style={{ margin: 0, color: theme.isDark ? '#c4b5fd' : '#5b35b1' }}>마케팅</p>
+            <strong style={{ fontSize: '24px', color: theme.isDark ? '#c4b5fd' : '#5b35b1' }}>
+              {formatNumber(marketingSales)}원
+            </strong>
           </div>
 
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #a3e4d7' }}>
-            <p style={{ margin: 0, color: '#117864' }}>상품</p>
-            <strong style={{ fontSize: '24px', color: '#117864' }}>{formatNumber(productSales)}원</strong>
+          <div
+            style={{
+              ...summaryCardStyle,
+              border: theme.isDark ? '1px solid #0f766e' : '1px solid #a3e4d7'
+            }}
+          >
+            <p style={{ margin: 0, color: theme.isDark ? '#5eead4' : '#117864' }}>상품</p>
+            <strong style={{ fontSize: '24px', color: theme.isDark ? '#5eead4' : '#117864' }}>
+              {formatNumber(productSales)}원
+            </strong>
           </div>
 
-          <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #b7d4ff' }}>
-            <p style={{ margin: 0, color: '#1f5fbf' }}>제휴</p>
-            <strong style={{ fontSize: '24px', color: '#1f5fbf' }}>{formatNumber(partnershipSales)}원</strong>
+          <div
+            style={{
+              ...summaryCardStyle,
+              border: theme.isDark ? '1px solid #2563eb' : '1px solid #b7d4ff'
+            }}
+          >
+            <p style={{ margin: 0, color: theme.isDark ? '#93c5fd' : '#1f5fbf' }}>제휴</p>
+            <strong style={{ fontSize: '24px', color: theme.isDark ? '#93c5fd' : '#1f5fbf' }}>
+              {formatNumber(partnershipSales)}원
+            </strong>
           </div>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            marginBottom: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>
             {editingId ? '매출 기록 수정' : '새 매출 기록 등록'}
           </h2>
 
           {editingId && (
-            <p style={{ color: '#666', marginTop: '-8px' }}>
+            <p style={{ color: theme.subText, marginTop: '-8px' }}>
               현재 기존 매출 기록을 수정하는 중입니다.
             </p>
           )}
@@ -296,11 +364,7 @@ const SalesLedger = () => {
               type="date"
               value={salesDate}
               onChange={(e) => setSalesDate(e.target.value)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <input
@@ -308,21 +372,13 @@ const SalesLedger = () => {
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               placeholder="거래처명 예: 블리스풀, 제주 ○○카페"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as SalesCategory)}
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             >
               <option value="컨설팅">컨설팅</option>
               <option value="마케팅">마케팅</option>
@@ -335,11 +391,7 @@ const SalesLedger = () => {
               value={amount}
               onChange={(e) => setAmount(Number(e.target.value))}
               placeholder="금액"
-              style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd'
-              }}
+              style={inputStyle}
             />
 
             <textarea
@@ -348,9 +400,7 @@ const SalesLedger = () => {
               placeholder="메모 예: 홈페이지 제작 착수금, 마케팅 월 관리비, 커피머신 판매, 상품 연결 수수료"
               rows={5}
               style={{
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #ddd',
+                ...inputStyle,
                 resize: 'vertical'
               }}
             />
@@ -364,8 +414,8 @@ const SalesLedger = () => {
                   padding: '14px',
                   borderRadius: '8px',
                   border: 'none',
-                  backgroundColor: '#333',
-                  color: '#fff',
+                  backgroundColor: theme.buttonBg,
+                  color: theme.buttonText,
                   fontWeight: 'bold',
                   cursor: 'pointer'
                 }}
@@ -377,15 +427,7 @@ const SalesLedger = () => {
                 <button
                   onClick={resetForm}
                   type="button"
-                  style={{
-                    padding: '14px',
-                    borderRadius: '8px',
-                    border: '1px solid #999',
-                    backgroundColor: '#fff',
-                    color: '#333',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-                  }}
+                  style={outlineButtonStyle}
                 >
                   수정 취소
                 </button>
@@ -394,19 +436,11 @@ const SalesLedger = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            border: '1px solid #ddd',
-            borderRadius: '12px',
-            padding: '24px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
-          }}
-        >
-          <h2 style={{ marginTop: 0 }}>등록된 매출 기록</h2>
+        <div style={cardStyle}>
+          <h2 style={{ marginTop: 0, color: theme.text }}>등록된 매출 기록</h2>
 
           {records.length === 0 ? (
-            <p style={{ color: '#666' }}>아직 등록된 매출 기록이 없습니다.</p>
+            <p style={{ color: theme.subText }}>아직 등록된 매출 기록이 없습니다.</p>
           ) : (
             <div style={{ display: 'grid', gap: '12px' }}>
               {records.map((record) => {
@@ -416,10 +450,10 @@ const SalesLedger = () => {
                   <div
                     key={record.id}
                     style={{
-                      border: '1px solid #eee',
+                      border: `1px solid ${theme.border}`,
                       borderRadius: '10px',
                       padding: '16px',
-                      backgroundColor: '#fafafa'
+                      backgroundColor: theme.cardBgSoft
                     }}
                   >
                     <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -436,19 +470,19 @@ const SalesLedger = () => {
                         {recordCategory}
                       </span>
 
-                      <strong>{record.clientName}</strong>
+                      <strong style={{ color: theme.text }}>{record.clientName}</strong>
                     </div>
 
-                    <p style={{ margin: '10px 0 4px', fontWeight: 'bold' }}>
+                    <p style={{ margin: '10px 0 4px', fontWeight: 'bold', color: theme.text }}>
                       {formatNumber(Number(record.amount || 0))}원
                     </p>
 
-                    <p style={{ margin: '0 0 8px', color: '#666' }}>
+                    <p style={{ margin: '0 0 8px', color: theme.subText }}>
                       매출일자: {record.salesDate}
                     </p>
 
                     {record.memo && (
-                      <p style={{ margin: 0, color: '#666', whiteSpace: 'pre-wrap' }}>
+                      <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
                         {record.memo}
                       </p>
                     )}
@@ -456,13 +490,7 @@ const SalesLedger = () => {
                     <div style={{ display: 'flex', gap: '8px', marginTop: '14px', flexWrap: 'wrap' }}>
                       <button
                         onClick={() => handleEdit(record)}
-                        style={{
-                          padding: '8px 12px',
-                          borderRadius: '6px',
-                          border: '1px solid #333',
-                          backgroundColor: '#fff',
-                          cursor: 'pointer'
-                        }}
+                        style={outlineButtonStyle}
                       >
                         수정
                       </button>
@@ -473,9 +501,10 @@ const SalesLedger = () => {
                           padding: '8px 12px',
                           borderRadius: '6px',
                           border: '1px solid #e74c3c',
-                          backgroundColor: '#fff',
+                          backgroundColor: theme.outlineButtonBg,
                           color: '#e74c3c',
-                          cursor: 'pointer'
+                          cursor: 'pointer',
+                          fontWeight: 'bold'
                         }}
                       >
                         삭제
