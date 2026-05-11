@@ -472,8 +472,9 @@ const WhatWeAvoidSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.45em] text-blue-600">
             DO LESS, DESIGN BETTER
           </p>
-          <h2 className="text-4xl font-bold leading-tight text-[#0B2C6B] md:text-5xl">
-            우리는 실행보다<br />
+          <h2 className="text-3xl font-bold leading-tight text-[#0B2C6B] md:text-4xl lg:text-[40px]">
+            우리는 실행보다
+            <br />
             방향을 먼저 설계합니다.
           </h2>
         </div>
@@ -487,6 +488,7 @@ const WhatWeAvoidSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
           </p>
           <p>
             사진과 영상은 전문가와 협업하되, 어떤 장면이 필요한지,
+            <br />
             어떤 기준으로 보여져야 하는지를 설계합니다.
           </p>
         </div>
