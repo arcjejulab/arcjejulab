@@ -56,6 +56,12 @@ const SalesNotes = () => {
     color: theme.text
   };
 
+  const textareaStyle = {
+    ...inputStyle,
+    resize: 'vertical' as const,
+    lineHeight: 1.6
+  };
+
   const cardStyle = {
     backgroundColor: theme.cardBg,
     border: `1px solid ${theme.border}`,
@@ -73,46 +79,6 @@ const SalesNotes = () => {
     color: theme.text,
     cursor: 'pointer',
     fontWeight: 'bold'
-  };
-
-  const quillModules = {
-    toolbar: [
-      [{ header: [1, 2, 3, false] }],
-      [{ size: ['small', false, 'large', 'huge'] }],
-      ['bold', 'italic', 'underline'],
-      [{ color: [] }, { background: [] }],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ align: [] }],
-      ['link'],
-      ['clean']
-    ]
-  };
-
-  const quillFormats = [
-    'header',
-    'size',
-    'bold',
-    'italic',
-    'underline',
-    'color',
-    'background',
-    'list',
-    'bullet',
-    'align',
-    'link'
-  ];
-
-  const editorStyle: React.CSSProperties = {
-    backgroundColor: theme.cardBgSoft,
-    color: theme.text,
-    borderRadius: '8px',
-    overflow: 'hidden'
-  };
-
-  const richTextViewStyle: React.CSSProperties = {
-    margin: 0,
-    color: theme.subText,
-    lineHeight: 1.7
   };
 
   const fetchNotes = async () => {
@@ -325,64 +291,52 @@ const SalesNotes = () => {
               <p style={{ margin: '0 0 8px', fontWeight: 'bold', color: theme.text }}>
                 핵심 영업 포인트
               </p>
-              <div style={editorStyle}>
-                <ReactQuill
-                  theme="snow"
-                  value={salesPoint}
-                  onChange={setSalesPoint}
-                  modules={quillModules}
-                  formats={quillFormats}
-                  placeholder="핵심 영업 포인트 예: 비용 절감, 합법 처리, 운영 효율, 매출 상승 가능성"
-                />
-              </div>
+              <textarea
+                value={salesPoint}
+                onChange={(e) => setSalesPoint(e.target.value)}
+                placeholder="핵심 영업 포인트 예: 비용 절감, 합법 처리, 운영 효율, 매출 상승 가능성"
+                rows={5}
+                style={textareaStyle}
+              />
             </div>
 
             <div>
               <p style={{ margin: '0 0 8px', fontWeight: 'bold', color: theme.text }}>
                 고객 반박 대응
               </p>
-              <div style={editorStyle}>
-                <ReactQuill
-                  theme="snow"
-                  value={objectionHandling}
-                  onChange={setObjectionHandling}
-                  modules={quillModules}
-                  formats={quillFormats}
-                  placeholder="고객 반박 대응 예: 비싸다고 할 때, 이미 거래처가 있다고 할 때, 나중에 하겠다고 할 때"
-                />
-              </div>
+              <textarea
+                value={objectionHandling}
+                onChange={(e) => setObjectionHandling(e.target.value)}
+                placeholder="고객 반박 대응 예: 비싸다고 할 때, 이미 거래처가 있다고 할 때, 나중에 하겠다고 할 때"
+                rows={5}
+                style={textareaStyle}
+              />
             </div>
 
             <div>
               <p style={{ margin: '0 0 8px', fontWeight: 'bold', color: theme.text }}>
                 영업 스크립트
               </p>
-              <div style={editorStyle}>
-                <ReactQuill
-                  theme="snow"
-                  value={script}
-                  onChange={setScript}
-                  modules={quillModules}
-                  formats={quillFormats}
-                  placeholder="영업 스크립트 예: 전화 멘트, 카톡 안내문, 방문 상담 멘트"
-                />
-              </div>
+              <textarea
+                value={script}
+                onChange={(e) => setScript(e.target.value)}
+                placeholder="영업 스크립트 예: 전화 멘트, 카톡 안내문, 방문 상담 멘트"
+                rows={5}
+                style={textareaStyle}
+              />
             </div>
 
             <div>
               <p style={{ margin: '0 0 8px', fontWeight: 'bold', color: theme.text }}>
                 추가 메모
               </p>
-              <div style={editorStyle}>
-                <ReactQuill
-                  theme="snow"
-                  value={memo}
-                  onChange={setMemo}
-                  modules={quillModules}
-                  formats={quillFormats}
-                  placeholder="추가 메모"
-                />
-              </div>
+              <textarea
+                value={memo}
+                onChange={(e) => setMemo(e.target.value)}
+                placeholder="추가 메모"
+                rows={4}
+                style={textareaStyle}
+              />
             </div>
 
             <div style={{ display: 'flex', gap: '10px' }}>
@@ -491,10 +445,9 @@ const SalesNotes = () => {
                       <p style={{ margin: '0 0 4px', fontWeight: 'bold', color: theme.text }}>
                         핵심 영업 포인트
                       </p>
-                      <div
-                        style={richTextViewStyle}
-                        dangerouslySetInnerHTML={{ __html: note.salesPoint }}
-                      />
+                      <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
+                        {note.salesPoint}
+                      </p>
                     </div>
                   )}
 
@@ -503,10 +456,9 @@ const SalesNotes = () => {
                       <p style={{ margin: '0 0 4px', fontWeight: 'bold', color: theme.text }}>
                         고객 반박 대응
                       </p>
-                      <div
-                        style={richTextViewStyle}
-                        dangerouslySetInnerHTML={{ __html: note.objectionHandling }}
-                      />
+                      <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
+                        {note.objectionHandling}
+                      </p>
                     </div>
                   )}
 
@@ -515,10 +467,9 @@ const SalesNotes = () => {
                       <p style={{ margin: '0 0 4px', fontWeight: 'bold', color: theme.text }}>
                         영업 스크립트
                       </p>
-                      <div
-                        style={richTextViewStyle}
-                        dangerouslySetInnerHTML={{ __html: note.script }}
-                      />
+                      <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
+                        {note.script}
+                      </p>
                     </div>
                   )}
 
@@ -527,10 +478,9 @@ const SalesNotes = () => {
                       <p style={{ margin: '0 0 4px', fontWeight: 'bold', color: theme.text }}>
                         추가 메모
                       </p>
-                      <div
-                        style={richTextViewStyle}
-                        dangerouslySetInnerHTML={{ __html: note.memo }}
-                      />
+                      <p style={{ margin: 0, color: theme.subText, whiteSpace: 'pre-wrap' }}>
+                        {note.memo}
+                      </p>
                     </div>
                   )}
 
