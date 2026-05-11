@@ -27,24 +27,3 @@ body,
     @apply antialiased text-[#1D1D1F] selection:bg-navy-deep selection:text-white;
   }
 }
-
-/* React Quill Editor */
-.ql-toolbar {
-  border-radius: 8px 8px 0 0;
-}
-
-.ql-container {
-  min-height: 140px;
-  border-radius: 0 0 8px 8px;
-  font-family: inherit;
-}
-
-.ql-editor {
-  min-height: 140px;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.ql-editor.ql-blank::before {
-  color: #9ca3af;
-}
