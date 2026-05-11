@@ -396,52 +396,60 @@ const SearchGrowthSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
   ];
 
   return (
-    <section id="search-growth" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-        <div className="lg:col-span-5">
-          <div className="h-full flex flex-col justify-between">
-            <div className="space-y-8">
-              <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Search & Discovery</span>
-              <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-                좋은 매장을<br />정확히 발견되게 만듭니다.
-              </h2>
-              <p className={`max-w-[470px] text-lg leading-relaxed break-keep ${sectionText(isDarkMode)}`}>
-                검색 결과에 보여지는 제목과 설명, 홈페이지의 H1 구조, FAQ, 구조화 데이터까지 하나의 의미로 연결되어야 합니다.
-              </p>
-            </div>
+    <section className="bg-[#F3F4F6] py-28">
+  <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+    <div>
+      <p className="mb-4 text-xs font-bold uppercase tracking-[0.45em] text-blue-600">
+        SEARCH & DISCOVERY
+      </p>
+      <h2 className="text-4xl font-bold leading-tight text-[#0B2C6B] md:text-5xl">
+        좋은 매장은
+        <br />
+        제대로 발견되어야
+        <br />
+        합니다.
+      </h2>
+      <p className="mt-8 max-w-md text-base leading-8 text-slate-700">
+        우리는 단순 노출보다 브랜드가 어떤 의미로 기억되고,
+        어떤 고객에게 발견되어야 하는지를 먼저 정리합니다.
+      </p>
+    </div>
 
-            <div className={`mt-9 p-8 rounded-[2rem] border max-w-[460px] ${sectionCard(isDarkMode)}`}>
-              <Search className="w-9 h-9 text-[#007AFF] mb-5" />
-              <p className={`text-xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-                제주 카페 컨설팅 · 제주 브랜딩 · 운영 SOP
-              </p>
-              <p className={`text-sm mt-3 leading-relaxed break-keep ${sectionText(isDarkMode)}`}>
-                검색엔진과 AI가 같은 방향으로 이해하도록 브랜드 문장을 반복합니다.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6 md:auto-rows-fr">
-          {platforms.map((item, idx) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.08 }}
-              viewport={{ once: true }}
-              className={`h-full p-8 rounded-[2.5rem] border min-h-[250px] ${sectionCard(isDarkMode)}`}
-            >
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'}`}>
-                {item.icon}
-              </div>
-              <h3 className={`text-xl font-black mb-4 break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{item.title}</h3>
-              <p className={`text-sm leading-relaxed break-keep ${sectionText(isDarkMode)}`}>{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
+    <div className="grid gap-6 md:grid-cols-2">
+      <div className="rounded-[2rem] bg-white p-9 shadow-sm ring-1 ring-slate-200">
+        <h3 className="text-lg font-bold text-[#0B2C6B]">제주 카페 컨설팅</h3>
+        <p className="mt-5 text-sm leading-7 text-slate-600">
+          제주 로컬 상권과 매장 운영 현실을 기준으로 브랜드의 방향과
+          고객 경험 흐름을 정리합니다.
+        </p>
       </div>
-    </section>
+
+      <div className="rounded-[2rem] bg-white p-9 shadow-sm ring-1 ring-slate-200">
+        <h3 className="text-lg font-bold text-[#0B2C6B]">브랜딩과 운영 구조</h3>
+        <p className="mt-5 text-sm leading-7 text-slate-600">
+          브랜드 컬러, 공간의 인상, 운영 SOP, 응대 방식이 하나의
+          경험으로 이어지도록 설계합니다.
+        </p>
+      </div>
+
+      <div className="rounded-[2rem] bg-white p-9 shadow-sm ring-1 ring-slate-200">
+        <h3 className="text-lg font-bold text-[#0B2C6B]">플레이스와 신뢰 흐름</h3>
+        <p className="mt-5 text-sm leading-7 text-slate-600">
+          상호, 소개문, 키워드, 리뷰 답글, 고객 동선이 브랜드 신뢰로
+          연결되도록 정리합니다.
+        </p>
+      </div>
+
+      <div className="rounded-[2rem] bg-white p-9 shadow-sm ring-1 ring-slate-200">
+        <h3 className="text-lg font-bold text-[#0B2C6B]">AI 검색 대응</h3>
+        <p className="mt-5 text-sm leading-7 text-slate-600">
+          AI가 브랜드를 단순 업종이 아닌 방향성과 운영 철학이 있는
+          로컬 브랜드로 이해하도록 구조를 정리합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
   );
 };
 
