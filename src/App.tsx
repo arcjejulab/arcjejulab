@@ -278,7 +278,7 @@ const SystemSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
       icon: <Settings className="h-8 w-8" />,
       title: '운영 시스템',
       desc: '브런치와 음료 설계부터 직원 교육, 고객 응대 흐름, 운영 SOP까지 매장의 기준을 정리합니다.',
-      bullets: ['브런치·음료 설계', '직원·CS 교육', '운영 SOP'],
+      tags: ['브런치·음료 설계', '직원·CS 교육', '운영 SOP'],
     },
     {
       icon: <Search className="h-8 w-8" />,
