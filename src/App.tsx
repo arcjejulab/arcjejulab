@@ -3,23 +3,20 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
   ArrowRight,
-  BarChart3,
+  Building2,
   CheckCircle2,
+  ChevronRight,
   Coffee,
   Compass,
   Cpu,
   Globe,
-  Heart,
-  Layout,
+  Layers3,
   Moon,
   Search,
   Settings,
   ShieldCheck,
-  Smartphone,
+  Sparkles,
   Sun,
-  Target,
-  TrendingUp,
-  Users,
   Wrench,
 } from 'lucide-react';
 
@@ -34,6 +31,8 @@ import WorkStatus from './pages/Admin/WorkStatus';
 import SalesLedger from './pages/Admin/SalesLedger';
 
 const BRAND_BLUE = '#10307D';
+const DARK_BG = '#0f1118';
+const LIGHT_BG = '#EBEBEB';
 
 const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
   <button
@@ -42,7 +41,7 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
     aria-label="Allrounder Coffee Lab home"
   >
     <div className="relative h-10 md:h-12 w-20 flex items-center justify-center">
-      <svg viewBox="0 0 100 60" className="absolute inset-0 w-full h-full drop-shadow-sm">
+      <svg viewBox="0 0 100 60" className="absolute inset-0 w-full h-full drop-shadow-sm" role="img" aria-label="ARC LAB logo">
         <path
           d="M15,30 C15,10 40,5 65,10 C85,15 90,30 85,45 C80,60 50,55 30,50 C10,45 15,40 15,30 Z"
           fill={isDark ? 'white' : BRAND_BLUE}
@@ -51,7 +50,7 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
           x="48"
           y="38"
           textAnchor="middle"
-          fill={isDark ? '#0f1118' : 'white'}
+          fill={isDark ? DARK_BG : 'white'}
           className="text-[22px] font-black tracking-tighter"
           style={{ fontFamily: 'system-ui, sans-serif' }}
         >
@@ -70,11 +69,15 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
 );
 
 const menuItems = [
-  { id: 'consulting', label: '카페 컨설팅' },
-  { id: 'marketing', label: '로컬 마케팅' },
-  { id: 'proof', label: '포트폴리오' },
+  { id: 'system', label: '브랜딩 시스템' },
+  { id: 'operation', label: '운영 SOP' },
+  { id: 'search-growth', label: '검색 성장' },
   { id: 'contact', label: '상담문의' },
 ];
+
+const sectionText = (isDarkMode: boolean) => (isDarkMode ? 'text-white/62' : 'text-slate-600');
+const sectionCard = (isDarkMode: boolean) =>
+  isDarkMode ? 'bg-white/[0.055] border-white/10' : 'bg-white border-[#10307D]/5 shadow-sm';
 
 const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDarkMode: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -136,14 +139,10 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
 };
 
 const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
-  const quickProof = [
-    { label: 'Cafe Consulting', value: '창업·운영·장비' },
-    { label: 'Local Marketing', value: '네이버·인스타·구글' },
-    { label: 'Business System', value: 'SOP·동선·매출 구조' },
-  ];
+  const facts = ['제주 카페 컨설팅', '브랜딩·운영 SOP', '장비·공간·검색 구조'];
 
   return (
-    <section className={`min-h-[86vh] px-6 md:px-12 py-16 md:py-24 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
+    <section className={`min-h-[88vh] px-6 md:px-12 py-16 md:py-24 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-7 space-y-10">
           <motion.div
@@ -158,16 +157,16 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
               }`}
             >
               <span className={`h-2 w-2 rounded-full ${isDarkMode ? 'bg-white' : 'bg-[#10307D]'}`} />
-              Jeju Local Business Growth Lab
+              Jeju F&B Branding · Operation System
             </div>
 
-            <h1 className={`text-4xl md:text-7xl font-black leading-[1.05] tracking-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-              제주 로컬 매장의<br />
-              성장을 설계합니다.
+            <h1 className={`text-4xl md:text-7xl font-black leading-[1.06] tracking-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+              브랜딩부터 운영까지,<br />
+              매장이 실제로 살아 움직이는<br className="hidden md:block" /> 구조를 설계합니다.
             </h1>
 
-            <p className={`text-lg md:text-2xl font-light leading-relaxed max-w-3xl break-keep ${isDarkMode ? 'text-white/65' : 'text-gray-600'}`}>
-              올라운더 커피랩은 카페 창업, 운영 개선, 장비 세팅, 온라인 마케팅을 <br />하나의 시스템으로 연결하는 실전형 컨설팅 회사입니다.
+            <p className={`text-lg md:text-2xl font-light leading-relaxed max-w-4xl break-keep ${sectionText(isDarkMode)}`}>
+              올라운더 커피랩은 제주 카페와 F&B 매장의 브랜딩, 운영 SOP, 장비 세팅, 고객 경험, 플레이스·SEO·AI 검색 대응까지 함께 설계하는 로컬 비즈니스 파트너입니다.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -175,30 +174,30 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-5 bg-[#10307D] text-white rounded-2xl text-xs font-black tracking-widest uppercase hover:scale-[1.02] active:scale-95 transition-all shadow-2xl shadow-[#10307D]/20"
               >
-                상담 문의하기
+                제주 카페 컨설팅 문의
               </button>
               <button
-                onClick={() => document.getElementById('consulting')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('system')?.scrollIntoView({ behavior: 'smooth' })}
                 className={`px-8 py-5 rounded-2xl text-xs font-black tracking-widest uppercase border transition-all ${
                   isDarkMode ? 'border-white/15 text-white hover:bg-white/10' : 'border-[#10307D]/15 text-[#10307D] hover:bg-white'
                 }`}
               >
-                서비스 살펴보기
+                시스템 보기
               </button>
             </div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {quickProof.map((item, idx) => (
+            {facts.map((item, idx) => (
               <motion.div
-                key={item.label}
+                key={item}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + idx * 0.1 }}
-                className={`p-6 rounded-3xl border ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5 shadow-sm'}`}
+                className={`p-6 rounded-3xl border ${sectionCard(isDarkMode)}`}
               >
-                <p className={`text-[10px] font-black tracking-widest uppercase mb-3 ${isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'}`}>{item.label}</p>
-                <p className={`text-sm font-black break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{item.value}</p>
+                <p className={`text-[10px] font-black tracking-widest uppercase mb-3 ${isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'}`}>Focus 0{idx + 1}</p>
+                <p className={`text-sm font-black break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{item}</p>
               </motion.div>
             ))}
           </div>
@@ -211,19 +210,19 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
           className="lg:col-span-5"
         >
           <div className={`rounded-[3.5rem] overflow-hidden border shadow-2xl ${isDarkMode ? 'bg-white/5 border-white/10 shadow-black/30' : 'bg-white border-[#10307D]/5 shadow-[#10307D]/10'}`}>
-            <div className="relative h-[480px] overflow-hidden">
+            <div className="relative h-[520px] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1600"
-                alt="제주 카페 컨설팅과 로컬 마케팅"
-                className={`w-full h-full object-cover ${isDarkMode ? 'grayscale-[55%] opacity-60' : 'opacity-95'}`}
+                src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=1600"
+                alt="제주 카페 브랜딩과 매장 운영 시스템 컨설팅"
+                className={`w-full h-full object-cover ${isDarkMode ? 'grayscale-[45%] opacity-62' : 'opacity-95'}`}
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent flex items-end p-10">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/25 to-transparent flex items-end p-10">
                 <div className="text-white space-y-4">
                   <p className="text-[10px] font-black tracking-[0.35em] uppercase text-white/55">Allrounder Coffee Lab</p>
                   <h2 className="text-3xl font-black leading-tight break-keep">
-                    사장님의 진심이 고객에게 닿고,<br />
-                    오래 사랑받는 매장이 되도록.
+                    브랜드는 보여지는 것이 아니라,<br />
+                    경험되고 기억되는 것입니다.
                   </h2>
                 </div>
               </div>
@@ -235,67 +234,103 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
   );
 };
 
-const ConsultingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
-  const services = [
+const ProblemSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
+  const problems = [
+    '예쁜 공간은 많지만 왜 이 매장이어야 하는지 설명되지 않습니다.',
+    '검색은 되지만 고객 경험과 운영이 연결되지 않아 재방문으로 이어지지 않습니다.',
+    '장비, 동선, 응대, 콘텐츠가 따로 움직이면 브랜드의 인상이 흐려집니다.',
+  ];
+
+  return (
+    <section id="system" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'}`}>
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="lg:col-span-5 space-y-6">
+          <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Why System</span>
+          <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+            왜 어떤 브랜드는<br />오래 기억되지 못할까?
+          </h2>
+        </div>
+        <div className="lg:col-span-7 space-y-5">
+          {problems.map((problem, idx) => (
+            <motion.div
+              key={problem}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.08 }}
+              viewport={{ once: true }}
+              className={`p-7 rounded-[2rem] border flex gap-5 ${sectionCard(isDarkMode)}`}
+            >
+              <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-sm font-black ${isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'}`}>0{idx + 1}</div>
+              <p className={`text-lg leading-relaxed break-keep ${isDarkMode ? 'text-white/74' : 'text-slate-600'}`}>{problem}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const SystemSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
+  const systems = [
     {
-      icon: <Coffee className="w-8 h-8" />,
-      title: '카페 창업 컨설팅',
-      desc: '상권, 메뉴, 장비, 동선, 운영 방식을 창업 전 단계에서 함께 설계합니다.',
-      points: ['창업 방향성 진단', '커피머신·주방 장비 구성', '메뉴와 객단가 설계'],
-    },
-    {
-      icon: <Settings className="w-8 h-8" />,
-      title: '운영 개선 컨설팅',
-      desc: '매출은 있는데 남는 게 없거나, 일은 많은데 성장이 막힌 매장의 병목을 찾습니다.',
-      points: ['운영 동선 점검', '인건비·원가 구조 진단', 'SOP 정리'],
+      icon: <Sparkles className="w-8 h-8" />,
+      title: '브랜딩 설계',
+      desc: '브랜드 방향, 브랜드 컬러, 고객 경험, 매장 포지셔닝을 정리합니다.',
+      tags: ['브랜드 방향성', '고객 경험', '브랜드 컬러'],
     },
     {
       icon: <Wrench className="w-8 h-8" />,
-      title: '장비·공간 세팅',
-      desc: '장비를 단순히 판매하는 것이 아니라, 매장 운영 구조에 맞게 배치합니다.',
-      points: ['커피머신·제빙기 세팅', '바 동선 검토', '설치 후 관리 기준'],
+      title: '매장 구축',
+      desc: '커피머신, 원두, 부재료, 장비, CCTV, 인테리어와 바 동선을 운영 관점에서 연결합니다.',
+      tags: ['커피머신·장비', '인테리어·동선', '원두·부재료'],
     },
     {
-      icon: <Layout className="w-8 h-8" />,
-      title: '브랜드 구조 정리',
-      desc: '대표님의 방향성과 고객이 이해해야 할 메시지를 하나의 브랜드 구조로 정리합니다.',
-      points: ['브랜드 문장 정리', '대표 메뉴 포지셔닝', '고객 경험 설계'],
+      icon: <Settings className="w-8 h-8" />,
+      title: '운영 시스템',
+      desc: '운영 SOP, 응대 흐름, 음식물처리기, 청소로봇, 사업자용 장기 리스·렌트까지 효율 구조를 봅니다.',
+      tags: ['운영 SOP', '업소용 음식물처리기', '청소로봇·렌트'],
+    },
+    {
+      icon: <Search className="w-8 h-8" />,
+      title: '발견과 성장',
+      desc: '네이버 플레이스, 구글 SEO, AEO, GEO, AI 검색 대응까지 브랜드가 발견되는 구조를 만듭니다.',
+      tags: ['제주 카페 컨설팅', '플레이스·SEO', 'AEO·GEO'],
     },
   ];
 
   return (
-    <section id="consulting" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'}`}>
+    <section className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div className="space-y-4">
-            <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Cafe Consulting</span>
-            <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>카페를 시작하기 전,<br />운영 구조부터 설계합니다.</h2>
+            <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Branding to Operation</span>
+            <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>우리는 브랜드와 운영을<br />분리해서 보지 않습니다.</h2>
           </div>
-          <p className={`max-w-xl text-base leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
-            예쁜 인테리어와 좋은 장비만으로 매장이 살아남지는 않습니다. 올라운더 커피랩은 창업, 장비, 메뉴, 동선, 운영까지 연결해 실제로 굴러가는 구조를 만듭니다.
+          <p className={`max-w-xl text-base leading-relaxed break-keep ${sectionText(isDarkMode)}`}>
+            올라운더 커피랩은 이것저것 다 하는 회사가 아니라, 실제 매장이 굴러가는 전체 흐름을 이해하고 필요한 요소를 하나의 운영 구조로 정리하는 팀입니다.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {services.map((service, idx) => (
+          {systems.map((item, idx) => (
             <motion.div
-              key={service.title}
+              key={item.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.08 }}
               viewport={{ once: true }}
-              className={`p-8 rounded-[2.5rem] border flex flex-col min-h-[360px] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-[#F8F9FA] border-[#10307D]/5'}`}
+              className={`p-8 rounded-[2.5rem] border min-h-[410px] flex flex-col ${sectionCard(isDarkMode)}`}
             >
               <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 ${isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'}`}>
-                {service.icon}
+                {item.icon}
               </div>
-              <h3 className={`text-xl font-black mb-4 break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{service.title}</h3>
-              <p className={`text-sm leading-relaxed mb-8 flex-1 break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>{service.desc}</p>
+              <h3 className={`text-xl font-black mb-4 break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{item.title}</h3>
+              <p className={`text-sm leading-relaxed mb-8 flex-1 break-keep ${sectionText(isDarkMode)}`}>{item.desc}</p>
               <div className="space-y-3">
-                {service.points.map((point) => (
-                  <div key={point} className="flex items-center gap-3">
+                {item.tags.map((tag) => (
+                  <div key={tag} className="flex items-center gap-3">
                     <CheckCircle2 className="w-4 h-4 text-[#007AFF] shrink-0" />
-                    <span className={`text-xs font-bold break-keep ${isDarkMode ? 'text-white/70' : 'text-[#10307D]/75'}`}>{point}</span>
+                    <span className={`text-xs font-bold break-keep ${isDarkMode ? 'text-white/70' : 'text-[#10307D]/75'}`}>{tag}</span>
                   </div>
                 ))}
               </div>
@@ -307,42 +342,85 @@ const ConsultingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
   );
 };
 
-const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
-  const platforms = [
-    { icon: <Search className="w-7 h-7" />, title: '네이버 스마트플레이스', desc: '상호, 소개문, 사진, 리뷰 답글, 키워드 구조를 로컬 검색에 맞게 정리합니다.' },
-    { icon: <Smartphone className="w-7 h-7" />, title: '인스타그램 콘텐츠', desc: '릴스, 카드뉴스, 촬영 포인트를 매장의 실제 매력과 연결합니다.' },
-    { icon: <Globe className="w-7 h-7" />, title: '블로그·구글 SEO', desc: '지역 키워드와 고객 검색 의도에 맞춘 콘텐츠 구조를 설계합니다.' },
-    { icon: <Target className="w-7 h-7" />, title: '상담 전환 설계', desc: '조회수보다 문의와 방문으로 이어지는 문장, 버튼, 페이지 흐름을 만듭니다.' },
+const OperationSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
+  const items = [
+    { title: '고객 응대 흐름', desc: '첫 인사부터 주문, 대기, 퇴점까지 브랜드 경험이 흔들리지 않도록 기준을 정리합니다.' },
+    { title: '직원 운영 가이드', desc: '사람이 바뀌어도 매장의 톤과 서비스 품질이 유지되도록 운영 언어를 만듭니다.' },
+    { title: '동선과 효율 구조', desc: '장비 배치, 바 흐름, 재고, 청소, 폐기물 처리까지 실제 운영 기준으로 점검합니다.' },
   ];
 
   return (
-    <section id="marketing" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
+    <section id="operation" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'}`}>
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="lg:col-span-5 space-y-8">
+          <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Operation SOP</span>
+          <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+            운영은 브랜드 경험의<br />일부입니다.
+          </h2>
+          <p className={`text-lg leading-relaxed break-keep ${sectionText(isDarkMode)}`}>
+            고객은 인테리어만 기억하지 않습니다. 응대, 속도, 동선, 일관성, 매장의 분위기까지 함께 기억합니다. 그래서 매장 운영 SOP는 단순 매뉴얼이 아니라 브랜드 경험을 지키는 기준입니다.
+          </p>
+        </div>
+
+        <div className="lg:col-span-7 grid grid-cols-1 gap-5">
+          {items.map((item, idx) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, x: 32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.08 }}
+              viewport={{ once: true }}
+              className={`p-8 rounded-[2.3rem] border flex flex-col md:flex-row md:items-center gap-6 ${sectionCard(isDarkMode)}`}
+            >
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 ${isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'}`}>
+                <Layers3 className="w-7 h-7" />
+              </div>
+              <div>
+                <h3 className={`text-xl font-black mb-3 break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{item.title}</h3>
+                <p className={`text-sm leading-relaxed break-keep ${sectionText(isDarkMode)}`}>{item.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const SearchGrowthSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
+  const platforms = [
+    { icon: <Compass className="w-7 h-7" />, title: '제주 카페 컨설팅', desc: '제주 로컬 상권, 관광 동선, 매장 운영 현실을 기준으로 방향을 정리합니다.' },
+    { icon: <Globe className="w-7 h-7" />, title: 'SEO · AEO · GEO', desc: '구글, 네이버, AI 검색에서 올라운더 커피랩의 정체성이 정확히 읽히도록 문장과 구조를 설계합니다.' },
+    { icon: <Building2 className="w-7 h-7" />, title: '플레이스와 신뢰 구조', desc: '상호, 소개문, 키워드, 리뷰 답글, 고객 동선이 하나의 브랜드 경험으로 이어지게 만듭니다.' },
+    { icon: <Cpu className="w-7 h-7" />, title: 'AI 검색 대응', desc: 'AI가 브랜드를 요약할 때 잘못된 지역·업종 정보가 아닌 정확한 방향성을 가져가도록 정리합니다.' },
+  ];
+
+  return (
+    <section id="search-growth" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
         <div className="lg:col-span-5">
-  <div className="h-full flex flex-col justify-between">
-    <div className="space-y-8">
-      <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Local Marketing</span>
-      <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-        좋은 매장을<br />고객이 발견하게 만듭니다.
-      </h2>
-      <p className={`max-w-[430px] text-lg leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
-        마케팅은 화려한 광고 문구가 아니라<br />
-        고객이 검색하고, 비교하고, 방문을 결정하는<br />
-        흐름을 설계하는 일입니다.
-      </p>
-    </div>
+          <div className="h-full flex flex-col justify-between">
+            <div className="space-y-8">
+              <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Search & Discovery</span>
+              <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+                좋은 매장을<br />정확히 발견되게 만듭니다.
+              </h2>
+              <p className={`max-w-[470px] text-lg leading-relaxed break-keep ${sectionText(isDarkMode)}`}>
+                검색 결과에 보여지는 제목과 설명, 홈페이지의 H1 구조, FAQ, 구조화 데이터까지 하나의 의미로 연결되어야 합니다.
+              </p>
+            </div>
 
-    <div className={`mt-9 p-8 rounded-[2rem] border max-w-[420px] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5'}`}>
-      <BarChart3 className="w-9 h-9 text-[#007AFF] mb-5" />
-      <p className={`text-xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-        검색 노출 → 신뢰 형성 → 방문 결정
-      </p>
-      <p className={`text-sm mt-3 leading-relaxed break-keep ${isDarkMode ? 'text-white/45' : 'text-gray-500'}`}>
-        플랫폼마다 흩어진 정보를 하나의 브랜드 경험으로 정리합니다.
-      </p>
-    </div>
-  </div>
-</div>
+            <div className={`mt-9 p-8 rounded-[2rem] border max-w-[460px] ${sectionCard(isDarkMode)}`}>
+              <Search className="w-9 h-9 text-[#007AFF] mb-5" />
+              <p className={`text-xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+                제주 카페 컨설팅 · 제주 브랜딩 · 운영 SOP
+              </p>
+              <p className={`text-sm mt-3 leading-relaxed break-keep ${sectionText(isDarkMode)}`}>
+                검색엔진과 AI가 같은 방향으로 이해하도록 브랜드 문장을 반복합니다.
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6 md:auto-rows-fr">
           {platforms.map((item, idx) => (
@@ -352,55 +430,13 @@ const MarketingSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.08 }}
               viewport={{ once: true }}
-              className={`h-full p-8 rounded-[2.5rem] border min-h-[250px] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-[#10307D]/5 shadow-sm'}`}
+              className={`h-full p-8 rounded-[2.5rem] border min-h-[250px] ${sectionCard(isDarkMode)}`}
             >
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'}`}>
                 {item.icon}
               </div>
               <h3 className={`text-xl font-black mb-4 break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{item.title}</h3>
-              <p className={`text-sm leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const ProofSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
-  const proofItems = [
-    { title: '직접 운영 경험', desc: '카페와 외식 매장을 직접 운영하며 현장의 문제를 경험했습니다.', icon: <Users className="w-8 h-8" /> },
-    { title: '장비·A/S 이해도', desc: '커피머신, 제빙기, 주방 장비의 설치와 유지관리까지 함께 관리합니다.', icon: <Cpu className="w-8 h-8" /> },
-    { title: '콘텐츠 제작 역량', desc: '매장 사진, 릴스, 리뷰 답글, 블로그 문구까지 실무형 콘텐츠로 연결합니다.', icon: <TrendingUp className="w-8 h-8" /> },
-    { title: '로컬 상권 감각', desc: '제주 지역의 관광 동선과 로컬 고객 흐름에 맞춰 플랫폼 노출 구조를 설계합니다.', icon: <Compass className="w-8 h-8" /> },
-  ];
-
-  return (
-    <section id="proof" className={`py-28 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'}`}>
-      <div className="max-w-[1400px] mx-auto">
-        <div className="text-center mb-16 space-y-5">
-          <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Proof & Positioning</span>
-          <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>우리는 광고만 다루는 회사가 아니라, <br />매장의 구조를 설계하는 회사입니다.</h2>
-          <p className={`max-w-3xl mx-auto text-base leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>
-            올라운더 커피랩의 차별점은 현장 운영, 장비, 메뉴, 마케팅을 따로 보지 않는다는 점입니다.<br /> 좋은 매장이 지속 가능한 브랜드로 성장할 수 있도록 운영과 마케팅의 기준을 세웁니다.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {proofItems.map((item, idx) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.08 }}
-              viewport={{ once: true }}
-              className={`p-8 rounded-[2.5rem] border ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-[#F8F9FA] border-[#10307D]/5'}`}
-            >
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 ${isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'}`}>
-                {item.icon}
-              </div>
-              <h3 className={`text-xl font-black mb-4 break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{item.title}</h3>
-              <p className={`text-sm leading-relaxed break-keep ${isDarkMode ? 'text-white/55' : 'text-gray-500'}`}>{item.desc}</p>
+              <p className={`text-sm leading-relaxed break-keep ${sectionText(isDarkMode)}`}>{item.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -416,14 +452,35 @@ const PhilosophySection = () => (
         Allrounder Philosophy
       </span>
       <h2 className="text-[32px] md:text-6xl font-black text-white leading-tight break-keep">
-        매장의 문제는 하나가 아닙니다.<br />그래서 해답도 하나일 수 없습니다.
+        검색되는 매장이 아니라,<br />기억되는 브랜드를 만듭니다.
       </h2>
       <div className="w-20 h-1 bg-white/30 mx-auto rounded-full" />
       <p className="text-lg md:text-xl text-white/72 font-light leading-relaxed max-w-4xl mx-auto break-keep">
-        노출이 부족한 매장도 있고, 운영 동선이 무너진 매장도 있고, 메뉴와 가격 구조가 맞지 않는 매장도 있습니다. 올라운더 커피랩은 문제를 따로 떼어 보지 않고, 창업·운영·장비·마케팅을 하나의 성장 구조로 연결합니다.
+        우리는 브랜드의 노출보다 브랜드의 이유를 중요하게 생각합니다. 사장님의 진심이 고객에게 닿고, 오래 사랑받는 매장이 되도록 브랜딩과 운영 시스템을 함께 정리합니다.
       </p>
     </div>
     <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white opacity-[0.03] rounded-full blur-[150px] translate-x-1/3 -translate-y-1/3" />
+  </section>
+);
+
+const WhatWeAvoidSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
+  <section className={`py-24 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'}`}>
+    <div className={`max-w-[1200px] mx-auto p-8 md:p-12 rounded-[3rem] border ${sectionCard(isDarkMode)}`}>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="lg:col-span-5 space-y-4">
+          <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Not a Content Factory</span>
+          <h2 className={`text-3xl md:text-5xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>우리는 콘텐츠 공장형 운영을 지향하지 않습니다.</h2>
+        </div>
+        <div className="lg:col-span-7 space-y-5">
+          {['무분별한 릴스 제작보다 브랜드 방향을 먼저 봅니다.', '블로그 대량 생산보다 검색 의도와 고객 경험을 먼저 정리합니다.', '사진 촬영은 전문가와 협업하되, 어떤 사진이 필요한지 방향을 설계합니다.'].map((text) => (
+            <div key={text} className="flex items-start gap-3">
+              <ChevronRight className="w-5 h-5 text-[#007AFF] mt-1 shrink-0" />
+              <p className={`text-base leading-relaxed break-keep ${sectionText(isDarkMode)}`}>{text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   </section>
 );
 
@@ -472,10 +529,10 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
         <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-10">
           <div className="space-y-6">
             <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Consulting Request</span>
-            <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>지금 매장의 문제를<br />함께 진단해보세요.</h2>
+            <h2 className={`text-4xl md:text-6xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>지금 매장의 구조를<br />함께 진단해보세요.</h2>
           </div>
-          <p className={`text-lg leading-relaxed break-keep ${isDarkMode ? 'text-white/60' : 'text-gray-500'}`}>
-            창업 준비, 매출 정체, 온라인 노출 부족, 장비 세팅, 운영 동선 문제까지 현재 상황을 남겨주시면 현실적으로 적용 가능한 방향부터 정리해드립니다.
+          <p className={`text-lg leading-relaxed break-keep ${sectionText(isDarkMode)}`}>
+            창업 준비, 매출 정체, 운영 SOP, 장비 세팅, 브랜드 방향, 제주 카페 컨설팅, 플레이스·SEO·AI 검색 대응까지 현재 상황을 남겨주시면 현실적으로 적용 가능한 방향부터 정리해드립니다.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 border-t border-gray-100/10">
             <div>
@@ -505,7 +562,7 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
               </div>
               <div className="space-y-2">
                 <h3 className={`text-2xl font-black ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>신청이 완료되었습니다.</h3>
-                <p className={`text-sm ${isDarkMode ? 'text-white/60' : 'text-gray-500'}`}>내용 확인 후 연락드리겠습니다.</p>
+                <p className={`text-sm ${sectionText(isDarkMode)}`}>내용 확인 후 연락드리겠습니다.</p>
               </div>
               <button onClick={() => setStatus('idle')} className={`text-[10px] font-black tracking-widest uppercase underline underline-offset-4 ${isDarkMode ? 'text-white/40' : 'text-[#10307D]/40'}`}>
                 새로 신청하기
@@ -529,7 +586,7 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
                   rows={5}
                   value={formData.inquiry}
                   onChange={handleChange}
-                  placeholder="현재 고민 중인 문제를 자유롭게 적어주세요. 예: 창업 준비, 매출 정체, 스마트플레이스 노출, 인스타그램 운영, 장비 세팅 등"
+                  placeholder="현재 고민 중인 문제를 자유롭게 적어주세요. 예: 제주 카페 컨설팅, 브랜딩, 운영 SOP, 장비 세팅, 플레이스·SEO, AI 검색 대응 등"
                   className={`w-full px-6 py-4 rounded-2xl border bg-transparent outline-none transition-all text-sm resize-none ${
                     isDarkMode ? 'border-white/10 focus:border-white/40 text-white placeholder-white/20' : 'border-[#10307D]/10 focus:border-[#10307D]/40 text-[#10307D] placeholder-gray-400'
                   }`}
@@ -593,11 +650,11 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
       <div className="flex flex-col md:flex-row gap-8 md:gap-16 text-center md:text-left">
         <div className="space-y-4">
           <h5 className={`text-[12px] font-black uppercase tracking-widest break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Service</h5>
-          <p className="text-sm text-gray-500 font-medium break-keep">제주 카페컨설팅 · 로컬 마케팅<br />스마트플레이스 · 당근 비즈프로필 · AI 검색 최적화</p>
+          <p className="text-sm text-gray-500 font-medium break-keep">제주 카페 컨설팅 · 제주 브랜딩<br />운영 SOP · F&B 시스템 · AEO/GEO</p>
         </div>
         <div className="space-y-4">
           <h5 className={`text-[12px] font-black uppercase tracking-widest break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Office</h5>
-          <p className="text-sm text-gray-500 font-medium break-keep">제주시 삼무로11길 8<br />올라운더 커피 랩</p>
+          <p className="text-sm text-gray-500 font-medium break-keep">제주시 삼무로11길 8<br />올라운더 커피랩</p>
         </div>
         <div className="space-y-4">
           <h5 className={`text-[12px] font-black uppercase tracking-widest break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Contact</h5>
@@ -614,7 +671,7 @@ function Home() {
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
-    document.body.style.backgroundColor = isDarkMode ? '#0f1118' : '#EBEBEB';
+    document.body.style.backgroundColor = isDarkMode ? DARK_BG : LIGHT_BG;
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
@@ -626,9 +683,11 @@ function Home() {
     >
       <Header isDarkMode={isDarkMode} toggleDarkMode={() => setIsDarkMode(!isDarkMode)} />
       <Hero isDarkMode={isDarkMode} />
-      <ConsultingSection isDarkMode={isDarkMode} />
-      <MarketingSection isDarkMode={isDarkMode} />
-      <ProofSection isDarkMode={isDarkMode} />
+      <ProblemSection isDarkMode={isDarkMode} />
+      <SystemSection isDarkMode={isDarkMode} />
+      <OperationSection isDarkMode={isDarkMode} />
+      <SearchGrowthSection isDarkMode={isDarkMode} />
+      <WhatWeAvoidSection isDarkMode={isDarkMode} />
       <PhilosophySection />
       <ConsultingRequest isDarkMode={isDarkMode} />
       <Footer isDarkMode={isDarkMode} />
