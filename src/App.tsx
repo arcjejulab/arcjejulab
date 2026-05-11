@@ -148,7 +148,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
               Jeju F&B Branding · Operation System
             </div>
 
-            <h1 className={`break-keep text-4xl font-black leading-[1.08] tracking-tight md:text-6xl xl:text-7xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+            <h1 className={`break-keep text-4xl font-black leading-[1.08] tracking-tight md:text-6xl xl:text-6xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
               브랜딩부터 운영까지,
               <br />
               매장이 살아 움직이는
