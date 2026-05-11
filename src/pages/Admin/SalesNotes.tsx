@@ -13,8 +13,6 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getAdminTheme, getSavedAdminTheme, AdminThemeMode } from './adminTheme';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
 type SalesNote = {
   id: string;
