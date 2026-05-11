@@ -221,7 +221,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
 
 const ProblemSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const problems = [
-    '예쁜 공간은 많지만 왜 이 매장이어야 하는지 설명되지 않습니다.',
+    '예쁜 공간은 많지만 왜 이 매장이어야 하는지 설명하지 못합니다.',
     '검색은 되지만 고객 경험과 운영이 연결되지 않아 재방문으로 이어지지 않습니다.',
     '장비, 동선, 응대, 콘텐츠가 따로 움직이면 브랜드의 인상이 흐려집니다.',
   ];
@@ -237,7 +237,7 @@ const ProblemSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             오래 기억되지 못할까?
           </h2>
           <p className={`max-w-md break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
-            우리는 매장을 단순히 예쁘게 보이게 하는 것보다, 고객이 실제로 경험하고 다시 떠올리는 구조를 먼저 봅니다.
+            우리는 매장을 단순히 예쁘게 보이게 하는 것보다, 고객이 실제로 경험하고 다시 떠올리는 구조를 먼저 설계합니다.
           </p>
         </div>
         <div className="space-y-5">
@@ -277,8 +277,8 @@ const SystemSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
     {
       icon: <Settings className="h-8 w-8" />,
       title: '운영 시스템',
-      desc: '운영 SOP, 응대 흐름, 음식물처리기, 청소로봇, 사업자용 장기 리스·렌트까지 효율 구조를 봅니다.',
-      tags: ['운영 SOP', '음식물처리기', '청소로봇·렌트'],
+      desc: '브런치와 음료 설계부터 직원 교육, 고객 응대 흐름, 운영 SOP까지 매장의 기준을 정리합니다.',
+      bullets: ['브런치·음료 설계', '직원·CS 교육', '운영 SOP'],
     },
     {
       icon: <Search className="h-8 w-8" />,
@@ -301,7 +301,7 @@ const SystemSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </h2>
           </div>
           <p className={`max-w-xl break-keep text-base leading-8 lg:justify-self-end ${mutedText(isDarkMode)}`}>
-            올라운더 커피랩은 이것저것 다 하는 회사가 아니라, 실제 매장이 굴러가는 전체 흐름을 이해하고 필요한 요소를 하나의 운영 구조로 정리하는 팀입니다.
+            올라운더 커피랩은 실제 매장이 굴러가는 전체 흐름을 이해하고 필요한 요소를 하나의 운영 구조로 정리합니다.
           </p>
         </div>
 
@@ -461,13 +461,13 @@ const PhilosophySection = () => (
     <div className={`${container} relative z-10 text-center`}>
       <span className="inline-block rounded-full border border-white/20 px-8 py-4 text-[10px] font-bold uppercase tracking-[0.45em] text-white backdrop-blur-xl">Allrounder Philosophy</span>
       <h2 className="mx-auto mt-10 max-w-4xl break-keep text-[32px] font-black leading-tight text-white md:text-6xl">
-        검색되는 매장이 아니라,
+        검색만되는 매장이 아니라,
         <br />
-        기억되는 브랜드를 만듭니다.
+        기억에 남는 브랜드를 만듭니다.
       </h2>
       <div className="mx-auto my-10 h-1 w-20 rounded-full bg-white/30" />
       <p className="mx-auto max-w-4xl break-keep text-lg font-light leading-8 text-white/72 md:text-xl">
-        우리는 브랜드의 노출보다 브랜드의 이유를 중요하게 생각합니다. 사장님의 진심이 고객에게 닿고, 오래 사랑받는 매장이 되도록 브랜딩과 운영 시스템을 함께 정리합니다.
+        우리는 브랜드의 노출보다 브랜드의 이유를 중요하게 생각합니다. 사장님의 진심이 고객에게 닿고, <br />오랫동안 사랑받는 매장이 되도록 브랜딩과 운영 시스템을 함께 설계합니다.
       </p>
     </div>
     <div className="absolute right-0 top-0 h-[800px] w-[800px] translate-x-1/3 -translate-y-1/3 rounded-full bg-white opacity-[0.03] blur-[150px]" />
