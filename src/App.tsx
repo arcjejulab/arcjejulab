@@ -464,24 +464,36 @@ const PhilosophySection = () => (
 );
 
 const WhatWeAvoidSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
-  <section className={`py-24 px-6 md:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'}`}>
-    <div className={`max-w-[1200px] mx-auto p-8 md:p-12 rounded-[3rem] border ${sectionCard(isDarkMode)}`}>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-5 space-y-4">
-          <span className={`text-[10px] font-black tracking-[0.5em] uppercase ${isDarkMode ? 'text-blue-400' : 'text-[#007AFF]'}`}>Not a Content Factory</span>
-          <h2 className={`text-3xl md:text-5xl font-black leading-tight break-keep ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>우리는 콘텐츠 공장형 운영을 지향하지 않습니다.</h2>
+  <section className="bg-white py-28">
+  <div className="mx-auto max-w-7xl px-6">
+    <div className="rounded-[2rem] border border-slate-200 bg-white px-10 py-14 shadow-sm md:px-14 lg:px-16">
+      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.45em] text-blue-600">
+            DO LESS, DESIGN BETTER
+          </p>
+          <h2 className="text-4xl font-bold leading-tight text-[#0B2C6B] md:text-5xl">
+            우리는 실행보다<br />
+            방향을 먼저 설계합니다.
+          </h2>
         </div>
-        <div className="lg:col-span-7 space-y-5">
-          {['무분별한 릴스 제작보다 브랜드 방향을 먼저 봅니다.', '블로그 대량 생산보다 검색 의도와 고객 경험을 먼저 정리합니다.', '사진 촬영은 전문가와 협업하되, 어떤 사진이 필요한지 방향을 설계합니다.'].map((text) => (
-            <div key={text} className="flex items-start gap-3">
-              <ChevronRight className="w-5 h-5 text-[#007AFF] mt-1 shrink-0" />
-              <p className={`text-base leading-relaxed break-keep ${sectionText(isDarkMode)}`}>{text}</p>
-            </div>
-          ))}
+
+        <div className="space-y-6 text-base leading-8 text-slate-700">
+          <p>
+            무분별한 콘텐츠 제작보다 브랜드의 기준을 먼저 세웁니다.
+          </p>
+          <p>
+            검색 노출보다 고객 경험의 흐름과 운영의 일관성을 먼저 정리합니다.
+          </p>
+          <p>
+            사진과 영상은 전문가와 협업하되, 어떤 장면이 필요한지,
+            어떤 기준으로 보여져야 하는지를 설계합니다.
+          </p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 );
 
 const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
