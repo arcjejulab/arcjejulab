@@ -38,14 +38,14 @@ const LIGHT_BG = '#EBEBEB';
 const container = 'mx-auto w-full max-w-7xl px-6 md:px-10';
 const sectionGap = 'py-24 md:py-28';
 
-const ImageLogo = ({ isDark = false }: { isDark?: boolean }) => (
+const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
   <button
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     className="flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none"
     aria-label="Allrounder Coffee Lab home"
   >
     <img
-      src="/logo.png"
+      src="/public/logo.png"
       alt="Allrounder Coffee Lab"
       className={`h-12 w-auto object-contain md:h-14 ${isDark ? 'brightness-0 invert' : ''}`}
       draggable={false}
