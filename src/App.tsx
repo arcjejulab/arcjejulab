@@ -43,7 +43,7 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
     <img
       src="/public/logo.png"
       alt="Allrounder Coffee Lab"
-      className={`h-12 w-auto object-contain md:h-14 ${isDark ? 'brightness-0 invert' : ''}`}
+      className={`h-24 w-auto object-contain md:h-28 ${isDark ? 'brightness-0 invert' : ''}`}
       draggable={false}
     />
   </button>
