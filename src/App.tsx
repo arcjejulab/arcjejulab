@@ -442,8 +442,8 @@ const OurApproachSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
             <p>사장님이 지키고 싶은 매장의 가치를 먼저 듣습니다.</p>
             <p>고객이 실제로 느끼는 경험과 다시 방문하게 되는 이유를 함께 찾습니다.</p>
             <p>
-              콘텐츠, 검색, 운영 흐름이 하나의 브랜드 경험으로 이어질 수 있도록
-              <br className="hidden md:block" />
+              콘텐츠, 검색, 운영 흐름이 하나의 브랜드 경험으로 이어질 수 있도록{' '}
+            <br className="hidden md:block" />
               현실적인 실행 방향을 제안합니다.
             </p>
           </div>
@@ -465,9 +465,10 @@ const PhilosophySection = () => (
         이유가 분명합니다.
       </h2>
       <div className="mx-auto my-10 h-1 w-20 rounded-full bg-white/30" />
-      <p className="mx-auto max-w-4xl text-lg font-light leading-8 text-white/72 md:text-xl">
-        우리는 매장의 진심이 고객에게 잘 전해지는 구조를 만듭니다.
-        좋은 경험이 좋은 기억으로 남고, 좋은 기억이 다시 방문하는 이유가 되도록 함께 고민합니다.
+      <p className="mx-auto max-w-3xl break-keep text-base font-light leading-8 text-white/72 md:text-xl md:leading-9">
+        매장의 진심이 고객에게 잘 전해지도록 돕습니다.
+      <br className="hidden md:block" />
+        좋은 경험이 좋은 기억으로 남고, 다시 방문하는 이유가 되도록 함께 고민합니다.
       </p>
     </div>
     <div className="absolute right-0 top-0 h-[800px] w-[800px] translate-x-1/3 -translate-y-1/3 rounded-full bg-white opacity-[0.03] blur-[150px]" />
