@@ -232,9 +232,9 @@ const ConcernSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <br />
             출발합니다.
           </h2>
-          <p className={`max-w-md break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
+          <p className={`max-w-md text-base leading-8 ${mutedText(isDarkMode)}`}>
             매장의 성장은 멋진 문장보다 현실적인 이해에서 시작됩니다.
-            <br />
+            <br className="hidden md:block" />
             우리는 매장의 상황, 고객의 반응, 운영 흐름을 함께 보고 필요한 방향을 정리합니다.
           </p>
         </div>
@@ -301,11 +301,11 @@ const SolutionSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
               고객에게 닿도록 돕습니다.
             </h2>
           </div>
-          <p className={`max-w-xl break-keep text-base leading-8 lg:justify-self-end ${mutedText(isDarkMode)}`}>
+          <p className={`max-w-xl text-base leading-8 lg:justify-self-end ${mutedText(isDarkMode)}`}>
             올라운더 커피랩은 브랜딩을 어렵게 설명하지 않습니다.
-            <br />
+            <br className="hidden md:block" />
             고객이 느끼는 경험과 사장님이 지키고 싶은 방향을 연결해 매장에 맞는 실행 흐름을 만듭니다.
-          </p>
+            </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -405,12 +405,10 @@ const SearchGrowthSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <br />
             잘 발견되어야 합니다.
           </h2>
-          <p className={`mt-8 max-w-md break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
-            검색은 단순한 노출이 아니라 고객이 매장을 이해하는
-            <br />
-            첫 접점입니다.
+          <p className={`mt-8 max-w-md text-base leading-8 ${mutedText(isDarkMode)}`}>
+            검색은 단순한 노출이 아니라 고객이 매장을 이해하는 첫 접점입니다.
             우리는 고객이 매장을 발견하고, 신뢰하고, 방문으로 이어지는 흐름을 함께 정리합니다.
-          </p>
+         </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -477,9 +475,8 @@ const PhilosophySection = () => (
         이유가 분명합니다.
       </h2>
       <div className="mx-auto my-10 h-1 w-20 rounded-full bg-white/30" />
-      <p className="mx-auto max-w-4xl break-keep text-lg font-light leading-8 text-white/72 md:text-xl">
+      <p className="mx-auto max-w-4xl text-lg font-light leading-8 text-white/72 md:text-xl">
         우리는 매장의 진심이 고객에게 잘 전해지는 구조를 만듭니다.
-        <br />
         좋은 경험이 좋은 기억으로 남고, 좋은 기억이 다시 방문하는 이유가 되도록 함께 고민합니다.
       </p>
     </div>
@@ -535,9 +532,9 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
               함께 시작해보세요.
             </h2>
           </div>
-          <p className={`break-keep text-lg leading-8 ${mutedText(isDarkMode)}`}>
-            창업 준비, 매장 운영, 브랜딩 방향, 플레이스 관리, 콘텐츠 기획, 검색 흐름까지 현재 상황을 남겨주시면 매장에 맞는 방향부터 함께 정리해드립니다.
-          </p>
+         <p className={`text-base leading-8 md:text-lg ${mutedText(isDarkMode)}`}>
+           창업 준비, 매장 운영, 브랜딩 방향, 플레이스 관리, 콘텐츠 기획, 검색 흐름까지 현재 상황을 남겨주시면 매장에 맞는 방향부터 함께 정리해드립니다.
+         </p>
 
           <div className="grid grid-cols-1 gap-6 border-t border-gray-100/10 pt-8 md:grid-cols-2">
             <div>
