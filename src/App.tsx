@@ -224,9 +224,8 @@ const ConcernSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <br />
             출발합니다.
           </h2>
-          <p className={`max-w-md text-base leading-8 ${mutedText(isDarkMode)}`}>
+          <p className={`max-w-lg break-keep text-base leading-8 tracking-[-0.01em] ${mutedText(isDarkMode)}`}>
             매장의 성장은 멋진 문장보다 현실적인 이해에서 시작됩니다.
-            <br className="hidden md:block" />
             우리는 매장의 상황, 고객의 반응, 운영 흐름을 함께 보고 필요한 방향을 정리합니다.
           </p>
         </div>
@@ -397,10 +396,10 @@ const SearchGrowthSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <br />
             잘 발견되어야 합니다.
           </h2>
-          <p className={`mt-8 max-w-md text-base leading-8 ${mutedText(isDarkMode)}`}>
+          <p className={`mt-8 max-w-md break-keep text-base leading-8 tracking-[-0.01em] ${mutedText(isDarkMode)}`}>
             검색은 단순한 노출이 아니라 고객이 매장을 이해하는 첫 접점입니다.
             우리는 고객이 매장을 발견하고, 신뢰하고, 방문으로 이어지는 흐름을 함께 정리합니다.
-         </p>
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
