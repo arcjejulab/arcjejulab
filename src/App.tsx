@@ -669,15 +669,17 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
   <footer className={`border-t py-16 transition-colors duration-500 ${isDarkMode ? 'border-white/5 bg-[#0f1118]' : 'border-[#10307D]/5 bg-[#EBEBEB]'}`}>
     <div className={`${container} flex flex-col items-center justify-between gap-12 lg:flex-row`}>
       <ArcLogo isDark={isDarkMode} />
-      <div className="flex flex-col gap-10 text-center md:flex-row md:gap-24 lg:gap-32 md:text-left">
-        <div className="space-y-4">
-          <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Service</h5>
-          <p className="break-keep text-sm font-medium leading-7 text-gray-500">
-            제주 카페 컨설팅 · 제주 브랜딩 · 운영 SOP
-            <br />
-            네이버 플레이스 · 구글 SEO · AI 검색 대응
-          </p>
-        </div>
+      <div className="flex flex-col gap-10 text-center md:flex-row md:gap-20 lg:gap-28 md:text-left">
+  <div className="space-y-4">
+    <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Service</h5>
+    <p className="break-keep text-sm font-medium leading-7 text-gray-500">
+      제주 카페 컨설팅 · 제주 브랜딩
+      <br />
+      운영 SOP · 플레이스 관리
+      <br />
+      구글 SEO · AI 검색 대응
+    </p>
+  </div>
         <div className="space-y-4">
           <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Office</h5>
           <p className="break-keep text-sm font-medium text-gray-500">
