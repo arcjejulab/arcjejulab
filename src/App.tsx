@@ -38,33 +38,18 @@ const LIGHT_BG = '#EBEBEB';
 const container = 'mx-auto w-full max-w-7xl px-6 md:px-10';
 const sectionGap = 'py-24 md:py-28';
 
-const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
+const ImageLogo = ({ isDark = false }: { isDark?: boolean }) => (
   <button
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-    className="flex items-center justify-center p-2 transition-all hover:scale-105 active:scale-95 focus:outline-none"
+    className="flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none"
     aria-label="Allrounder Coffee Lab home"
   >
-    <div className="relative flex h-10 w-20 items-center justify-center md:h-12">
-      <svg viewBox="0 0 100 60" className="absolute inset-0 h-full w-full drop-shadow-sm" role="img" aria-label="ARC LAB logo">
-        <path
-          d="M15,30 C15,10 40,5 65,10 C85,15 90,30 85,45 C80,60 50,55 30,50 C10,45 15,40 15,30 Z"
-          fill={isDark ? 'white' : BRAND_BLUE}
-        />
-        <text
-          x="48"
-          y="38"
-          textAnchor="middle"
-          fill={isDark ? DARK_BG : 'white'}
-          className="text-[22px] font-black tracking-tighter"
-          style={{ fontFamily: 'system-ui, sans-serif' }}
-        >
-          ARC
-        </text>
-      </svg>
-      <span className={`absolute -bottom-1 -right-1 text-[10px] font-black uppercase tracking-tighter ${isDark ? 'text-white' : 'text-[#10307D]'}`}>
-        LAB
-      </span>
-    </div>
+    <img
+      src="/logo.png"
+      alt="Allrounder Coffee Lab"
+      className={`h-12 w-auto object-contain md:h-14 ${isDark ? 'brightness-0 invert' : ''}`}
+      draggable={false}
+    />
   </button>
 );
 
@@ -107,7 +92,7 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
       }`}
     >
       <div className="flex items-center gap-8">
-        <ArcLogo isDark={isDarkMode} />
+        <ImageLogo isDark={isDarkMode} />
         <div className="hidden gap-8 md:flex">
           {menuItems.map((item) => (
             <a
