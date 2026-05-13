@@ -523,8 +523,8 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
               함께 시작해보세요.
             </h2>
           </div>
-         <p className={`text-base leading-8 md:text-lg ${mutedText(isDarkMode)}`}>
-           창업 준비, 매장 운영, 브랜딩 방향, 플레이스 관리, 콘텐츠 기획, 검색 흐름까지 현재 상황을 남겨주시면 매장에 맞는 방향부터 함께 정리해드립니다.
+         <p className={`max-w-xl break-keep text-base leading-8 tracking-[-0.01em] md:text-lg ${mutedText(isDarkMode)}`}>
+           창업 준비, 매장 운영, 브랜딩 방향, 플레이스 관리, 콘텐츠 기획, 검색 흐름까지 현재 상황을 맞는 방향부터 함께 정리해드립니다.
          </p>
 
           <div className="grid grid-cols-1 gap-6 border-t border-gray-100/10 pt-8 md:grid-cols-2">
