@@ -292,11 +292,10 @@ const SolutionSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
               고객에게 닿도록 돕습니다.
             </h2>
           </div>
-          <p className={`max-w-xl text-base leading-8 lg:justify-self-end ${mutedText(isDarkMode)}`}>
+          <p className={`max-w-2xl break-keep text-base leading-8 tracking-[-0.01em] lg:justify-self-end ${mutedText(isDarkMode)}`}>
             올라운더 커피랩은 브랜딩을 어렵게 설명하지 않습니다.
-            <br className="hidden md:block" />
             고객이 느끼는 경험과 사장님이 지키고 싶은 방향을 연결해 매장에 맞는 실행 흐름을 만듭니다.
-            </p>
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
