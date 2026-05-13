@@ -11,14 +11,10 @@ import {
   Layers3,
   Moon,
   Search,
-  Settings,
   ShieldCheck,
   Sparkles,
   Sun,
   Wrench,
-  HeartHandshake,
-  Store,
-  MessageCircleHeart,
 } from 'lucide-react';
 
 import AdminLogin from './pages/Admin/Login';
@@ -92,7 +88,7 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
       }`}
     >
       <div className="flex items-center gap-8">
-        <ImageLogo isDark={isDarkMode} />
+        <ArcLogo isDark={isDarkMode} />
         <div className="hidden gap-8 md:flex">
           {menuItems.map((item) => (
             <a
@@ -237,7 +233,9 @@ const ConcernSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             출발합니다.
           </h2>
           <p className={`max-w-md break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
-            매장의 성장은 멋진 문장보다 현실적인 이해에서 시작됩니다. <br />우리는 매장의 상황, 고객의 반응, 운영 흐름을 함께 보고 필요한 방향을 정리합니다.
+            매장의 성장은 멋진 문장보다 현실적인 이해에서 시작됩니다.
+            <br />
+            우리는 매장의 상황, 고객의 반응, 운영 흐름을 함께 보고 필요한 방향을 정리합니다.
           </p>
         </div>
 
@@ -304,7 +302,9 @@ const SolutionSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </h2>
           </div>
           <p className={`max-w-xl break-keep text-base leading-8 lg:justify-self-end ${mutedText(isDarkMode)}`}>
-            올라운더 커피랩은 브랜딩을 어렵게 설명하지 않습니다.<br />고객이 느끼는 경험과 사장님이 지키고 싶은 방향을 연결해 매장에 맞는 실행 흐름을 만듭니다.
+            올라운더 커피랩은 브랜딩을 어렵게 설명하지 않습니다.
+            <br />
+            고객이 느끼는 경험과 사장님이 지키고 싶은 방향을 연결해 매장에 맞는 실행 흐름을 만듭니다.
           </p>
         </div>
 
@@ -406,7 +406,9 @@ const SearchGrowthSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             잘 발견되어야 합니다.
           </h2>
           <p className={`mt-8 max-w-md break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
-            검색은 단순한 노출이 아니라 고객이 매장을 이해하는<br />첫 접점입니다.
+            검색은 단순한 노출이 아니라 고객이 매장을 이해하는
+            <br />
+            첫 접점입니다.
             우리는 고객이 매장을 발견하고, 신뢰하고, 방문으로 이어지는 흐름을 함께 정리합니다.
           </p>
         </div>
@@ -450,7 +452,7 @@ const OurApproachSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
 
           <div className={`space-y-6 break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
             <p>사장님이 지키고 싶은 매장의 가치를 먼저 듣습니다.</p>
-            <p>고객이 실제로 느끼는 경험과 다시 방문하게되는 이유를 함께 찾습니다.</p>
+            <p>고객이 실제로 느끼는 경험과 다시 방문하게 되는 이유를 함께 찾습니다.</p>
             <p>
               콘텐츠, 검색, 운영 흐름이 하나의 브랜드 경험으로 이어질 수 있도록
               <br className="hidden md:block" />
@@ -477,7 +479,8 @@ const PhilosophySection = () => (
       <div className="mx-auto my-10 h-1 w-20 rounded-full bg-white/30" />
       <p className="mx-auto max-w-4xl break-keep text-lg font-light leading-8 text-white/72 md:text-xl">
         우리는 매장의 진심이 고객에게 잘 전해지는 구조를 만듭니다.
-        <br />좋은 경험이 좋은 기억으로 남고, 좋은 기억이 다시 방문하는 이유가 되도록 함께 고민합니다.
+        <br />
+        좋은 경험이 좋은 기억으로 남고, 좋은 기억이 다시 방문하는 이유가 되도록 함께 고민합니다.
       </p>
     </div>
     <div className="absolute right-0 top-0 h-[800px] w-[800px] translate-x-1/3 -translate-y-1/3 rounded-full bg-white opacity-[0.03] blur-[150px]" />
@@ -655,16 +658,16 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
     <div className={`${container} flex flex-col items-center justify-between gap-12 lg:flex-row`}>
       <ArcLogo isDark={isDarkMode} />
       <div className="flex flex-col gap-10 text-center md:flex-row md:gap-20 lg:gap-28 md:text-left">
-  <div className="space-y-4">
-    <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Service</h5>
-    <p className="break-keep text-sm font-medium leading-7 text-gray-500">
-      제주 카페 컨설팅 · 제주 브랜딩
-      <br />
-      운영 SOP · 플레이스 관리
-      <br />
-      구글 SEO · AI 검색 대응
-    </p>
-  </div>
+        <div className="space-y-4">
+          <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Service</h5>
+          <p className="break-keep text-sm font-medium leading-7 text-gray-500">
+            제주 카페 컨설팅 · 제주 브랜딩
+            <br />
+            운영 SOP · 플레이스 관리
+            <br />
+            구글 SEO · AI 검색 대응
+          </p>
+        </div>
         <div className="space-y-4">
           <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Office</h5>
           <p className="break-keep text-sm font-medium text-gray-500">
