@@ -166,9 +166,9 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </h1>
 
             <p className={`max-w-3xl break-keep text-lg font-light leading-relaxed md:text-xl ${mutedText(isDarkMode)}`}>
-              올라운더 커피랩은 제주 로컬 매장의 진짜 매력을 발견하고,
-              고객에게 자연스럽게 전해지도록 돕습니다.
-              브랜딩, 운영, 콘텐츠, 검색 흐름을 함께 정리해 오래 기억되는 매장을 만듭니다.
+              올라운더커피랩은 매장의 진짜 매력을 발견하고,
+              브랜딩, 운영 흐름, 네이버 플레이스, 구글 SEO, AI 검색 대응까지
+              매장에 맞게 정리해 오래 기억되는 브랜드로 성장할 수 있도록 돕습니다.
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
@@ -252,7 +252,7 @@ const ConcernSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             출발합니다.
           </h2>
           <p className={`max-w-md break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
-            매장의 성장은 멋진 문장보다 현실적인 이해에서 시작됩니다. 우리는 매장의 상황, 고객의 반응, 운영 흐름을 함께 보고 필요한 방향을 정리합니다.
+            매장의 성장은 멋진 문장보다 현실적인 이해에서 시작됩니다. <br />우리는 매장의 상황, 고객의 반응, 운영 흐름을 함께 보고 필요한 방향을 정리합니다.
           </p>
         </div>
 
@@ -319,7 +319,7 @@ const SolutionSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </h2>
           </div>
           <p className={`max-w-xl break-keep text-base leading-8 lg:justify-self-end ${mutedText(isDarkMode)}`}>
-            올라운더 커피랩은 브랜딩을 어렵게 설명하지 않습니다. 고객이 느끼는 경험과 사장님이 지키고 싶은 방향을 연결해 매장에 맞는 실행 흐름을 만듭니다.
+            올라운더 커피랩은 브랜딩을 어렵게 설명하지 않습니다.<br />고객이 느끼는 경험과 사장님이 지키고 싶은 방향을 연결해 매장에 맞는 실행 흐름을 만듭니다.
           </p>
         </div>
 
@@ -421,7 +421,7 @@ const SearchGrowthSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             잘 발견되어야 합니다.
           </h2>
           <p className={`mt-8 max-w-md break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
-            검색은 단순한 노출이 아니라 고객이 매장을 이해하는 첫 접점입니다.
+            검색은 단순한 노출이 아니라 고객이 매장을 이해하는<br />첫 접점입니다.
             우리는 고객이 매장을 발견하고, 신뢰하고, 방문으로 이어지는 흐름을 함께 정리합니다.
           </p>
         </div>
@@ -465,7 +465,7 @@ const OurApproachSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
 
           <div className={`space-y-6 break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
             <p>사장님이 지키고 싶은 매장의 가치를 먼저 듣습니다.</p>
-            <p>고객이 실제로 느끼는 경험과 다시 방문하는 이유를 함께 찾습니다.</p>
+            <p>고객이 실제로 느끼는 경험과 다시 방문하게되는 이유를 함께 찾습니다.</p>
             <p>
               콘텐츠, 검색, 운영 흐름이 하나의 브랜드 경험으로 이어질 수 있도록
               <br className="hidden md:block" />
@@ -492,7 +492,7 @@ const PhilosophySection = () => (
       <div className="mx-auto my-10 h-1 w-20 rounded-full bg-white/30" />
       <p className="mx-auto max-w-4xl break-keep text-lg font-light leading-8 text-white/72 md:text-xl">
         우리는 매장의 진심이 고객에게 잘 전해지는 구조를 만듭니다.
-        좋은 경험이 좋은 기억으로 남고, 좋은 기억이 다시 방문하는 이유가 되도록 함께 고민합니다.
+        <br />좋은 경험이 좋은 기억으로 남고, 좋은 기억이 다시 방문하는 이유가 되도록 함께 고민합니다.
       </p>
     </div>
     <div className="absolute right-0 top-0 h-[800px] w-[800px] translate-x-1/3 -translate-y-1/3 rounded-full bg-white opacity-[0.03] blur-[150px]" />
