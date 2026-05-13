@@ -146,12 +146,11 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
               매장을 만듭니다.
             </h1>
 
-            <p className={`max-w-3xl break-keep text-lg font-light leading-relaxed md:text-xl ${mutedText(isDarkMode)}`}>
+            <p className={`max-w-3xl break-keep text-base font-light leading-8 tracking-[-0.01em] md:text-xl md:leading-relaxed ${mutedText(isDarkMode)}`}>
               올라운더커피랩은 매장의 진짜 매력을 발견하고,
-              브랜딩, 운영 흐름, 네이버 플레이스, 구글 SEO, AI 검색 대응까지
-              매장에 맞게 정리해 오래 기억되는 브랜드로 성장할 수 있도록 돕습니다.
+              브랜딩, 운영 흐름, 검색과 콘텐츠를 함께 쌓아가며
+              스스로 성장할 수 있는 브랜드로 만들어갑니다.
             </p>
-
             <div className="flex flex-col gap-4 sm:flex-row">
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
