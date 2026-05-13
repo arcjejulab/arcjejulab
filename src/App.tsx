@@ -159,14 +159,6 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
               >
                 우리 매장 상담하기
               </button>
-              <button
-                onClick={() => document.getElementById('concern')?.scrollIntoView({ behavior: 'smooth' })}
-                className={`rounded-2xl border px-8 py-5 text-xs font-black uppercase tracking-widest transition-all ${
-                  isDarkMode ? 'border-white/15 text-white hover:bg-white/10' : 'border-[#10307D]/15 text-[#10307D] hover:bg-white'
-                }`}
-              >
-                고민부터 보기
-              </button>
             </div>
           </motion.div>
 
