@@ -288,7 +288,7 @@ const SolutionSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <h2 className={`break-keep text-4xl font-black leading-tight md:text-5xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
               매장의 맞는
             <br />
-              실행 흐름을 만듭니다.
+              운영 흐름을 만듭니다.
             </h2>
           </div>
           <p className={`max-w-2xl break-keep text-base leading-8 tracking-[-0.01em] lg:justify-self-end ${mutedText(isDarkMode)}`}>
@@ -440,7 +440,7 @@ const OurApproachSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
           <div className={`space-y-6 break-keep text-base leading-8 tracking-[-0.01em] ${mutedText(isDarkMode)}`}>
             <p>좋은 매장은 외부 도움에만 기대지 않고, 스스로 기준을 만들어갑니다.</p>
             <p>브랜딩, 운영, 검색과 콘텐츠가 한 방향으로 쌓이면 매장의 힘이 더 분명해집니다.</p>
-            <p>올라운더 커피랩은 오래도 사랑받는 브랜드로 성장하는 흐름을 만듭니다.</p>
+            <p>올라운더 커피랩은 오래도록 사랑받는 브랜드로 성장하는 흐름을 만듭니다.</p>
          </div>
         </div>
       </div>
