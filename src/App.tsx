@@ -286,14 +286,14 @@ const SolutionSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
           <div>
             <SectionLabel isDarkMode={isDarkMode}>What We Do</SectionLabel>
             <h2 className={`break-keep text-4xl font-black leading-tight md:text-5xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-              매장의 매력이
-              <br />
-              고객에게 닿도록 돕습니다.
+              매장의 맞는
+            <br />
+              실행 흐름을 만듭니다.
             </h2>
           </div>
           <p className={`max-w-2xl break-keep text-base leading-8 tracking-[-0.01em] lg:justify-self-end ${mutedText(isDarkMode)}`}>
-            올라운더 커피랩은 브랜딩을 어렵게 설명하지 않습니다.
-            고객이 느끼는 경험과 사장님이 지키고 싶은 방향을 연결해 매장에 맞는 실행 흐름을 만듭니다.
+            올라운더 커피랩은 매장의 상황과 고객 경험을 함께 살펴봅니다.
+            브랜딩, 운영, 검색과 콘텐츠가 하나의 흐름으로 이어지도록 매장에 맞는 실행 방향을 만듭니다.
           </p>
         </div>
 
@@ -345,9 +345,9 @@ const OperationSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <br />
             중요한 경험입니다.
           </h2>
-          <p className={`break-keep text-lg leading-8 ${mutedText(isDarkMode)}`}>
-            고객은 메뉴만 기억하지 않습니다. 응대, 속도, 분위기, 동선, 리뷰 답글까지 함께 기억합니다.
-            그래서 운영 기준은 매장의 인상을 오래 지키는 중요한 장치입니다.
+          <p className={`break-keep text-lg leading-8 tracking-[-0.01em] ${mutedText(isDarkMode)}`}>
+            고객은 메뉴와 함께 응대, 분위기, 동선, 리뷰까지 매장의 경험으로 기억합니다.
+            그래서 운영 기준은 매장의 인상을 오래 지키는 중요한 기준이 됩니다.
           </p>
         </div>
 
@@ -390,13 +390,13 @@ const SearchGrowthSection = ({ isDarkMode }: { isDarkMode: boolean }) => {
         <div>
           <SectionLabel isDarkMode={isDarkMode}>Search & Discovery</SectionLabel>
           <h2 className={`break-keep text-4xl font-black leading-tight md:text-5xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-            좋은 매장은
-            <br />
-            잘 발견되어야 합니다.
+            고객이 찾기 쉬운
+          <br />
+            매장을 만듭니다.
           </h2>
-          <p className={`mt-8 max-w-md break-keep text-base leading-8 tracking-[-0.01em] ${mutedText(isDarkMode)}`}>
-            검색은 단순한 노출이 아니라 고객이 매장을 이해하는 첫 접점입니다.
-            우리는 고객이 매장을 발견하고, 신뢰하고, 방문으로 이어지는 흐름을 함께 정리합니다.
+          <p className={`mt-8 max-w-lg break-keep text-base leading-8 tracking-[-0.01em] ${mutedText(isDarkMode)}`}>
+            고객은 검색을 통해 매장의 첫인상과 정보를 확인합니다.
+            우리는 매장의 정보와 경험이 방문으로 이어지도록 흐름을 정리합니다.
           </p>
         </div>
 
@@ -431,21 +431,17 @@ const OurApproachSection = ({ isDarkMode }: { isDarkMode: boolean }) => (
           <div>
             <SectionLabel isDarkMode={isDarkMode}>Our Approach</SectionLabel>
             <h2 className={`break-keep text-3xl font-black leading-tight md:text-4xl xl:text-[42px] ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-              매장에 필요한 방향부터
-              <br />
-              함께 정리합니다.
+              스스로 성장하는
+            <br />
+              힘을 만듭니다.
             </h2>
           </div>
 
-          <div className={`space-y-6 break-keep text-base leading-8 ${mutedText(isDarkMode)}`}>
-            <p>사장님이 지키고 싶은 매장의 가치를 먼저 듣습니다.</p>
-            <p>고객이 실제로 느끼는 경험과 다시 방문하게 되는 이유를 함께 찾습니다.</p>
-            <p>
-              콘텐츠, 검색, 운영 흐름이 하나의 브랜드 경험으로 이어질 수 있도록{' '}
-            <br className="hidden md:block" />
-              현실적인 실행 방향을 제안합니다.
-            </p>
-          </div>
+          <div className={`space-y-6 break-keep text-base leading-8 tracking-[-0.01em] ${mutedText(isDarkMode)}`}>
+            <p>좋은 매장은 외부 도움에만 기대지 않고, 스스로 기준을 만들어갑니다.</p>
+            <p>브랜딩, 운영, 검색과 콘텐츠가 한 방향으로 쌓이면 매장의 힘이 더 분명해집니다.</p>
+            <p>올라운더 커피랩은 오래도 사랑받는 브랜드로 성장하는 흐름을 만듭니다.</p>
+         </div>
         </div>
       </div>
     </div>
