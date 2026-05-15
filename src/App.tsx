@@ -128,7 +128,6 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
 };
 
 const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
-  const facts = ['재방문 흐름', '고객 경험', '검색과 콘텐츠'];
 
   return (
     <section className={`px-6 py-20 transition-colors duration-500 md:px-10 md:py-24 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
@@ -161,22 +160,6 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {facts.map((item, idx) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + idx * 0.1 }}
-                className={`rounded-[2rem] border p-7 ${cardBase(isDarkMode)}`}
-              >
-                <p className={`mb-3 text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'}`}>
-                  Focus 0{idx + 1}
-                </p>
-                <p className={`break-keep text-sm font-black ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>{item}</p>
-              </motion.div>
-            ))}
-          </div>
         </div>
 
         <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.1 }}>
