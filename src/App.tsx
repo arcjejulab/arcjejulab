@@ -41,11 +41,11 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
     aria-label="Allrounder Coffee Lab home"
   >
    <img
-    src="/public/logo.png"
+    src={isDark ? "/public/logo-dark.png" : "/public/logo.png"}
     alt="Allrounder Coffee Lab"
     className="h-20 w-auto object-contain md:h-24"
     draggable={false}
-/>
+  />
   </button>
 );
 
