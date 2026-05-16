@@ -40,12 +40,12 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
     className="flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none"
     aria-label="Allrounder Coffee Lab home"
   >
-    <img
-      src="/public/logo.png"
-      alt="Allrounder Coffee Lab"
-      className={`h-16 w-auto object-contain md:h-20 ${isDark ? 'brightness-0 invert' : ''}`}
-      draggable={false}
-    />
+   <img
+    src="/logo.png"
+    alt="Allrounder Coffee Lab"
+    className="h-20 w-auto object-contain md:h-24"
+    draggable={false}
+/>
   </button>
 );
 
