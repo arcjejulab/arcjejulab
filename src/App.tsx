@@ -224,7 +224,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
 
             <p className={`max-w-3xl break-keep text-base font-light leading-8 tracking-[-0.01em] md:text-xl md:leading-relaxed ${mutedText(isDarkMode)}`}>
               올라운더커피랩이 생각하는 브랜딩의 끝에는 사장님의{' '}
-              <span className={`text-xl font-black md:text-2xl ${isDarkMode ? 'text-blue-300' : 'text-[#10307D]'}`}>
+              <span className="text-xl font-black text-[#10307D] md:text-2xl">
                 자생력
               </span>
               이 있습니다.
