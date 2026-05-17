@@ -138,32 +138,33 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
               </button>
 
               {activeMenu === item.label && (
-                <div
-                  className={`absolute left-1/2 top-10 w-56 -translate-x-1/2 rounded-3xl border p-5 animate-[fadeIn_.25s_ease-out] ${
-                    isDarkMode
-                      ? 'border-white/10 bg-[#161922]'
-                      : 'border-[#10307D]/10 bg-white'
-                  } shadow-2xl`}
-                >
-                  <div className="space-y-4">
-                    {dropdownData[item.label as keyof typeof dropdownData].map((subItem) => (
-                      <div
-                        key={subItem}
-                        className={`cursor-pointer text-sm transition-all hover:translate-x-1 ${
-                          isDarkMode
-                            ? 'text-white/70 hover:text-white'
-                            : 'text-[#10307D]/70 hover:text-[#10307D]'
-                        }`}
-                      >
-                        {subItem}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+  <div className="absolute left-1/2 top-10 w-56 -translate-x-1/2">
+    <div
+      className={`rounded-3xl border p-5 animate-[fadeIn_.25s_ease-out] ${
+        isDarkMode
+          ? 'border-white/10 bg-[#161922]'
+          : 'border-[#10307D]/10 bg-white'
+      } shadow-2xl`}
+    >
+      <div className="space-y-4">
+        {dropdownData[item.label as keyof typeof dropdownData].map((subItem) => (
+          <div
+            key={subItem}
+            className={`cursor-pointer text-sm transition-all hover:translate-x-1 ${
+              isDarkMode
+                ? 'text-white/70 hover:text-white'
+                : 'text-[#10307D]/70 hover:text-[#10307D]'
+            }`}
+          >
+            {subItem}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
             </div>
           ))}
-
         </div>
 
         {/* 우측 */}
