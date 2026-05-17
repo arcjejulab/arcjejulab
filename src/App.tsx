@@ -50,11 +50,10 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
 );
 
 const menuItems = [
-  { id: 'concern', label: '매장 고민' },
+  { id: 'concern', label: '소개' },
   { id: 'solution', label: '함께하는 일' },
-  { id: 'operation', label: '운영 기준' },
-  { id: 'search-growth', label: '검색 성장' },
-  { id: 'contact', label: '상담문의' },
+  { id: 'search-growth', label: '서비스' },
+  { id: 'contact', label: '문의' },
 ];
 
 const mutedText = (isDarkMode: boolean) => (isDarkMode ? 'text-white/62' : 'text-slate-600');
