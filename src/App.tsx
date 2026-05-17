@@ -50,35 +50,39 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
 );
 
 const menuItems = [
-  { id: 'concern', label: '소개' },
-  { id: 'solution', label: '함께하는 일' },
-  { id: 'search-growth', label: '서비스' },
-  { id: 'contact', label: '문의' },
+  {
+    label: '소개',
+    items: ['올라운더커피랩', '우리의 방향'],
+  },
+  {
+    label: '함께하는 일',
+    items: ['브랜드 방향 정리', '운영 흐름 만들기', '검색과 콘텐츠'],
+  },
+  {
+    label: '서비스',
+    items: ['브랜딩', '검색 성장', '매장 시스템'],
+  },
+  {
+    label: '문의',
+    items: ['상담 신청', '연락처'],
+  },
 ];
-
-const mutedText = (isDarkMode: boolean) => (isDarkMode ? 'text-white/62' : 'text-slate-600');
-
-const cardBase = (isDarkMode: boolean) =>
-  isDarkMode ? 'border-white/10 bg-white/[0.055]' : 'border-[#10307D]/5 bg-white shadow-sm';
-
-const tagColor = (isDarkMode: boolean) => (isDarkMode ? 'text-blue-300' : 'text-blue-600');
-
-const SectionLabel = ({ children, isDarkMode }: { children: React.ReactNode; isDarkMode: boolean }) => (
-  <p className={`mb-5 text-xs font-black uppercase tracking-[0.42em] ${tagColor(isDarkMode)}`}>{children}</p>
-);
 
 const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDarkMode: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
+
     window.addEventListener('scroll', handleScroll);
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <nav
-      className={`sticky top-0 z-[100] flex h-20 w-full items-center justify-between px-6 backdrop-blur-md transition-all duration-300 md:px-12 ${
+      className={`sticky top-0 z-[100] h-20 w-full backdrop-blur-md transition-all duration-300 ${
         isScrolled
           ? isDarkMode
             ? 'bg-[#0f1118]/90 shadow-lg'
@@ -86,41 +90,90 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
           : ''
       }`}
     >
-      <div className="flex items-center gap-8">
-        <ArcLogo isDark={isDarkMode} />
-        <div className="hidden gap-8 md:flex">
-          {menuItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`text-sm font-bold transition-colors ${
-                isDarkMode ? 'text-white/60 hover:text-white' : 'text-[#10307D]/60 hover:text-[#10307D]'
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </div>
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 md:px-12">
 
-      <div className="flex items-center gap-4">
-        <button
-          onClick={toggleDarkMode}
-          className={`rounded-full p-2.5 transition-all hover:scale-110 active:scale-90 ${
-            isDarkMode ? 'bg-white/10 text-yellow-400' : 'bg-[#10307D]/5 text-[#10307D]'
-          }`}
-          aria-label="Toggle dark mode"
-        >
-          {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        </button>
-        <button
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          className={`rounded-full px-6 py-2.5 text-[12px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 ${
-            isDarkMode ? 'bg-white text-[#0f1118]' : 'bg-[#10307D] text-white'
-          }`}
-        >
-          상담 문의
-        </button>
+        <div className="flex items-center gap-10">
+
+          <ArcLogo isDark={isDarkMode} />
+
+          {/* PC 메뉴 */}
+          <div className="hidden md:flex h-full items-center gap-10">
+
+            {menuItems.map((menu, index) => (
+              <div
+                key={menu.label}
+                className="relative h-full flex items-center"
+                onMouseEnter={() => setActiveMenu(index)}
+                onMouseLeave={() => setActiveMenu(null)}
+              >
+                <button
+                  className={`text-sm font-bold transition-colors ${
+                    isDarkMode
+                      ? 'text-white/60 hover:text-white'
+                      : 'text-[#10307D]/60 hover:text-[#10307D]'
+                  }`}
+                >
+                  {menu.label}
+                </button>
+
+                {/* 서랍 메뉴 */}
+                {activeMenu === index && (
+                  <div
+                    className={`absolute top-[78px] left-1/2 -translate-x-1/2 w-64 rounded-3xl border p-6 ${
+                      isDarkMode
+                        ? 'border-white/10 bg-[#161922]'
+                        : 'border-[#10307D]/5 bg-white'
+                    }`}
+                  >
+                    <div className="space-y-4">
+                      {menu.items.map((item) => (
+                        <div
+                          key={item}
+                          className={`cursor-pointer text-sm font-medium transition-all hover:translate-x-1 ${
+                            isDarkMode
+                              ? 'text-white/70 hover:text-white'
+                              : 'text-[#10307D]/70 hover:text-[#10307D]'
+                          }`}
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+              </div>
+            ))}
+
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+
+          <button
+            onClick={toggleDarkMode}
+            className={`rounded-full p-2.5 ${
+              isDarkMode
+                ? 'bg-white/10 text-yellow-400'
+                : 'bg-[#10307D]/5 text-[#10307D]'
+            }`}
+          >
+            {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
+
+          <button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className={`rounded-full px-6 py-2.5 text-[12px] font-black uppercase tracking-widest ${
+              isDarkMode
+                ? 'bg-white text-[#0f1118]'
+                : 'bg-[#10307D] text-white'
+            }`}
+          >
+            상담 문의
+          </button>
+
+        </div>
+
       </div>
     </nav>
   );
