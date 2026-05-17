@@ -728,7 +728,6 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
     </div>
   </footer>
 );
-);
 
 const GlobalStyles = () => (
   <style>
