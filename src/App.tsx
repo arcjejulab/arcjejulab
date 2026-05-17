@@ -101,14 +101,16 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
           : ''
       }`}
     >
-      <div className="flex items-center gap-8">
+      <div className="flex items-center">
         <ArcLogo isDark={isDarkMode} />
-        <div className="hidden gap-8 md:flex">
+      </div>
+
+      <div className="absolute left-1/2 hidden -translate-x-1/2 gap-12 md:flex">
           {menuItems.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
-              className={`text-sm font-bold transition-colors ${
+              className={`text-base font-bold transition-colors ${
                 isDarkMode ? 'text-white/60 hover:text-white' : 'text-[#10307D]/60 hover:text-[#10307D]'
               }`}
             >
