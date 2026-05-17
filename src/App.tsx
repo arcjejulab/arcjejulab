@@ -122,11 +122,11 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
 
           {menuItems.map((item) => (
             <div
-              key={item.id}
-              className="relative" pb-8"
-              onMouseEnter={() => setActiveMenu(item.label)}
-              onMouseLeave={() => setActiveMenu(null)}
-            >
+  key={item.id}
+  className="relative pb-8"
+  onMouseEnter={() => setActiveMenu(item.label)}
+  onMouseLeave={() => setActiveMenu(null)}
+>
               <button
                 className={`text-base font-bold transition-colors ${
                   isDarkMode
