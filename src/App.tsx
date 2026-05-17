@@ -93,7 +93,7 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
 
   return (
     <nav
-      className={`sticky top-0 z-[100] flex h-20 w-full items-center justify-between px-6 backdrop-blur-md transition-all duration-300 md:px-12 ${
+      className={`sticky top-0 z-[100] h-20 w-full backdrop-blur-md transition-all duration-300 ${
         isScrolled
           ? isDarkMode
             ? 'bg-[#0f1118]/90 shadow-lg'
@@ -101,45 +101,45 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
           : ''
       }`}
     >
-      <div className="flex items-center">
-  <ArcLogo isDark={isDarkMode} />
-</div>
+      <div className="relative flex h-full w-full items-center justify-between px-6 md:px-12">
+        <div className="flex items-center">
+          <ArcLogo isDark={isDarkMode} />
+        </div>
 
-<div className="absolute left-1/2 hidden -translate-x-1/2 md:flex gap-12">
-  {menuItems.map((item) => (
-    <a
-      key={item.id}
-      href={`#${item.id}`}
-      className={`text-base font-bold transition-colors ${
-        isDarkMode
-          ? 'text-white/60 hover:text-white'
-          : 'text-[#10307D]/60 hover:text-[#10307D]'
-      }`}
-    >
-      {item.label}
-    </a>
-  ))}
-</div>
-      </div>
+        <div className="absolute left-1/2 hidden -translate-x-1/2 gap-12 md:flex">
+          {menuItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`text-base font-bold transition-colors ${
+                isDarkMode ? 'text-white/60 hover:text-white' : 'text-[#10307D]/60 hover:text-[#10307D]'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
 
-      <div className="flex items-center gap-4">
-        <button
-          onClick={toggleDarkMode}
-          className={`rounded-full p-2.5 transition-all hover:scale-110 active:scale-90 ${
-            isDarkMode ? 'bg-white/10 text-yellow-400' : 'bg-[#10307D]/5 text-[#10307D]'
-          }`}
-          aria-label="Toggle dark mode"
-        >
-          {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        </button>
-        <button
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          className={`rounded-full px-6 py-2.5 text-[12px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 ${
-            isDarkMode ? 'bg-white text-[#0f1118]' : 'bg-[#10307D] text-white'
-          }`}
-        >
-          상담 문의
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={toggleDarkMode}
+            className={`rounded-full p-2.5 transition-all hover:scale-110 active:scale-90 ${
+              isDarkMode ? 'bg-white/10 text-yellow-400' : 'bg-[#10307D]/5 text-[#10307D]'
+            }`}
+            aria-label="Toggle dark mode"
+          >
+            {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
+
+          <button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className={`rounded-full px-6 py-2.5 text-[12px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 ${
+              isDarkMode ? 'bg-white text-[#0f1118]' : 'bg-[#10307D] text-white'
+            }`}
+          >
+            상담 문의
+          </button>
+        </div>
       </div>
     </nav>
   );
