@@ -102,22 +102,24 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
       }`}
     >
       <div className="flex items-center">
-        <ArcLogo isDark={isDarkMode} />
-      </div>
+  <ArcLogo isDark={isDarkMode} />
+</div>
 
-      <div className="absolute left-1/2 hidden -translate-x-1/2 gap-12 md:flex">
-          {menuItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`text-base font-bold transition-colors ${
-                isDarkMode ? 'text-white/60 hover:text-white' : 'text-[#10307D]/60 hover:text-[#10307D]'
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
+<div className="absolute left-1/2 hidden -translate-x-1/2 md:flex gap-12">
+  {menuItems.map((item) => (
+    <a
+      key={item.id}
+      href={`#${item.id}`}
+      className={`text-base font-bold transition-colors ${
+        isDarkMode
+          ? 'text-white/60 hover:text-white'
+          : 'text-[#10307D]/60 hover:text-[#10307D]'
+      }`}
+    >
+      {item.label}
+    </a>
+  ))}
+</div>
       </div>
 
       <div className="flex items-center gap-4">
