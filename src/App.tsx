@@ -123,7 +123,7 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
           {menuItems.map((item) => (
             <div
               key={item.id}
-              className="relative"
+              className="relative" pb-8"
               onMouseEnter={() => setActiveMenu(item.label)}
               onMouseLeave={() => setActiveMenu(null)}
             >
@@ -138,7 +138,7 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
               </button>
 
               {activeMenu === item.label && (
-  <div className="absolute left-1/2 top-10 w-56 -translate-x-1/2">
+  <div className="absolute left-1/2 top-9 w-56 -translate-x-1/2">
     <motion.div
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
