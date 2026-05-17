@@ -55,6 +55,32 @@ const menuItems = [
   { id: 'search-growth', label: '서비스' },
   { id: 'contact', label: '문의' },
 ];
+const mutedText = (isDarkMode: boolean) =>
+  isDarkMode ? 'text-white/62' : 'text-slate-600';
+
+const cardBase = (isDarkMode: boolean) =>
+  isDarkMode
+    ? 'border-white/10 bg-white/[0.055]'
+    : 'border-[#10307D]/5 bg-white shadow-sm';
+
+const tagColor = (isDarkMode: boolean) =>
+  isDarkMode ? 'text-blue-300' : 'text-blue-600';
+
+const SectionLabel = ({
+  children,
+  isDarkMode,
+}: {
+  children: React.ReactNode;
+  isDarkMode: boolean;
+}) => (
+  <p
+    className={`mb-5 text-xs font-black uppercase tracking-[0.42em] ${tagColor(
+      isDarkMode
+    )}`}
+  >
+    {children}
+  </p>
+);
 
 const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDarkMode: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
