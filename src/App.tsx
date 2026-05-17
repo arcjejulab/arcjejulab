@@ -258,7 +258,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
                   <h2 className="break-keep text-3xl font-black leading-tight">
                     좋은 매장은
                     <br />
-                    경험으로 기억됩니다.
+                    경험으로부터
                   </h2>
                 </div>
               </div>
