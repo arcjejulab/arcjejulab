@@ -735,7 +735,7 @@ const GlobalStyles = () => (
       @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translate(-50%, -10px);
+          transform: translate(-10px);
         }
 
         to {
