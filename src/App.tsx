@@ -139,8 +139,11 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
 
               {activeMenu === item.label && (
   <div className="absolute left-1/2 top-10 w-56 -translate-x-1/2">
-    <div
-      className={`rounded-3xl border p-5 animate-[fadeIn_.25s_ease-out] ${
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.22, ease: 'easeOut' }}
+      className={`rounded-3xl border p-5 ${
         isDarkMode
           ? 'border-white/10 bg-[#161922]'
           : 'border-[#10307D]/10 bg-white'
@@ -160,7 +163,7 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   </div>
 )}
             </div>
@@ -730,24 +733,6 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
   </footer>
 );
 
-const GlobalStyles = () => (
-  <style>
-    {`
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translate(-10px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translate(-50%, 0);
-        }
-      }
-    `}
-  </style>
-);
-
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
 
@@ -759,7 +744,6 @@ function Home() {
 
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 selection:bg-[#10307D] selection:text-white ${isDarkMode ? 'bg-[#0f1118] text-white' : 'bg-[#EBEBEB] text-[#10307D]'}`}>
-      <GlobalStyles />
       <Header isDarkMode={isDarkMode} toggleDarkMode={() => setIsDarkMode(!isDarkMode)} />
       <Hero isDarkMode={isDarkMode} />
       <ConcernSection isDarkMode={isDarkMode} />
