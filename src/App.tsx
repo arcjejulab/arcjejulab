@@ -748,7 +748,6 @@ const GlobalStyles = () => (
 );
 
 function Home() {
-function Home() {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
 
   useEffect(() => {
