@@ -217,15 +217,15 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </div>
 
             <h1 className={`break-keep text-4xl font-black leading-[1.08] tracking-tight md:text-6xl xl:text-6xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
-              손님이 다시 찾는
+              누구나 스스로
               <br />
-              매장을 만듭니다.
+              할 수 있게.
             </h1>
 
             <p className={`max-w-3xl break-keep text-base font-light leading-8 tracking-[-0.01em] md:text-xl md:leading-relaxed ${mutedText(isDarkMode)}`}>
-              올라운더커피랩은 매장의 진짜 매력을 발견하고,
-              브랜딩, 운영 흐름, 검색과 콘텐츠를 함께 쌓아가며
-              스스로 성장할 수 있는 브랜드로 만들어갑니다.
+              올라운더커피랩이 생각하는 브랜딩의 끝에는 사장님의 자생력이 있습니다.
+              도움 없이도 스스로 해낼 수 있는 실무 능력과 운영 노하우,
+              그것이 우리가 함께 만들어가는 진짜 브랜딩의 가치입니다.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <button
