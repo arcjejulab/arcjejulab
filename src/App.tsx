@@ -377,7 +377,7 @@ const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
                 {isSub ? (
                   <>
                     <h2
-                      className={`break-keep text-3xl font-black leading-tight tracking-[-0.04em] md:text-5xl ${
+                      className={`break-keep text-2xl font-black leading-tight tracking-[-0.03em] md:text-4xl ${
                         isDarkMode ? 'text-white' : 'text-[#10307D]'
                       }`}
                     >
@@ -391,7 +391,7 @@ const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
 
                     {block.description && (
                       <p
-                        className={`max-w-4xl break-keep text-xl font-light leading-9 tracking-[-0.02em] md:text-2xl md:leading-10 ${
+                        className={`max-w-3xl break-keep text-xl font-light leading-9 tracking-[-0.01em] md:text-l md:leading-9 ${
                           isDarkMode ? 'text-white/68' : 'text-slate-600'
                         }`}
                       >
