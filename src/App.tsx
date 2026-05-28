@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import {
   Building2,
   CheckCircle2,
@@ -270,45 +270,29 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
   );
 };
 
-const brandStoryBlocks = [
+const brandStories = [
   {
     id: 'concern',
-    type: 'main',
-    label: 'JUST AUTHENTIC',
-    title: ['나의 브랜드가 전하고자 하는 진심이', '고객에게 온전히 닿는 것.'],
-  },
-  {
-    type: 'sub',
-    label: 'JUST AUTHENTIC',
-    title: ['올라운더 커피랩은 당신의 브랜드가'],
-    description: [
+    keyword: 'JUST AUTHENTIC',
+    headline: ['나의 브랜드가 전하고자 하는 진심이', '고객에게 온전히 닿는 것.'],
+    sub: [
+      '올라운더 커피랩은 당신의 브랜드가',
       '반짝하는 기교보다 본질에 집중하고,',
       '스스로 성장할 수 있는 힘을 만들어가도록 돕습니다.',
     ],
   },
   {
     id: 'solution',
-    type: 'main',
-    label: 'BRANDING',
-    title: ['브랜딩은 고객의 기억에서', '완성됩니다.'],
-  },
-  {
-    type: 'sub',
-    label: 'BRANDING',
-    title: ['문을 열고 떠난 고객의 마음에'],
-    description: ['좋은 기억과 경험으로 남는 것.'],
+    keyword: 'BRANDING',
+    headline: ['브랜딩은 고객의 기억에서', '완성됩니다.'],
+    sub: ['문을 열고 떠난 고객의 마음에', '좋은 기억과 경험으로 남는 것.'],
   },
   {
     id: 'operation',
-    type: 'main',
-    label: 'SYSTEM',
-    title: ['스스로 성장하고 발전하는', '정교한 매장 설계'],
-  },
-  {
-    type: 'sub',
-    label: 'SYSTEM',
-    title: ['오차 없는 레시피와 장비 세팅,'],
-    description: [
+    keyword: 'SYSTEM',
+    headline: ['스스로 성장하고 발전하는', '정교한 매장 설계'],
+    sub: [
+      '오차 없는 레시피와 장비 세팅,',
       '현장의 동선과 고객 서비스까지.',
       '매장이 실제로 움직이는 모든 요소를',
       '하나의 구조로 묶어내는 것.',
@@ -316,114 +300,126 @@ const brandStoryBlocks = [
   },
   {
     id: 'search-growth',
-    type: 'main',
-    label: 'MARKETING',
-    title: ['사람들의 마음에 깊은 공감을 주는', '진실한 이야기'],
-  },
-  {
-    type: 'sub',
-    label: 'MARKETING',
-    title: ['브랜드가 가진 본질과 가치를'],
-    description: [
+    keyword: 'MARKETING',
+    headline: ['사람들의 마음에 깊은 공감을 주는', '진실한 이야기'],
+    sub: [
+      '브랜드가 가진 본질과 가치를',
       '가장 우리다운 언어로 담아내고,',
       '고객의 발걸음을 기분 좋은 설렘으로 연결하는 것.',
     ],
   },
 ];
 
-const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
-  return (
-    <section className={`${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
-      {brandStoryBlocks.map((block, index) => {
-        const isSub = block.type === 'sub';
-        const isEven = index % 2 === 0;
+const BrandStoryPanel = ({
+  story,
+  isDarkMode,
+  index,
+}: {
+  story: {
+    id: string;
+    keyword: string;
+    headline: string[];
+    sub: string[];
+  };
+  isDarkMode: boolean;
+  index: number;
+}) => {
+  const sectionRef = useRef<HTMLElement | null>(null);
 
-        return (
-          <motion.section
-            key={`${block.label}-${index}`}
-            id={block.id}
-            initial={{ opacity: 0, y: 36 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: false, amount: 0.45 }}
-            className={`flex min-h-screen items-center transition-colors duration-500 ${
-              isDarkMode
-                ? isEven
-                  ? 'bg-[#0f1118]'
-                  : 'bg-[#1a1e29]'
-                : isEven
-                  ? 'bg-[#EBEBEB]'
-                  : 'bg-white'
-            }`}
-          >
-            <div className={`${container} grid grid-cols-1 gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-center`}>
-              <div className="space-y-5">
-                <p
-                  className={`text-xs font-black uppercase tracking-[0.45em] ${
-                    isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.28, 0.45], [1, 1, 0]);
+  const headlineY = useTransform(scrollYProgress, [0, 0.45], [0, -28]);
+
+  const subOpacity = useTransform(scrollYProgress, [0.38, 0.58, 1], [0, 1, 1]);
+  const subY = useTransform(scrollYProgress, [0.38, 0.58], [36, 0]);
+
+  const isEven = index % 2 === 0;
+
+  return (
+    <section
+      ref={sectionRef}
+      id={story.id}
+      className={`relative h-[220vh] transition-colors duration-500 ${
+        isDarkMode
+          ? isEven
+            ? 'bg-[#0f1118]'
+            : 'bg-[#1a1e29]'
+          : isEven
+            ? 'bg-[#EBEBEB]'
+            : 'bg-white'
+      }`}
+    >
+      <div className="sticky top-20 flex h-[calc(100vh-5rem)] items-center overflow-hidden">
+        <div className={`${container}`}>
+          <div className="relative min-h-[520px]">
+            <div className="absolute inset-0 flex flex-col justify-center">
+              <p
+                className={`break-keep text-5xl font-black leading-none tracking-[-0.06em] md:text-8xl xl:text-9xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                {story.keyword}
+              </p>
+
+              <motion.div
+                style={{ opacity: headlineOpacity, y: headlineY }}
+                className="mt-10"
+              >
+                <h2
+                  className={`break-keep text-2xl font-black leading-tight tracking-[-0.03em] md:text-4xl ${
+                    isDarkMode ? 'text-white/88' : 'text-[#10307D]/90'
                   }`}
                 >
-                  {block.label}
-                </p>
+                  {story.headline.map((line) => (
+                    <React.Fragment key={line}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  ))}
+                </h2>
+              </motion.div>
 
-                <div
-                  className={`h-1 w-16 rounded-full ${
-                    isDarkMode ? 'bg-white/20' : 'bg-[#10307D]/20'
+              <motion.div
+                style={{ opacity: subOpacity, y: subY }}
+                className="mt-10"
+              >
+                <p
+                  className={`max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+                    isDarkMode ? 'text-white/70' : 'text-slate-600'
                   }`}
-                />
-              </div>
-
-              <div className="space-y-10">
-                {isSub ? (
-                  <>
-                    <h2
-                      className={`break-keep text-2xl font-black leading-tight tracking-[-0.03em] md:text-4xl ${
-                        isDarkMode ? 'text-white' : 'text-[#10307D]'
-                      }`}
-                    >
-                      {block.title.map((line) => (
-                        <React.Fragment key={line}>
-                          {line}
-                          <br />
-                        </React.Fragment>
-                      ))}
-                    </h2>
-
-                    {block.description && (
-                      <p
-                        className={`max-w-3xl break-keep text-xl font-light leading-9 tracking-[-0.01em] md:text-l md:leading-9 ${
-                          isDarkMode ? 'text-white/68' : 'text-slate-600'
-                        }`}
-                      >
-                        {block.description.map((line) => (
-                          <React.Fragment key={line}>
-                            {line}
-                            <br className="hidden md:block" />
-                          </React.Fragment>
-                        ))}
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  <h2
-                    className={`break-keep text-5xl font-black leading-[1.08] tracking-[-0.055em] md:text-7xl xl:text-8xl ${
-                      isDarkMode ? 'text-white' : 'text-[#10307D]'
-                    }`}
-                  >
-                    {block.title.map((line) => (
-                      <React.Fragment key={line}>
-                        {line}
-                        <br />
-                      </React.Fragment>
-                    ))}
-                  </h2>
-                )}
-              </div>
+                >
+                  {story.sub.map((line) => (
+                    <React.Fragment key={line}>
+                      {line}
+                      <br className="hidden md:block" />
+                    </React.Fragment>
+                  ))}
+                </p>
+              </motion.div>
             </div>
-          </motion.section>
-        );
-      })}
+          </div>
+        </div>
+      </div>
     </section>
+  );
+};
+
+const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
+  return (
+    <>
+      {brandStories.map((story, index) => (
+        <BrandStoryPanel
+          key={story.keyword}
+          story={story}
+          index={index}
+          isDarkMode={isDarkMode}
+        />
+      ))}
+    </>
   );
 };
 
