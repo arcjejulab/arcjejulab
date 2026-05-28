@@ -1,21 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'motion/react';
-import {
-  Building2,
-  CheckCircle2,
-  Coffee,
-  Compass,
-  Cpu,
-  Globe,
-  Layers3,
-  Moon,
-  Search,
-  ShieldCheck,
-  Sparkles,
-  Sun,
-  Wrench,
-} from 'lucide-react';
+import { motion } from 'motion/react';
+import { Moon, ShieldCheck, Sun } from 'lucide-react';
 
 import AdminLogin from './pages/Admin/Login';
 import Dashboard from './pages/Admin/Dashboard';
@@ -27,7 +13,6 @@ import Estimates from './pages/Admin/Estimates';
 import WorkStatus from './pages/Admin/WorkStatus';
 import SalesLedger from './pages/Admin/SalesLedger';
 
-const BRAND_BLUE = '#10307D';
 const DARK_BG = '#0f1118';
 const LIGHT_BG = '#EBEBEB';
 
@@ -40,12 +25,12 @@ const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
     className="flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none"
     aria-label="Allrounder Coffee Lab home"
   >
-   <img
-    src={isDark ? "/public/logo-dark.png" : "/public/logo.png"}
-    alt="Allrounder Coffee Lab"
-    className="h-20 w-auto object-contain md:h-24"
-    draggable={false}
-  />
+    <img
+      src={isDark ? '/public/logo-dark.png' : '/public/logo.png'}
+      alt="Allrounder Coffee Lab"
+      className="h-20 w-auto object-contain md:h-24"
+      draggable={false}
+    />
   </button>
 );
 
@@ -55,13 +40,9 @@ const menuItems = [
   { id: 'search-growth', label: '서비스' },
   { id: 'contact', label: '문의' },
 ];
+
 const mutedText = (isDarkMode: boolean) =>
   isDarkMode ? 'text-white/62' : 'text-slate-600';
-
-const cardBase = (isDarkMode: boolean) =>
-  isDarkMode
-    ? 'border-white/10 bg-white/[0.055]'
-    : 'border-[#10307D]/5 bg-white shadow-sm';
 
 const tagColor = (isDarkMode: boolean) =>
   isDarkMode ? 'text-blue-300' : 'text-blue-600';
@@ -73,16 +54,18 @@ const SectionLabel = ({
   children: React.ReactNode;
   isDarkMode: boolean;
 }) => (
-  <p
-    className={`mb-5 text-xs font-black uppercase tracking-[0.42em] ${tagColor(
-      isDarkMode
-    )}`}
-  >
+  <p className={`mb-5 text-xs font-black uppercase tracking-[0.42em] ${tagColor(isDarkMode)}`}>
     {children}
   </p>
 );
 
-const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDarkMode: () => void }) => {
+const Header = ({
+  isDarkMode,
+  toggleDarkMode,
+}: {
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
@@ -111,23 +94,20 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
       }`}
     >
       <div className="relative flex h-full w-full items-center justify-between px-6 md:px-12">
-
-        {/* 로고 */}
         <div className="flex items-center">
           <ArcLogo isDark={isDarkMode} />
         </div>
 
-        {/* 메뉴 */}
-        <div className="absolute left-1/2 hidden -translate-x-1/2 md:flex gap-12">
-
+        <div className="absolute left-1/2 hidden -translate-x-1/2 gap-12 md:flex">
           {menuItems.map((item) => (
             <div
-  key={item.id}
-  className="relative pb-8"
-  onMouseEnter={() => setActiveMenu(item.label)}
-  onMouseLeave={() => setActiveMenu(null)}
->
+              key={item.id}
+              className="relative pb-8"
+              onMouseEnter={() => setActiveMenu(item.label)}
+              onMouseLeave={() => setActiveMenu(null)}
+            >
               <button
+                onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })}
                 className={`text-base font-bold transition-colors ${
                   isDarkMode
                     ? 'text-white/60 hover:text-white'
@@ -138,47 +118,48 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
               </button>
 
               {activeMenu === item.label && (
-  <div className="absolute left-1/2 top-9 w-56 -translate-x-1/2">
-    <motion.div
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.22, ease: 'easeOut' }}
-      className={`rounded-3xl border p-5 ${
-        isDarkMode
-          ? 'border-white/10 bg-[#161922]'
-          : 'border-[#10307D]/10 bg-white'
-      } shadow-2xl`}
-    >
-      <div className="space-y-4">
-        {dropdownData[item.label as keyof typeof dropdownData].map((subItem) => (
-          <div
-            key={subItem}
-            className={`cursor-pointer text-sm transition-all hover:translate-x-1 ${
-              isDarkMode
-                ? 'text-white/70 hover:text-white'
-                : 'text-[#10307D]/70 hover:text-[#10307D]'
-            }`}
-          >
-            {subItem}
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  </div>
-)}
+                <div className="absolute left-1/2 top-9 w-56 -translate-x-1/2">
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.22, ease: 'easeOut' }}
+                    className={`rounded-3xl border p-5 shadow-2xl ${
+                      isDarkMode
+                        ? 'border-white/10 bg-[#161922]'
+                        : 'border-[#10307D]/10 bg-white'
+                    }`}
+                  >
+                    <div className="space-y-4">
+                      {dropdownData[item.label as keyof typeof dropdownData].map((subItem) => (
+                        <div
+                          key={subItem}
+                          onClick={() =>
+                            document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })
+                          }
+                          className={`cursor-pointer text-sm transition-all hover:translate-x-1 ${
+                            isDarkMode
+                              ? 'text-white/70 hover:text-white'
+                              : 'text-[#10307D]/70 hover:text-[#10307D]'
+                          }`}
+                        >
+                          {subItem}
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              )}
             </div>
           ))}
         </div>
 
-        {/* 우측 */}
         <div className="flex items-center gap-4">
           <button
             onClick={toggleDarkMode}
-            className={`rounded-full p-2.5 ${
-              isDarkMode
-                ? 'bg-white/10 text-yellow-400'
-                : 'bg-[#10307D]/5 text-[#10307D]'
+            className={`rounded-full p-2.5 transition-all hover:scale-110 active:scale-90 ${
+              isDarkMode ? 'bg-white/10 text-yellow-400' : 'bg-[#10307D]/5 text-[#10307D]'
             }`}
+            aria-label="Toggle dark mode"
           >
             {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
@@ -189,48 +170,63 @@ const Header = ({ isDarkMode, toggleDarkMode }: { isDarkMode: boolean; toggleDar
                 behavior: 'smooth',
               })
             }
-            className={`rounded-full px-6 py-2.5 text-[12px] font-black uppercase tracking-widest ${
-              isDarkMode
-                ? 'bg-white text-[#0f1118]'
-                : 'bg-[#10307D] text-white'
+            className={`rounded-full px-6 py-2.5 text-[12px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 ${
+              isDarkMode ? 'bg-white text-[#0f1118]' : 'bg-[#10307D] text-white'
             }`}
           >
             상담 문의
           </button>
         </div>
-
       </div>
     </nav>
   );
 };
 
 const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
-
   return (
-    <section className={`px-6 py-20 transition-colors duration-500 md:px-10 md:py-24 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
+    <section
+      className={`px-6 py-20 transition-colors duration-500 md:px-10 md:py-24 ${
+        isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+      }`}
+    >
       <div className="mx-auto grid min-h-[78vh] max-w-7xl grid-cols-1 items-center gap-14 lg:grid-cols-2">
         <div className="space-y-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="space-y-8">
-            <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'}`}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <div
+              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-widest ${
+                isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'
+              }`}
+            >
               <span className={`h-2 w-2 rounded-full ${isDarkMode ? 'bg-white' : 'bg-[#10307D]'}`} />
               Jeju Local Brand Partner
             </div>
 
-            <h1 className={`break-keep text-4xl font-black leading-[1.08] tracking-tight md:text-6xl xl:text-6xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+            <h1
+              className={`break-keep text-4xl font-black leading-[1.08] tracking-tight md:text-6xl xl:text-6xl ${
+                isDarkMode ? 'text-white' : 'text-[#10307D]'
+              }`}
+            >
               누구나 스스로
               <br />
               할 수 있게.
             </h1>
 
-            <p className={`max-w-3xl break-keep text-base font-light leading-8 tracking-[-0.01em] md:text-xl md:leading-relaxed ${mutedText(isDarkMode)}`}>
+            <p
+              className={`max-w-3xl break-keep text-base font-light leading-8 tracking-[-0.01em] md:text-xl md:leading-relaxed ${mutedText(
+                isDarkMode
+              )}`}
+            >
               올라운더커피랩이 생각하는 브랜딩의 끝에는 사장님의{' '}
-              <span className="text-xl font-black text-[#10307D] md:text-2xl">
-                자생력
-              </span>
-              이 있습니다.
-              도움 없이도 스스로 해낼 수 있는 실무 능력과 운영 노하우,
+              <span className="text-xl font-black text-[#10307D] md:text-2xl">자생력</span>
+              이 있습니다. 도움 없이도 스스로 해낼 수 있는 실무 능력과 운영 노하우,
               그것이 우리가 함께 만들어가는 진짜 브랜딩의 가치입니다.
             </p>
+
             <div className="flex flex-col gap-4 sm:flex-row">
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
@@ -240,11 +236,20 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
               </button>
             </div>
           </motion.div>
-
         </div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.1 }}>
-          <div className={`overflow-hidden rounded-[3rem] border shadow-2xl ${isDarkMode ? 'border-white/10 bg-white/5 shadow-black/30' : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'}`}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        >
+          <div
+            className={`overflow-hidden rounded-[3rem] border shadow-2xl ${
+              isDarkMode
+                ? 'border-white/10 bg-white/5 shadow-black/30'
+                : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'
+            }`}
+          >
             <div className="relative h-[520px] overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=1600"
@@ -254,7 +259,9 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
               />
               <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/88 via-black/25 to-transparent p-10">
                 <div className="space-y-4 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-[0.35em] text-white/55">Allrounder Coffee Lab</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.35em] text-white/55">
+                    Allrounder Coffee Lab
+                  </p>
                   <h2 className="break-keep text-3xl font-black leading-tight">
                     좋은 매장은
                     <br />
@@ -314,183 +321,112 @@ const brandStories = [
   },
 ];
 
-const BrandStoryPanel = ({
-  story,
-  isDarkMode,
-  index,
-}: {
-  story: {
-    id: string;
-    keyword: string;
-    korean: string;
-    headline: string[];
-    sub: string[];
-  };
-  isDarkMode: boolean;
-  index: number;
-}) => {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const headlineOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.22, 0.44, 0.58],
-    [1, 1, 0.2, 0]
-  );
-
-  const headlineY = useTransform(
-    scrollYProgress,
-    [0, 0.58],
-    [0, -36]
-  );
-
-  const subOpacity = useTransform(
-    scrollYProgress,
-    [0.28, 0.46, 0.88, 1],
-    [0, 1, 1, 0.15]
-  );
-
-  const subY = useTransform(
-    scrollYProgress,
-    [0.28, 0.46],
-    [44, 0]
-  );
-
-  const subBlur = useTransform(
-    scrollYProgress,
-    [0.28, 0.46],
-    ['blur(10px)', 'blur(0px)']
-  );
-
-  const keywordScale = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [1, 0.96, 0.96]
-  );
-
-  const keywordOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.6, 1],
-    [1, 0.88, 0.84]
-  );
-
-  const isEven = index % 2 === 0;
-
-  return (
-    <section
-      ref={sectionRef}
-      id={story.id}
-      className={`relative h-[280vh] transition-colors duration-500 ${
-        isDarkMode
-          ? isEven
-            ? 'bg-[#0f1118]'
-            : 'bg-[#1a1e29]'
-          : isEven
-            ? 'bg-[#EBEBEB]'
-            : 'bg-white'
-      }`}
-    >
-      <div className="sticky top-20 flex h-[calc(100vh-5rem)] items-center overflow-hidden">
-        <div className={`${container}`}>
-          <div className="relative min-h-[560px]">
-            <div
-              className={`pointer-events-none absolute left-1/2 top-1/2 select-none text-[18vw] font-black leading-none tracking-[-0.08em] opacity-[0.035] ${
-                isDarkMode ? 'text-white' : 'text-[#10307D]'
-              }`}
-              style={{
-                transform: 'translate(-50%, -50%)',
-              }}
-            >
-              {story.keyword}
-            </div>
-
-            <div className="absolute inset-0 flex flex-col justify-center">
-              <div
-                className={`mb-8 h-20 w-[3px] rounded-full ${
-                  isDarkMode ? 'bg-white/20' : 'bg-[#10307D]/20'
-                }`}
-              />
-
-              <motion.div
-                style={{ scale: keywordScale, opacity: keywordOpacity }}
-                className="space-y-5"
-              >
-                <p
-                  className={`break-keep text-5xl font-black leading-none tracking-[-0.06em] md:text-8xl xl:text-9xl ${
-                    isDarkMode ? 'text-white' : 'text-[#10307D]'
-                  }`}
-                >
-                  {story.keyword}
-                </p>
-
-                <p
-                  className={`break-keep text-xl font-black tracking-[0.16em] md:text-3xl ${
-                    isDarkMode ? 'text-white/55' : 'text-[#10307D]/55'
-                  }`}
-                >
-                  {story.korean}
-                </p>
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: headlineOpacity, y: headlineY }}
-                className="mt-10"
-              >
-                <h2
-                  className={`break-keep text-2xl font-black leading-tight tracking-[-0.03em] md:text-4xl ${
-                    isDarkMode ? 'text-white/88' : 'text-[#10307D]/90'
-                  }`}
-                >
-                  {story.headline.map((line) => (
-                    <React.Fragment key={line}>
-                      {line}
-                      <br />
-                    </React.Fragment>
-                  ))}
-                </h2>
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: subOpacity, y: subY, filter: subBlur }}
-                className="mt-10"
-              >
-                <p
-                  className={`max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
-                    isDarkMode ? 'text-white/70' : 'text-slate-600'
-                  }`}
-                >
-                  {story.sub.map((line) => (
-                    <React.Fragment key={line}>
-                      {line}
-                      <br className="hidden md:block" />
-                    </React.Fragment>
-                  ))}
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
-    <>
-      {brandStories.map((story, index) => (
-        <BrandStoryPanel
-          key={story.keyword}
-          story={story}
-          index={index}
-          isDarkMode={isDarkMode}
-        />
-      ))}
-    </>
+    <section className={`${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
+      {brandStories.map((story, index) => {
+        const isEven = index % 2 === 0;
+
+        return (
+          <section
+            key={story.keyword}
+            id={story.id}
+            className={`relative overflow-hidden transition-colors duration-500 ${
+              isDarkMode
+                ? isEven
+                  ? 'bg-[#0f1118]'
+                  : 'bg-[#1a1e29]'
+                : isEven
+                  ? 'bg-[#EBEBEB]'
+                  : 'bg-white'
+            }`}
+          >
+            <div className="relative flex min-h-screen items-center py-28 md:py-36">
+              <div
+                className={`pointer-events-none absolute left-1/2 top-1/2 select-none text-[18vw] font-black leading-none tracking-[-0.08em] opacity-[0.035] ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+                style={{ transform: 'translate(-50%, -50%)' }}
+              >
+                {story.keyword}
+              </div>
+
+              <div className={`${container} relative z-10`}>
+                <motion.div
+                  initial={{ opacity: 0, y: 42 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  viewport={{ once: false, amount: 0.45 }}
+                  className="max-w-6xl"
+                >
+                  <div
+                    className={`mb-10 h-20 w-[3px] rounded-full ${
+                      isDarkMode ? 'bg-white/20' : 'bg-[#10307D]/20'
+                    }`}
+                  />
+
+                  <div className="space-y-5">
+                    <h2
+                      className={`break-keep text-5xl font-black leading-none tracking-[-0.06em] md:text-8xl xl:text-9xl ${
+                        isDarkMode ? 'text-white' : 'text-[#10307D]'
+                      }`}
+                    >
+                      {story.keyword}
+                    </h2>
+
+                    <p
+                      className={`break-keep text-xl font-black tracking-[0.16em] md:text-3xl ${
+                        isDarkMode ? 'text-white/55' : 'text-[#10307D]/55'
+                      }`}
+                    >
+                      {story.korean}
+                    </p>
+                  </div>
+
+                  <p
+                    className={`mt-12 break-keep text-2xl font-black leading-tight tracking-[-0.035em] md:text-5xl ${
+                      isDarkMode ? 'text-white/90' : 'text-[#10307D]/90'
+                    }`}
+                  >
+                    {story.headline.map((line) => (
+                      <React.Fragment key={line}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+
+            <div className="relative flex min-h-[70vh] items-center py-24 md:py-32">
+              <div className={`${container}`}>
+                <motion.div
+                  initial={{ opacity: 0, y: 56, filter: 'blur(10px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  viewport={{ once: false, amount: 0.5 }}
+                  className="ml-auto max-w-4xl"
+                >
+                  <p
+                    className={`break-keep text-xl font-light leading-9 tracking-[-0.015em] md:text-3xl md:leading-[1.55] ${
+                      isDarkMode ? 'text-white/72' : 'text-slate-600'
+                    }`}
+                  >
+                    {story.sub.map((line) => (
+                      <React.Fragment key={line}>
+                        {line}
+                        <br className="hidden md:block" />
+                      </React.Fragment>
+                    ))}
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        );
+      })}
+    </section>
   );
 };
 
@@ -521,7 +457,13 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
 
       if (response.ok) {
         setStatus('success');
-        setFormData({ businessName: '', representativeName: '', contact: '', callTime: '', inquiry: '' });
+        setFormData({
+          businessName: '',
+          representativeName: '',
+          contact: '',
+          callTime: '',
+          inquiry: '',
+        });
       } else {
         setStatus('error');
       }
@@ -531,29 +473,65 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
   };
 
   return (
-    <section id="contact" className={`${sectionGap} transition-colors duration-500 ${isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'}`}>
+    <section
+      id="contact"
+      className={`${sectionGap} transition-colors duration-500 ${
+        isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+      }`}
+    >
       <div className={`${container} grid grid-cols-1 gap-16 overflow-hidden lg:grid-cols-2 lg:items-start`}>
-        <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-10">
+        <motion.div
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="space-y-10"
+        >
           <div>
             <SectionLabel isDarkMode={isDarkMode}>Consulting Request</SectionLabel>
-            <h2 className={`break-keep text-4xl font-black leading-tight md:text-5xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+            <h2
+              className={`break-keep text-4xl font-black leading-tight md:text-5xl ${
+                isDarkMode ? 'text-white' : 'text-[#10307D]'
+              }`}
+            >
               우리 매장의 이야기를
               <br />
               함께 시작해보세요.
             </h2>
           </div>
-         <p className={`max-w-xl break-keep text-base leading-8 tracking-[-0.01em] md:text-lg ${mutedText(isDarkMode)}`}>
-           창업 준비, 매장 운영, 브랜딩 방향, 플레이스 관리, 콘텐츠 기획, 검색 흐름까지 현재 상황을 맞는 방향부터 함께 정리해드립니다.
-         </p>
+
+          <p
+            className={`max-w-xl break-keep text-base leading-8 tracking-[-0.01em] md:text-lg ${mutedText(
+              isDarkMode
+            )}`}
+          >
+            창업 준비, 매장 운영, 브랜딩 방향, 플레이스 관리, 콘텐츠 기획, 검색 흐름까지
+            현재 상황에 맞는 방향부터 함께 정리해드립니다.
+          </p>
 
           <div className="grid grid-cols-1 gap-6 border-t border-gray-100/10 pt-8 md:grid-cols-2">
             <div>
-              <h5 className={`mb-2 text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white/30' : 'text-gray-400'}`}>Phone</h5>
-              <p className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>010-5549-4012</p>
+              <h5
+                className={`mb-2 text-[10px] font-black uppercase tracking-widest ${
+                  isDarkMode ? 'text-white/30' : 'text-gray-400'
+                }`}
+              >
+                Phone
+              </h5>
+              <p className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+                010-5549-4012
+              </p>
             </div>
             <div>
-              <h5 className={`mb-2 text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white/30' : 'text-gray-400'}`}>Email</h5>
-              <p className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>arcjejulab@gmail.com</p>
+              <h5
+                className={`mb-2 text-[10px] font-black uppercase tracking-widest ${
+                  isDarkMode ? 'text-white/30' : 'text-gray-400'
+                }`}
+              >
+                Email
+              </h5>
+              <p className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+                arcjejulab@gmail.com
+              </p>
             </div>
           </div>
         </motion.div>
@@ -564,21 +542,31 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
           transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true, amount: 0.35 }}
           className={`rounded-[2rem] border p-8 shadow-2xl md:p-12 ${
-            isDarkMode ? 'border-white/10 bg-white/5 shadow-black/40' : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'
+            isDarkMode
+              ? 'border-white/10 bg-white/5 shadow-black/40'
+              : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'
           }`}
         >
           {status === 'success' ? (
             <div className="space-y-6 py-20 text-center">
-              <div className={`mx-auto flex h-20 w-20 items-center justify-center rounded-full ${isDarkMode ? 'bg-white/10' : 'bg-[#10307D]/5'}`}>
+              <div
+                className={`mx-auto flex h-20 w-20 items-center justify-center rounded-full ${
+                  isDarkMode ? 'bg-white/10' : 'bg-[#10307D]/5'
+                }`}
+              >
                 <ShieldCheck className={`h-10 w-10 ${isDarkMode ? 'text-blue-400' : 'text-[#10307D]'}`} />
               </div>
               <div className="space-y-2">
-                <h3 className={`text-2xl font-black ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>신청이 완료되었습니다.</h3>
+                <h3 className={`text-2xl font-black ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+                  신청이 완료되었습니다.
+                </h3>
                 <p className={`text-sm ${mutedText(isDarkMode)}`}>내용 확인 후 연락드리겠습니다.</p>
               </div>
               <button
                 onClick={() => setStatus('idle')}
-                className={`text-[10px] font-black uppercase tracking-widest underline underline-offset-4 ${isDarkMode ? 'text-white/40' : 'text-[#10307D]/40'}`}
+                className={`text-[10px] font-black uppercase tracking-widest underline underline-offset-4 ${
+                  isDarkMode ? 'text-white/40' : 'text-[#10307D]/40'
+                }`}
               >
                 새로 신청하기
               </button>
@@ -586,15 +574,48 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-7">
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <InputField isDarkMode={isDarkMode} label="상호명" name="businessName" value={formData.businessName} onChange={handleChange} placeholder="매장 또는 회사명" />
-                <InputField isDarkMode={isDarkMode} label="대표자 성함" name="representativeName" value={formData.representativeName} onChange={handleChange} placeholder="성함" />
+                <InputField
+                  isDarkMode={isDarkMode}
+                  label="상호명"
+                  name="businessName"
+                  value={formData.businessName}
+                  onChange={handleChange}
+                  placeholder="매장 또는 회사명"
+                />
+                <InputField
+                  isDarkMode={isDarkMode}
+                  label="대표자 성함"
+                  name="representativeName"
+                  value={formData.representativeName}
+                  onChange={handleChange}
+                  placeholder="성함"
+                />
               </div>
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <InputField isDarkMode={isDarkMode} label="연락처" name="contact" type="tel" value={formData.contact} onChange={handleChange} placeholder="연락 가능한 번호" />
-                <InputField isDarkMode={isDarkMode} label="통화 가능 시간" name="callTime" value={formData.callTime} onChange={handleChange} placeholder="예: 평일 10:00 - 16:00" />
+                <InputField
+                  isDarkMode={isDarkMode}
+                  label="연락처"
+                  name="contact"
+                  type="tel"
+                  value={formData.contact}
+                  onChange={handleChange}
+                  placeholder="연락 가능한 번호"
+                />
+                <InputField
+                  isDarkMode={isDarkMode}
+                  label="통화 가능 시간"
+                  name="callTime"
+                  value={formData.callTime}
+                  onChange={handleChange}
+                  placeholder="예: 평일 10:00 - 16:00"
+                />
               </div>
               <div className="space-y-2">
-                <label className={`ml-2 block text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white/40' : 'text-gray-400'}`}>
+                <label
+                  className={`ml-2 block text-[10px] font-black uppercase tracking-widest ${
+                    isDarkMode ? 'text-white/40' : 'text-gray-400'
+                  }`}
+                >
                   문의 내용
                 </label>
                 <textarea
@@ -605,7 +626,9 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
                   onChange={handleChange}
                   placeholder="현재 매장에서 고민 중인 내용을 자유롭게 적어주세요. 예: 재방문, 단골, 플레이스 관리, 콘텐츠 방향, 운영 흐름 등"
                   className={`w-full resize-none rounded-2xl border bg-transparent px-6 py-4 text-sm outline-none transition-all ${
-                    isDarkMode ? 'border-white/10 text-white placeholder-white/20 focus:border-white/40' : 'border-[#10307D]/10 text-[#10307D] placeholder-gray-400 focus:border-[#10307D]/40'
+                    isDarkMode
+                      ? 'border-white/10 text-white placeholder-white/20 focus:border-white/40'
+                      : 'border-[#10307D]/10 text-[#10307D] placeholder-gray-400 focus:border-[#10307D]/40'
                   }`}
                 />
               </div>
@@ -613,12 +636,18 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
                 disabled={status === 'submitting'}
                 type="submit"
                 className={`w-full rounded-2xl py-6 text-xs font-black uppercase tracking-[0.2em] shadow-2xl transition-all hover:scale-[1.02] active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 ${
-                  isDarkMode ? 'bg-white text-[#0f1118] shadow-white/5' : 'bg-[#10307D] text-white shadow-[#10307D]/20'
+                  isDarkMode
+                    ? 'bg-white text-[#0f1118] shadow-white/5'
+                    : 'bg-[#10307D] text-white shadow-[#10307D]/20'
                 }`}
               >
                 {status === 'submitting' ? '처리 중...' : '상담 신청하기'}
               </button>
-              {status === 'error' && <p className="text-center text-xs font-bold text-red-500">전송 중 오류가 발생했습니다. 다시 시도해 주세요.</p>}
+              {status === 'error' && (
+                <p className="text-center text-xs font-bold text-red-500">
+                  전송 중 오류가 발생했습니다. 다시 시도해 주세요.
+                </p>
+              )}
             </form>
           )}
         </motion.div>
@@ -645,7 +674,13 @@ const InputField = ({
   type?: string;
 }) => (
   <div className="space-y-2">
-    <label className={`ml-2 block text-[10px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white/40' : 'text-gray-400'}`}>{label}</label>
+    <label
+      className={`ml-2 block text-[10px] font-black uppercase tracking-widest ${
+        isDarkMode ? 'text-white/40' : 'text-gray-400'
+      }`}
+    >
+      {label}
+    </label>
     <input
       required
       type={type}
@@ -654,19 +689,31 @@ const InputField = ({
       onChange={onChange}
       placeholder={placeholder}
       className={`w-full rounded-2xl border bg-transparent px-6 py-4 text-sm outline-none transition-all ${
-        isDarkMode ? 'border-white/10 text-white placeholder-white/20 focus:border-white/40' : 'border-[#10307D]/10 text-[#10307D] placeholder-gray-400 focus:border-[#10307D]/40'
+        isDarkMode
+          ? 'border-white/10 text-white placeholder-white/20 focus:border-white/40'
+          : 'border-[#10307D]/10 text-[#10307D] placeholder-gray-400 focus:border-[#10307D]/40'
       }`}
     />
   </div>
 );
 
 const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
-  <footer className={`border-t py-16 transition-colors duration-500 ${isDarkMode ? 'border-white/5 bg-[#0f1118]' : 'border-[#10307D]/5 bg-[#EBEBEB]'}`}>
+  <footer
+    className={`border-t py-16 transition-colors duration-500 ${
+      isDarkMode ? 'border-white/5 bg-[#0f1118]' : 'border-[#10307D]/5 bg-[#EBEBEB]'
+    }`}
+  >
     <div className={`${container} flex flex-col items-center justify-between gap-12 lg:flex-row`}>
       <ArcLogo isDark={isDarkMode} />
       <div className="flex flex-col gap-10 text-center md:flex-row md:gap-20 lg:gap-28 md:text-left">
         <div className="space-y-4">
-          <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Service</h5>
+          <h5
+            className={`break-keep text-[12px] font-black uppercase tracking-widest ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            Service
+          </h5>
           <p className="break-keep text-sm font-medium leading-7 text-gray-500">
             제주 카페 컨설팅 · 제주 브랜딩
             <br />
@@ -676,7 +723,13 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
           </p>
         </div>
         <div className="space-y-4">
-          <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Office</h5>
+          <h5
+            className={`break-keep text-[12px] font-black uppercase tracking-widest ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            Office
+          </h5>
           <p className="break-keep text-sm font-medium text-gray-500">
             제주시 삼무로11길 8
             <br />
@@ -684,7 +737,13 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
           </p>
         </div>
         <div className="space-y-4">
-          <h5 className={`break-keep text-[12px] font-black uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>Contact</h5>
+          <h5
+            className={`break-keep text-[12px] font-black uppercase tracking-widest ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            Contact
+          </h5>
           <p className="break-keep text-sm font-medium text-gray-500">
             010-5549-4012
             <br />
@@ -692,7 +751,9 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
           </p>
         </div>
       </div>
-      <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400">© 2026 ARC LAB. ALL RIGHTS RESERVED.</div>
+      <div className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+        © 2026 ARC LAB. ALL RIGHTS RESERVED.
+      </div>
     </div>
   </footer>
 );
@@ -707,7 +768,11 @@ function Home() {
   }, [isDarkMode]);
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-500 selection:bg-[#10307D] selection:text-white ${isDarkMode ? 'bg-[#0f1118] text-white' : 'bg-[#EBEBEB] text-[#10307D]'}`}>
+    <div
+      className={`min-h-screen font-sans transition-colors duration-500 selection:bg-[#10307D] selection:text-white ${
+        isDarkMode ? 'bg-[#0f1118] text-white' : 'bg-[#EBEBEB] text-[#10307D]'
+      }`}
+    >
       <Header isDarkMode={isDarkMode} toggleDarkMode={() => setIsDarkMode(!isDarkMode)} />
       <Hero isDarkMode={isDarkMode} />
       <BrandStorySections isDarkMode={isDarkMode} />
@@ -723,13 +788,62 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/admin/schedule" element={<ProtectedRoute><Schedule /></ProtectedRoute>} />
-        <Route path="/admin/clients" element={<ProtectedRoute><Clients /></ProtectedRoute>} />
-        <Route path="/admin/sales-notes" element={<ProtectedRoute><SalesNotes /></ProtectedRoute>} />
-        <Route path="/admin/estimates" element={<ProtectedRoute><Estimates /></ProtectedRoute>} />
-        <Route path="/admin/work-status" element={<ProtectedRoute><WorkStatus /></ProtectedRoute>} />
-        <Route path="/admin/sales-ledger" element={<ProtectedRoute><SalesLedger /></ProtectedRoute>} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/schedule"
+          element={
+            <ProtectedRoute>
+              <Schedule />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/clients"
+          element={
+            <ProtectedRoute>
+              <Clients />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/sales-notes"
+          element={
+            <ProtectedRoute>
+              <SalesNotes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/estimates"
+          element={
+            <ProtectedRoute>
+              <Estimates />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/work-status"
+          element={
+            <ProtectedRoute>
+              <WorkStatus />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/sales-ledger"
+          element={
+            <ProtectedRoute>
+              <SalesLedger />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
