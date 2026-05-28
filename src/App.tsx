@@ -274,6 +274,7 @@ const brandStories = [
   {
     id: 'concern',
     keyword: 'JUST AUTHENTIC',
+    korean: '진정성',
     headline: ['나의 브랜드가 전하고자 하는 진심이', '고객에게 온전히 닿는 것.'],
     sub: [
       '올라운더 커피랩은 당신의 브랜드가',
@@ -284,12 +285,14 @@ const brandStories = [
   {
     id: 'solution',
     keyword: 'BRANDING',
+    korean: '브랜딩',
     headline: ['브랜딩은 고객의 기억에서', '완성됩니다.'],
     sub: ['문을 열고 떠난 고객의 마음에', '좋은 기억과 경험으로 남는 것.'],
   },
   {
     id: 'operation',
     keyword: 'SYSTEM',
+    korean: '시스템',
     headline: ['스스로 성장하고 발전하는', '정교한 매장 설계'],
     sub: [
       '오차 없는 레시피와 장비 세팅,',
@@ -301,6 +304,7 @@ const brandStories = [
   {
     id: 'search-growth',
     keyword: 'MARKETING',
+    korean: '마케팅',
     headline: ['사람들의 마음에 깊은 공감을 주는', '진실한 이야기'],
     sub: [
       '브랜드가 가진 본질과 가치를',
@@ -318,6 +322,7 @@ const BrandStoryPanel = ({
   story: {
     id: string;
     keyword: string;
+    korean: string;
     headline: string[];
     sub: string[];
   };
@@ -336,6 +341,10 @@ const BrandStoryPanel = ({
 
   const subOpacity = useTransform(scrollYProgress, [0.38, 0.58, 1], [0, 1, 1]);
   const subY = useTransform(scrollYProgress, [0.38, 0.58], [36, 0]);
+  const subBlur = useTransform(scrollYProgress, [0.38, 0.58], ['blur(10px)', 'blur(0px)']);
+
+  const keywordScale = useTransform(scrollYProgress, [0, 0.45, 1], [1, 0.96, 0.96]);
+  const keywordOpacity = useTransform(scrollYProgress, [0, 0.55, 1], [1, 0.86, 0.82]);
 
   const isEven = index % 2 === 0;
 
@@ -356,14 +365,43 @@ const BrandStoryPanel = ({
       <div className="sticky top-20 flex h-[calc(100vh-5rem)] items-center overflow-hidden">
         <div className={`${container}`}>
           <div className="relative min-h-[520px]">
+            <div
+              className={`pointer-events-none absolute left-1/2 top-1/2 select-none text-[18vw] font-black leading-none tracking-[-0.08em] opacity-[0.035] ${
+                isDarkMode ? 'text-white' : 'text-[#10307D]'
+              }`}
+              style={{
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              {story.keyword}
+            </div>
+
             <div className="absolute inset-0 flex flex-col justify-center">
-              <p
-                className={`break-keep text-5xl font-black leading-none tracking-[-0.06em] md:text-8xl xl:text-9xl ${
-                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+              <div
+                className={`mb-8 h-20 w-[3px] rounded-full ${
+                  isDarkMode ? 'bg-white/20' : 'bg-[#10307D]/20'
                 }`}
-              >
-                {story.keyword}
-              </p>
+              />
+
+              <motion.div style={{ scale: keywordScale, opacity: keywordOpacity }} className="space-y-4">
+                <div className="space-y-3">
+                  <p
+                    className={`break-keep text-5xl font-black leading-none tracking-[-0.06em] md:text-8xl xl:text-9xl ${
+                      isDarkMode ? 'text-white' : 'text-[#10307D]'
+                    }`}
+                  >
+                    {story.keyword}
+                  </p>
+
+                  <p
+                    className={`text-sm font-black tracking-[0.22em] md:text-base ${
+                      isDarkMode ? 'text-white/45' : 'text-[#10307D]/45'
+                    }`}
+                  >
+                    {story.korean}
+                  </p>
+                </div>
+              </motion.div>
 
               <motion.div
                 style={{ opacity: headlineOpacity, y: headlineY }}
@@ -384,7 +422,7 @@ const BrandStoryPanel = ({
               </motion.div>
 
               <motion.div
-                style={{ opacity: subOpacity, y: subY }}
+                style={{ opacity: subOpacity, y: subY, filter: subBlur }}
                 className="mt-10"
               >
                 <p
