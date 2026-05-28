@@ -336,15 +336,47 @@ const BrandStoryPanel = ({
     offset: ['start start', 'end end'],
   });
 
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.28, 0.45], [1, 1, 0]);
-  const headlineY = useTransform(scrollYProgress, [0, 0.45], [0, -28]);
+  const headlineOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.22, 0.44, 0.58],
+    [1, 1, 0.2, 0]
+  );
 
-  const subOpacity = useTransform(scrollYProgress, [0.38, 0.58, 1], [0, 1, 1]);
-  const subY = useTransform(scrollYProgress, [0.38, 0.58], [36, 0]);
-  const subBlur = useTransform(scrollYProgress, [0.38, 0.58], ['blur(10px)', 'blur(0px)']);
+  const headlineY = useTransform(
+    scrollYProgress,
+    [0, 0.58],
+    [0, -36]
+  );
 
-  const keywordScale = useTransform(scrollYProgress, [0, 0.45, 1], [1, 0.96, 0.96]);
-  const keywordOpacity = useTransform(scrollYProgress, [0, 0.55, 1], [1, 0.86, 0.82]);
+  const subOpacity = useTransform(
+    scrollYProgress,
+    [0.28, 0.46, 0.88, 1],
+    [0, 1, 1, 0.15]
+  );
+
+  const subY = useTransform(
+    scrollYProgress,
+    [0.28, 0.46],
+    [44, 0]
+  );
+
+  const subBlur = useTransform(
+    scrollYProgress,
+    [0.28, 0.46],
+    ['blur(10px)', 'blur(0px)']
+  );
+
+  const keywordScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1, 0.96, 0.96]
+  );
+
+  const keywordOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.6, 1],
+    [1, 0.88, 0.84]
+  );
 
   const isEven = index % 2 === 0;
 
@@ -352,7 +384,7 @@ const BrandStoryPanel = ({
     <section
       ref={sectionRef}
       id={story.id}
-      className={`relative h-[220vh] transition-colors duration-500 ${
+      className={`relative h-[280vh] transition-colors duration-500 ${
         isDarkMode
           ? isEven
             ? 'bg-[#0f1118]'
@@ -364,7 +396,7 @@ const BrandStoryPanel = ({
     >
       <div className="sticky top-20 flex h-[calc(100vh-5rem)] items-center overflow-hidden">
         <div className={`${container}`}>
-          <div className="relative min-h-[520px]">
+          <div className="relative min-h-[560px]">
             <div
               className={`pointer-events-none absolute left-1/2 top-1/2 select-none text-[18vw] font-black leading-none tracking-[-0.08em] opacity-[0.035] ${
                 isDarkMode ? 'text-white' : 'text-[#10307D]'
@@ -383,24 +415,25 @@ const BrandStoryPanel = ({
                 }`}
               />
 
-              <motion.div style={{ scale: keywordScale, opacity: keywordOpacity }} className="space-y-4">
-                <div className="space-y-3">
-                  <p
-                    className={`break-keep text-5xl font-black leading-none tracking-[-0.06em] md:text-8xl xl:text-9xl ${
-                      isDarkMode ? 'text-white' : 'text-[#10307D]'
-                    }`}
-                  >
-                    {story.keyword}
-                  </p>
+              <motion.div
+                style={{ scale: keywordScale, opacity: keywordOpacity }}
+                className="space-y-5"
+              >
+                <p
+                  className={`break-keep text-5xl font-black leading-none tracking-[-0.06em] md:text-8xl xl:text-9xl ${
+                    isDarkMode ? 'text-white' : 'text-[#10307D]'
+                  }`}
+                >
+                  {story.keyword}
+                </p>
 
-                  <p
-                    className={`text-sm font-black tracking-[0.22em] md:text-base ${
-                      isDarkMode ? 'text-white/45' : 'text-[#10307D]/45'
-                    }`}
-                  >
-                    {story.korean}
-                  </p>
-                </div>
+                <p
+                  className={`break-keep text-xl font-black tracking-[0.16em] md:text-3xl ${
+                    isDarkMode ? 'text-white/55' : 'text-[#10307D]/55'
+                  }`}
+                >
+                  {story.korean}
+                </p>
               </motion.div>
 
               <motion.div
