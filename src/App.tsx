@@ -83,6 +83,31 @@ const Header = ({
     문의: ['상담 신청', '연락처'],
   };
 
+  const moveToSection = (id: string) => {
+    const target = document.getElementById(id);
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    window.location.href = `/#${id}`;
+  };
+
+  const handleDropdownClick = (subItem: string, parentId: string) => {
+    if (subItem === '올라운더커피랩') {
+      window.location.href = '/about';
+      return;
+    }
+
+    if (subItem === '우리의 방향') {
+      window.location.href = '/about#direction';
+      return;
+    }
+
+    moveToSection(parentId);
+  };
+
   return (
     <nav
       className={`sticky top-0 z-[100] h-20 w-full backdrop-blur-md transition-all duration-300 ${
@@ -107,7 +132,7 @@ const Header = ({
               onMouseLeave={() => setActiveMenu(null)}
             >
               <button
-                onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => moveToSection(item.id)}
                 className={`text-base font-bold transition-colors ${
                   isDarkMode
                     ? 'text-white/60 hover:text-white'
@@ -132,23 +157,15 @@ const Header = ({
                     <div className="space-y-4">
                       {dropdownData[item.label as keyof typeof dropdownData].map((subItem) => (
                         <div
-  key={subItem}
-  onClick={() => {
-    if (subItem === '올라운더커피랩') {
-      window.location.href = '/about';
-      return;
-    }
-
-    document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
-  }}
-  className={`cursor-pointer text-sm transition-all hover:translate-x-1 ${
-    isDarkMode
-      ? 'text-white/70 hover:text-white'
-      : 'text-[#10307D]/70 hover:text-[#10307D]'
-  }`}
->
-  {subItem}
-</div>
+                          key={subItem}
+                          onClick={() => handleDropdownClick(subItem, item.id)}
+                          className={`cursor-pointer text-sm transition-all hover:translate-x-1 ${
+                            isDarkMode
+                              ? 'text-white/70 hover:text-white'
+                              : 'text-[#10307D]/70 hover:text-[#10307D]'
+                          }`}
+                        >
+                          {subItem}
                         </div>
                       ))}
                     </div>
@@ -171,11 +188,7 @@ const Header = ({
           </button>
 
           <button
-            onClick={() =>
-              document.getElementById('contact')?.scrollIntoView({
-                behavior: 'smooth',
-              })
-            }
+            onClick={() => moveToSection('contact')}
             className={`rounded-full px-6 py-2.5 text-[12px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 ${
               isDarkMode ? 'bg-white text-[#0f1118]' : 'bg-[#10307D] text-white'
             }`}
@@ -763,6 +776,7 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
     </div>
   </footer>
 );
+
 const AboutPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
 
@@ -847,6 +861,7 @@ const AboutPage = () => {
         </section>
 
         <section
+          id="direction"
           className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
             isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
           }`}
