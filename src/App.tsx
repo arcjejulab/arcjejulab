@@ -132,17 +132,23 @@ const Header = ({
                     <div className="space-y-4">
                       {dropdownData[item.label as keyof typeof dropdownData].map((subItem) => (
                         <div
-                          key={subItem}
-                          onClick={() =>
-                            document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })
-                          }
-                          className={`cursor-pointer text-sm transition-all hover:translate-x-1 ${
-                            isDarkMode
-                              ? 'text-white/70 hover:text-white'
-                              : 'text-[#10307D]/70 hover:text-[#10307D]'
-                          }`}
-                        >
-                          {subItem}
+  key={subItem}
+  onClick={() => {
+    if (subItem === '올라운더커피랩') {
+      window.location.href = '/about';
+      return;
+    }
+
+    document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+  }}
+  className={`cursor-pointer text-sm transition-all hover:translate-x-1 ${
+    isDarkMode
+      ? 'text-white/70 hover:text-white'
+      : 'text-[#10307D]/70 hover:text-[#10307D]'
+  }`}
+>
+  {subItem}
+</div>m}
                         </div>
                       ))}
                     </div>
@@ -757,6 +763,196 @@ const Footer = ({ isDarkMode }: { isDarkMode: boolean }) => (
     </div>
   </footer>
 );
+const AboutPage = () => {
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
+
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    document.body.style.backgroundColor = isDarkMode ? DARK_BG : LIGHT_BG;
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
+  return (
+    <div
+      className={`min-h-screen font-sans transition-colors duration-500 selection:bg-[#10307D] selection:text-white ${
+        isDarkMode ? 'bg-[#0f1118] text-white' : 'bg-[#EBEBEB] text-[#10307D]'
+      }`}
+    >
+      <Header isDarkMode={isDarkMode} toggleDarkMode={() => setIsDarkMode(!isDarkMode)} />
+
+      <main>
+        <section
+          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
+            <motion.div
+              initial={{ opacity: 0, y: 36 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-8"
+            >
+              <p
+                className={`text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/40' : 'text-[#10307D]/45'
+                }`}
+              >
+                About Allrounder Coffee Lab
+              </p>
+
+              <h1
+                className={`break-keep text-5xl font-black leading-tight tracking-[-0.05em] md:text-7xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                올라운더
+                <br />
+                커피랩
+              </h1>
+
+              <p
+                className={`max-w-2xl break-keep text-xl font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+                  isDarkMode ? 'text-white/70' : 'text-slate-600'
+                }`}
+              >
+                우리는 매장의 진짜 방향을 함께 찾고,
+                브랜드가 스스로 성장할 수 있는 구조를 만들어갑니다.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className={`overflow-hidden rounded-[3rem] border shadow-2xl ${
+                isDarkMode
+                  ? 'border-white/10 bg-white/5 shadow-black/30'
+                  : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'
+              }`}
+            >
+              <div className="relative h-[520px] overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&q=80&w=1600"
+                  alt="올라운더 커피랩 소개"
+                  className={`h-full w-full object-cover ${
+                    isDarkMode ? 'grayscale-[35%] opacity-65' : 'opacity-95'
+                  }`}
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section
+          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+            isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
+          }`}
+        >
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div>
+              <p
+                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                }`}
+              >
+                Our Direction
+              </p>
+
+              <h2
+                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                브랜딩의 끝에는
+                <br />
+                자생력이 있습니다.
+              </h2>
+            </div>
+
+            <div
+              className={`space-y-8 break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-xl md:leading-10 ${
+                isDarkMode ? 'text-white/70' : 'text-slate-600'
+              }`}
+            >
+              <p>
+                올라운더 커피랩은 매장을 대신 움직이는 방식보다,
+                사장님이 직접 판단하고 운영할 수 있는 기준을 함께 만드는 것을 중요하게 생각합니다.
+              </p>
+
+              <p>
+                브랜딩, 운영 흐름, 검색과 콘텐츠, 매장 시스템은 따로 움직이는 요소가 아닙니다.
+                하나의 방향으로 연결될 때 매장은 더 오래 기억되고, 더 단단하게 성장합니다.
+              </p>
+
+              <p>
+                우리는 반짝하는 기교보다 본질에 집중합니다.
+                매장의 진심이 고객에게 닿고, 좋은 경험이 다시 방문하는 이유가 되도록 함께 설계합니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="contact"
+          className={`px-6 py-24 transition-colors duration-500 md:px-10 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
+          <div className="mx-auto max-w-7xl">
+            <div
+              className={`rounded-[3rem] border p-10 md:p-14 ${
+                isDarkMode
+                  ? 'border-white/10 bg-white/[0.055]'
+                  : 'border-[#10307D]/5 bg-white shadow-sm'
+              }`}
+            >
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <div>
+                  <p
+                    className={`mb-5 text-xs font-black uppercase tracking-[0.42em] ${
+                      isDarkMode ? 'text-blue-300' : 'text-blue-600'
+                    }`}
+                  >
+                    Start With Us
+                  </p>
+                  <h2
+                    className={`break-keep text-3xl font-black leading-tight md:text-5xl ${
+                      isDarkMode ? 'text-white' : 'text-[#10307D]'
+                    }`}
+                  >
+                    우리 매장의 방향을
+                    <br />
+                    함께 정리해보세요.
+                  </h2>
+                </div>
+
+                <div className="space-y-5">
+                  <button
+                    onClick={() => {
+                      window.location.href = '/#contact';
+                    }}
+                    className="w-full rounded-2xl bg-[#10307D] px-8 py-5 text-xs font-black uppercase tracking-widest text-white shadow-2xl shadow-[#10307D]/20 transition-all hover:scale-[1.02] active:scale-95"
+                  >
+                    상담 문의하기
+                  </button>
+
+                  <p className={`break-keep text-sm leading-7 ${mutedText(isDarkMode)}`}>
+                    창업 준비, 운영 흐름, 브랜딩 방향, 검색과 콘텐츠까지 현재 상황에 맞게 함께 정리합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer isDarkMode={isDarkMode} />
+    </div>
+  );
+};
 
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -787,6 +983,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
           path="/admin/dashboard"
