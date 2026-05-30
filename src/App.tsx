@@ -796,19 +796,27 @@ const AboutPage = () => {
 
       <main>
         <section
-          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+          className={`relative overflow-hidden px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
             isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
           }`}
         >
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
+          <div
+            className={`pointer-events-none absolute -right-24 top-24 select-none text-[18vw] font-black leading-none tracking-[-0.08em] opacity-[0.035] ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            ABOUT
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-7xl">
             <motion.div
               initial={{ opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="space-y-8"
+              className="max-w-5xl"
             >
               <p
-                className={`text-xs font-black uppercase tracking-[0.45em] ${
+                className={`mb-8 text-xs font-black uppercase tracking-[0.45em] ${
                   isDarkMode ? 'text-white/40' : 'text-[#10307D]/45'
                 }`}
               >
@@ -816,52 +824,67 @@ const AboutPage = () => {
               </p>
 
               <h1
-                className={`break-keep text-5xl font-black leading-tight tracking-[-0.05em] md:text-7xl ${
+                className={`break-keep text-5xl font-black leading-[1.05] tracking-[-0.06em] md:text-7xl xl:text-8xl ${
                   isDarkMode ? 'text-white' : 'text-[#10307D]'
                 }`}
               >
-                올라운더
+                좋은 공간과
                 <br />
-                커피랩
+                좋은 시간을 만듭니다.
               </h1>
 
               <p
-                className={`max-w-2xl break-keep text-xl font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+                className={`mt-10 max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
                   isDarkMode ? 'text-white/70' : 'text-slate-600'
                 }`}
               >
-                우리는 매장의 진짜 방향을 함께 찾고,
-                브랜드가 스스로 성장할 수 있는 구조를 만들어갑니다.
+                올라운더커피랩은 매장이 나아가야 할 방향을 찾고,
+                브랜딩과 운영 시스템, 검색과 콘텐츠가 하나의 흐름으로 이어지도록
+                사장님과 함께 만들어갑니다.
               </p>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className={`overflow-hidden rounded-[3rem] border shadow-2xl ${
-                isDarkMode
-                  ? 'border-white/10 bg-white/5 shadow-black/30'
-                  : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'
-              }`}
-            >
-              <div className="relative h-[520px] overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&q=80&w=1600"
-                  alt="올라운더 커피랩 소개"
-                  className={`h-full w-full object-cover ${
-                    isDarkMode ? 'grayscale-[35%] opacity-65' : 'opacity-95'
-                  }`}
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+            <div className="mt-20 grid grid-cols-1 gap-5 md:grid-cols-3">
+              <div
+                className={`rounded-3xl border p-6 ${
+                  isDarkMode
+                    ? 'border-white/10 bg-white/[0.045]'
+                    : 'border-[#10307D]/5 bg-white shadow-sm'
+                }`}
+              >
+                <p className={`text-sm font-black ${isDarkMode ? 'text-white/72' : 'text-[#10307D]/75'}`}>
+                  Built in Jeju
+                </p>
               </div>
-            </motion.div>
+
+              <div
+                className={`rounded-3xl border p-6 ${
+                  isDarkMode
+                    ? 'border-white/10 bg-white/[0.045]'
+                    : 'border-[#10307D]/5 bg-white shadow-sm'
+                }`}
+              >
+                <p className={`text-sm font-black ${isDarkMode ? 'text-white/72' : 'text-[#10307D]/75'}`}>
+                  Branding · System · Marketing
+                </p>
+              </div>
+
+              <div
+                className={`rounded-3xl border p-6 ${
+                  isDarkMode
+                    ? 'border-white/10 bg-white/[0.045]'
+                    : 'border-[#10307D]/5 bg-white shadow-sm'
+                }`}
+              >
+                <p className={`text-sm font-black ${isDarkMode ? 'text-white/72' : 'text-[#10307D]/75'}`}>
+                  Self-Sustaining Store
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
         <section
-          id="direction"
           className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
             isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
           }`}
@@ -873,7 +896,7 @@ const AboutPage = () => {
                   isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
                 }`}
               >
-                Our Direction
+                Our Beginning
               </p>
 
               <h2
@@ -881,9 +904,9 @@ const AboutPage = () => {
                   isDarkMode ? 'text-white' : 'text-[#10307D]'
                 }`}
               >
-                브랜딩의 끝에는
+                시작은 하나의
                 <br />
-                자생력이 있습니다.
+                질문이었습니다.
               </h2>
             </div>
 
@@ -893,19 +916,241 @@ const AboutPage = () => {
               }`}
             >
               <p>
-                올라운더 커피랩은 매장을 대신 움직이는 방식보다,
-                사장님이 직접 판단하고 운영할 수 있는 기준을 함께 만드는 것을 중요하게 생각합니다.
+                좋은 매장은 어떤 공간이어야 할까.
+                손님이 문을 열고 들어오는 순간부터 다시 나서는 순간까지,
+                무엇이 편안함과 설렘을 만들까.
               </p>
 
               <p>
-                브랜딩, 운영 흐름, 검색과 콘텐츠, 매장 시스템은 따로 움직이는 요소가 아닙니다.
-                하나의 방향으로 연결될 때 매장은 더 오래 기억되고, 더 단단하게 성장합니다.
+                올라운더커피랩은 그 질문에서 시작되었습니다.
+                맛있는 메뉴와 멋진 인테리어를 넘어,
+                고객이 느끼는 분위기, 직원의 움직임, 운영의 흐름, 검색과 콘텐츠까지
+                하나의 경험으로 이어지는 매장을 만들고자 했습니다.
               </p>
 
               <p>
-                우리는 반짝하는 기교보다 본질에 집중합니다.
-                매장의 진심이 고객에게 닿고, 좋은 경험이 다시 방문하는 이유가 되도록 함께 설계합니다.
+                우리는 매장을 대신 움직이는 방식보다,
+                사장님이 직접 판단하고 운영할 수 있는 기준을 함께 만드는 일을 중요하게 생각합니다.
+                그래서 올라운더커피랩의 브랜딩은 언제나 자생력으로 이어집니다.
               </p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-16">
+              <p
+                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                }`}
+              >
+                People
+              </p>
+
+              <h2
+                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                브랜드를 만드는 사람들
+              </h2>
+            </div>
+
+            <div className="space-y-8">
+              <div
+                className={`rounded-[3rem] border p-8 md:p-12 ${
+                  isDarkMode
+                    ? 'border-white/10 bg-white/[0.04]'
+                    : 'border-[#10307D]/5 bg-white shadow-sm'
+                }`}
+              >
+                <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.35fr_1fr] lg:items-center">
+                  <div>
+                    <p
+                      className={`text-xs font-black uppercase tracking-[0.42em] ${
+                        isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                      }`}
+                    >
+                      CEO
+                    </p>
+
+                    <h3
+                      className={`mt-5 text-4xl font-black tracking-[-0.04em] md:text-6xl ${
+                        isDarkMode ? 'text-white' : 'text-[#10307D]'
+                      }`}
+                    >
+                      CEO
+                    </h3>
+                  </div>
+
+                  <div
+                    className={`min-h-[180px] rounded-[2rem] border border-dashed p-8 ${
+                      isDarkMode
+                        ? 'border-white/10 bg-black/10'
+                        : 'border-[#10307D]/10 bg-[#10307D]/[0.025]'
+                    }`}
+                  >
+                    <p
+                      className={`break-keep text-base leading-8 ${
+                        isDarkMode ? 'text-white/35' : 'text-[#10307D]/35'
+                      }`}
+                    >
+                      CEO 소개 영역은 추후 작성 예정입니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`overflow-hidden rounded-[3rem] border ${
+                  isDarkMode
+                    ? 'border-white/10 bg-white/[0.055]'
+                    : 'border-[#10307D]/5 bg-white shadow-sm'
+                }`}
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-[0.42fr_1fr]">
+                  <div
+                    className={`flex min-h-[420px] flex-col justify-between p-8 md:p-12 ${
+                      isDarkMode ? 'bg-white/[0.035]' : 'bg-[#10307D]/[0.035]'
+                    }`}
+                  >
+                    <div>
+                      <p
+                        className={`text-xs font-black uppercase tracking-[0.42em] ${
+                          isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                        }`}
+                      >
+                        Director
+                      </p>
+
+                      <h3
+                        className={`mt-5 text-4xl font-black tracking-[-0.04em] md:text-6xl ${
+                          isDarkMode ? 'text-white' : 'text-[#10307D]'
+                        }`}
+                      >
+                        Director
+                      </h3>
+                    </div>
+
+                    <div className="mt-12 space-y-3">
+                      <div
+                        className={`w-fit rounded-full border px-4 py-2 text-xs font-black ${
+                          isDarkMode
+                            ? 'border-white/10 text-white/62'
+                            : 'border-[#10307D]/10 text-[#10307D]/62'
+                        }`}
+                      >
+                        10년 이상의 현장 경험
+                      </div>
+
+                      <div
+                        className={`w-fit rounded-full border px-4 py-2 text-xs font-black ${
+                          isDarkMode
+                            ? 'border-white/10 text-white/62'
+                            : 'border-[#10307D]/10 text-[#10307D]/62'
+                        }`}
+                      >
+                        100평대 카페 운영
+                      </div>
+
+                      <div
+                        className={`w-fit rounded-full border px-4 py-2 text-xs font-black ${
+                          isDarkMode
+                            ? 'border-white/10 text-white/62'
+                            : 'border-[#10307D]/10 text-[#10307D]/62'
+                        }`}
+                      >
+                        커피 유통 · 장비 · 시스템
+                      </div>
+
+                      <div
+                        className={`w-fit rounded-full border px-4 py-2 text-xs font-black ${
+                          isDarkMode
+                            ? 'border-white/10 text-white/62'
+                            : 'border-[#10307D]/10 text-[#10307D]/62'
+                        }`}
+                      >
+                        브랜딩 · 검색 · 콘텐츠
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-8 md:p-12">
+                    <div
+                      className={`space-y-7 break-keep text-base font-light leading-8 tracking-[-0.015em] md:text-lg md:leading-9 ${
+                        isDarkMode ? 'text-white/72' : 'text-slate-600'
+                      }`}
+                    >
+                      <p>
+                        모든 사람이 들어오고 나가는 순간까지 행복한 공간을 만들고 싶었습니다.
+                      </p>
+
+                      <p>
+                        매장을 방문하는 손님은 물론, 그 공간에서 일하는 직원들까지
+                        문을 열고 들어오는 순간부터 편안함과 설렘을 느끼고,
+                        머무는 동안 좋은 경험을 쌓고,
+                        다시 나서는 순간에도 기분 좋은 기억을 가져가길 바랐습니다.
+                      </p>
+
+                      <p>
+                        좋은 매장은 맛있는 메뉴, 친절한 응대, 편안한 동선,
+                        안정적인 장비, 직원의 움직임, 고객이 느끼는 분위기까지
+                        여러 요소가 하나의 흐름으로 이어질 때 만들어진다고 믿습니다.
+                      </p>
+
+                      <p>
+                        그 흐름을 이해하기 위해 대형 프랜차이즈 카페에서
+                        새내기 바리스타로 시작해 총괄 매니저까지 약 5년간 현장을 경험했습니다.
+                        커피를 만드는 기술뿐 아니라, 매장이 운영되는 방식과 시스템이 유지되는 구조,
+                        고객 경험이 만들어지는 과정을 현장에서 익혔습니다.
+                      </p>
+
+                      <p>
+                        이후 커피 유통사업을 시작했고, 제주시내 100평대 카페를 직접 운영하며
+                        브랜드, 운영, 장비 세팅, 동선, 고객 응대, 직원 운영을 실제 매장 안에서 검증했습니다.
+                      </p>
+
+                      <p>
+                        바리스타로 일하고, 매장을 직접 운영하고, 창업과 컨설팅 현장을 지나오며
+                        늘 고객의 입장을 최우선으로 생각했습니다.
+                        고객이 어떤 순간에 불편함을 느끼는지,
+                        어떤 경험을 좋은 기억으로 남기는지,
+                        다시 방문하고 싶어지는 이유가 어디에서 만들어지는지 꾸준히 연구해왔습니다.
+                      </p>
+
+                      <p>
+                        카페와 매장 운영을 중심으로 쌓아온 10년 이상의 경험은
+                        보여주기 위한 이력이 아니라,
+                        좋은 공간과 좋은 시간을 만들기 위해 쌓아온 과정입니다.
+                      </p>
+
+                      <p>
+                       사업과 매장을 직접 운영해보지 않고는
+                       사장님의 마음을 온전히 이해하기 어렵다고 생각합니다.
+                       매출이 흔들릴 때의 불안함, 직원이 바뀔 때마다 다시 기준을 세워야 하는 어려움,
+                       좋은 메뉴와 공간을 가지고도 고객에게 제대로 전해지지 않을 때의 답답함을
+                       현장에서 직접 경험해왔습니다.
+                      </p>
+                      
+                      <p>
+                        올라운더커피랩에서는 브랜딩, 운영 시스템, 장비, 동선,
+                        검색과 콘텐츠까지 매장이 스스로 성장하는 데 필요한 요소들을
+                        하나의 흐름으로 연결합니다.
+                      </p>
+
+                      <p>
+                        우리는 사장님이 스스로 판단하고 운영할 수 있는 기준을 함께 만들고,
+                        매장이 자생력을 갖춘 브랜드로 성장할 수 있도록 돕는 브랜드 파트너입니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -913,7 +1158,7 @@ const AboutPage = () => {
         <section
           id="contact"
           className={`px-6 py-24 transition-colors duration-500 md:px-10 ${
-            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+            isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
           }`}
         >
           <div className="mx-auto max-w-7xl">
@@ -921,7 +1166,7 @@ const AboutPage = () => {
               className={`rounded-[3rem] border p-10 md:p-14 ${
                 isDarkMode
                   ? 'border-white/10 bg-white/[0.055]'
-                  : 'border-[#10307D]/5 bg-white shadow-sm'
+                  : 'border-[#10307D]/5 bg-[#EBEBEB] shadow-sm'
               }`}
             >
               <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -933,14 +1178,15 @@ const AboutPage = () => {
                   >
                     Start With Us
                   </p>
+
                   <h2
                     className={`break-keep text-3xl font-black leading-tight md:text-5xl ${
                       isDarkMode ? 'text-white' : 'text-[#10307D]'
                     }`}
                   >
-                    우리 매장의 방향을
+                    매장이 나아가야 할 방향을
                     <br />
-                    함께 정리해보세요.
+                    찾아 드립니다.
                   </h2>
                 </div>
 
@@ -955,7 +1201,7 @@ const AboutPage = () => {
                   </button>
 
                   <p className={`break-keep text-sm leading-7 ${mutedText(isDarkMode)}`}>
-                    창업 준비, 운영 흐름, 브랜딩 방향, 검색과 콘텐츠까지 현재 상황에 맞게 함께 정리합니다.
+                    창업 준비, 운영 흐름, 브랜딩 방향, 검색과 콘텐츠까지 현재 상황에 맞게 정리합니다.
                   </p>
                 </div>
               </div>
@@ -968,7 +1214,6 @@ const AboutPage = () => {
     </div>
   );
 };
-
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
 
