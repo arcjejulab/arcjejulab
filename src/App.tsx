@@ -16,7 +16,7 @@ import SalesLedger from './pages/Admin/SalesLedger';
 const DARK_BG = '#0f1118';
 const LIGHT_BG = '#EBEBEB';
 
-const container = 'mx-auto w-full max-w-7xl px-6 md:px-10';
+const container = 'mx-auto w-full max-w-[1440px] px-6 md:px-12 xl:px-16';
 const sectionGap = 'py-24 md:py-28';
 
 const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
@@ -204,11 +204,11 @@ const Header = ({
 const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <section
-      className={`px-6 py-20 transition-colors duration-500 md:px-10 md:py-24 ${
+      className={`px-6 py-20 transition-colors duration-500 md:px-12 md:py-24 xl:px-16 ${
         isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
       }`}
     >
-      <div className="mx-auto grid min-h-[78vh] max-w-7xl grid-cols-1 items-center gap-14 lg:grid-cols-2">
+      <div className="mx-auto grid min-h-[82vh] max-w-[1440px] grid-cols-1 items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] xl:gap-24">
         <div className="space-y-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -217,7 +217,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
             className="space-y-8"
           >
             <div
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-widest ${
+              className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest ${
                 isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'
               }`}
             >
@@ -226,7 +226,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </div>
 
             <h1
-              className={`break-keep text-4xl font-black leading-[1.08] tracking-tight md:text-6xl xl:text-6xl ${
+              className={`break-keep text-5xl font-black leading-[1.02] tracking-[-0.06em] md:text-7xl xl:text-8xl ${
                 isDarkMode ? 'text-white' : 'text-[#10307D]'
               }`}
             >
@@ -236,12 +236,12 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </h1>
 
             <p
-              className={`max-w-3xl break-keep text-base font-light leading-8 tracking-[-0.01em] md:text-xl md:leading-relaxed ${mutedText(
+              className={`max-w-4xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-[1.65] ${mutedText(
                 isDarkMode
               )}`}
             >
               올라운더커피랩이 생각하는 브랜딩의 끝에는 사장님의{' '}
-              <span className="text-xl font-black text-[#10307D] md:text-2xl">자생력</span>
+              <span className="text-2xl font-black text-[#10307D] md:text-3xl">자생력</span>
               이 있습니다. 도움 없이도 스스로 해낼 수 있는 실무 능력과 운영 노하우,
               그것이 우리가 만들어나가는 진짜 브랜딩의 가치입니다.
             </p>
@@ -249,7 +249,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <div className="flex flex-col gap-4 sm:flex-row">
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-2xl bg-[#10307D] px-8 py-5 text-xs font-black uppercase tracking-widest text-white shadow-2xl shadow-[#10307D]/20 transition-all hover:scale-[1.02] active:scale-95"
+                className="rounded-2xl bg-[#10307D] px-10 py-5 text-sm font-black uppercase tracking-widest text-white shadow-2xl shadow-[#10307D]/20 transition-all hover:scale-[1.02] active:scale-95"
               >
                 우리 매장 상담하기
               </button>
@@ -269,19 +269,19 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
                 : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'
             }`}
           >
-            <div className="relative h-[520px] overflow-hidden">
+            <div className="relative h-[520px] overflow-hidden md:h-[620px] xl:h-[680px]">
               <img
                 src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=1600"
                 alt="제주 카페 브랜딩과 매장 운영 컨설팅"
                 className={`h-full w-full object-cover ${isDarkMode ? 'grayscale-[45%] opacity-60' : 'opacity-95'}`}
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/88 via-black/25 to-transparent p-10">
-                <div className="space-y-4 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-[0.35em] text-white/55">
+              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/88 via-black/25 to-transparent p-10 md:p-14">
+                <div className="space-y-5 text-white">
+                  <p className="text-[11px] font-black uppercase tracking-[0.35em] text-white/55">
                     Allrounder Coffee Lab
                   </p>
-                  <h2 className="break-keep text-3xl font-black leading-tight">
+                  <h2 className="break-keep text-4xl font-black leading-tight md:text-5xl">
                     좋은 매장은
                     <br />
                     경험으로부터
@@ -376,7 +376,7 @@ const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   viewport={{ once: false, amount: 0.45 }}
-                  className="max-w-6xl"
+                  className="max-w-7xl"
                 >
                   <div
                     className={`mb-10 h-20 w-[3px] rounded-full ${
@@ -425,7 +425,7 @@ const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
                   whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   viewport={{ once: false, amount: 0.5 }}
-                  className="ml-auto max-w-4xl"
+                  className="ml-auto max-w-5xl"
                 >
                   <p
                     className={`break-keep text-xl font-light leading-9 tracking-[-0.015em] md:text-3xl md:leading-[1.55] ${
