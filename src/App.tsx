@@ -824,24 +824,26 @@ const AboutPage = () => {
               </p>
 
               <h1
-                className={`break-keep text-5xl font-black leading-[1.05] tracking-[-0.06em] md:text-7xl xl:text-8xl ${
-                  isDarkMode ? 'text-white' : 'text-[#10307D]'
-                }`}
-              >
-                좋은 공간과
-                <br />
-                좋은 시간을 만듭니다.
-              </h1>
+  className={`break-keep text-5xl font-black leading-[1.05] tracking-[-0.06em] md:text-7xl xl:text-8xl ${
+    isDarkMode ? 'text-white' : 'text-[#10307D]'
+  }`}
+>
+  좋은 공간을 넘어,
+  <br />
+  스스로 성장하는 매장을 만듭니다.
+</h1>
 
-              <p
-                className={`mt-10 max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
-                  isDarkMode ? 'text-white/70' : 'text-slate-600'
-                }`}
-              >
-                올라운더커피랩은 매장이 나아가야 할 방향을 찾고,
-                브랜딩과 운영 시스템, 검색과 콘텐츠가 하나의 흐름으로 이어지도록
-                사장님과 함께 만들어갑니다.
-              </p>
+<p
+  className={`mt-10 max-w-4xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+    isDarkMode ? 'text-white/70' : 'text-slate-600'
+  }`}
+>
+  올라운더커피랩은 직접 매장을 운영하며 체득한 본질적인 경험을 바탕으로
+  비즈니스의 뼈대를 세웁니다.
+  <br className="hidden md:block" />
+  겉으로 보이는 마케팅을 넘어, 브랜딩·운영 시스템·검색과 콘텐츠가 하나의 흐름으로 이어져
+  매장 스스로 에너지를 생산하는 지속 가능한 미래를 사장님과 함께 만들어갑니다.
+</p>
             </motion.div>
 
             <div className="mt-20 grid grid-cols-1 gap-5 md:grid-cols-3">
