@@ -16,8 +16,7 @@ import SalesLedger from './pages/Admin/SalesLedger';
 const DARK_BG = '#0f1118';
 const LIGHT_BG = '#EBEBEB';
 
-const container = 'mx-auto w-full max-w-[1600px] px-6 md:px-12 xl:px-20';
-const storyContainer = 'mx-auto w-full max-w-7xl px-6 md:px-10';
+const container = 'mx-auto w-full max-w-[1440px] px-6 md:px-12 xl:px-16';
 const sectionGap = 'py-24 md:py-28';
 
 const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
@@ -205,11 +204,11 @@ const Header = ({
 const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <section
-      className={`px-6 py-20 transition-colors duration-500 md:px-12 md:py-24 xl:px-20 ${
+      className={`px-6 py-20 transition-colors duration-500 md:px-12 md:py-24 xl:px-16 ${
         isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
       }`}
     >
-      <div className="mx-auto grid min-h-[82vh] max-w-[1600px] grid-cols-1 items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] xl:gap-24">
+      <div className="mx-auto grid min-h-[82vh] max-w-[1440px] grid-cols-1 items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] xl:gap-24">
         <div className="space-y-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -371,13 +370,13 @@ const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
                 {story.keyword}
               </div>
 
-              <div className={`${storyContainer} relative z-10`}>
+              <div className={`${container} relative z-10`}>
                 <motion.div
                   initial={{ opacity: 0, y: 42 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   viewport={{ once: false, amount: 0.45 }}
-                  className="max-w-6xl"
+                  className="max-w-7xl"
                 >
                   <div
                     className={`mb-10 h-20 w-[3px] rounded-full ${
@@ -420,13 +419,13 @@ const BrandStorySections = ({ isDarkMode }: { isDarkMode: boolean }) => {
             </div>
 
             <div className="relative flex min-h-[70vh] items-center py-24 md:py-32">
-              <div className={`${storyContainer}`}>
+              <div className={`${container}`}>
                 <motion.div
                   initial={{ opacity: 0, y: 56, filter: 'blur(10px)' }}
                   whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   viewport={{ once: false, amount: 0.5 }}
-                  className="ml-auto max-w-4xl"
+                  className="ml-auto max-w-5xl"
                 >
                   <p
                     className={`break-keep text-xl font-light leading-9 tracking-[-0.015em] md:text-3xl md:leading-[1.55] ${
@@ -499,7 +498,7 @@ const ConsultingRequest = ({ isDarkMode }: { isDarkMode: boolean }) => {
         isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
       }`}
     >
-      <div className={`${container} grid grid-cols-1 gap-16 overflow-hidden lg:grid-cols-[0.9fr_1.1fr] lg:items-start xl:gap-24`}>
+      <div className={`${container} grid grid-cols-1 gap-16 overflow-hidden lg:grid-cols-2 lg:items-start`}>
         <motion.div
           initial={{ opacity: 0, x: -24 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -797,7 +796,7 @@ const AboutPage = () => {
 
       <main>
         <section
-          className={`relative overflow-hidden py-28 transition-colors duration-500 md:py-36 ${
+          className={`relative overflow-hidden px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
             isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
           }`}
         >
@@ -809,12 +808,12 @@ const AboutPage = () => {
             ABOUT
           </div>
 
-          <div className={`${container} relative z-10`}>
+          <div className="relative z-10 mx-auto max-w-7xl">
             <motion.div
               initial={{ opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-[1180px]"
+              className="max-w-5xl"
             >
               <p
                 className={`mb-8 text-xs font-black uppercase tracking-[0.45em] ${
@@ -835,7 +834,7 @@ const AboutPage = () => {
 </h1>
 
 <p
-  className={`mt-10 max-w-[980px] break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+  className={`mt-10 max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
     isDarkMode ? 'text-white/70' : 'text-slate-600'
   }`}
 >
@@ -887,11 +886,11 @@ const AboutPage = () => {
         </section>
 
         <section
-          className={`py-28 transition-colors duration-500 md:py-36 ${
+          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
             isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
           }`}
         >
-          <div className={`${container} grid grid-cols-1 gap-20 lg:grid-cols-[0.7fr_1.3fr] lg:items-start xl:gap-28`}>
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div>
               <p
                 className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
@@ -956,11 +955,11 @@ const AboutPage = () => {
         </section>
 
         <section
-          className={`py-28 transition-colors duration-500 md:py-36 ${
+          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
             isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
           }`}
         >
-          <div className={container}>
+          <div className="mx-auto max-w-7xl">
             <div className="mb-16">
               <p
                 className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
@@ -1165,11 +1164,11 @@ const AboutPage = () => {
 
         <section
           id="contact"
-          className={`py-24 transition-colors duration-500 ${
+          className={`px-6 py-24 transition-colors duration-500 md:px-10 ${
             isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
           }`}
         >
-          <div className={container}>
+          <div className="mx-auto max-w-7xl">
             <div
               className={`rounded-[3rem] border p-10 md:p-14 ${
                 isDarkMode
