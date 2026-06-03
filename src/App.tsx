@@ -77,7 +77,7 @@ const Header = ({
   }, []);
 
   const dropdownData = {
-    소개: ['올라운더커피랩', '브랜드 철'],
+    소개: ['올라운더커피랩', '브랜드 철학'],
     '함께하는 일': ['브랜드 방향 정리', '운영 흐름 만들기', '검색과 콘텐츠'],
     서비스: ['브랜딩', '검색 성장', '매장 시스템'],
     문의: ['상담 신청', '연락처'],
@@ -898,7 +898,7 @@ const AboutPage = () => {
                   isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
                 }`}
               >
-                Our Beginning
+                Our Standard
               </p>
 
               <h2
