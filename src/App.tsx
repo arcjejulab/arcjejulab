@@ -1110,59 +1110,166 @@ const PhilosophyPage = () => {
         </section>
 
         <section
-          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
-            isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
+  className={`px-6 py-24 transition-colors duration-500 md:px-10 md:py-32 ${
+    isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
+  }`}
+>
+  <div className="mx-auto max-w-7xl">
+    <div
+      className={`rounded-[3rem] border p-8 md:p-12 lg:p-16 ${
+        isDarkMode
+          ? 'border-white/10 bg-white/[0.045]'
+          : 'border-[#10307D]/5 bg-[#F7F7F7] shadow-sm'
+      }`}
+    >
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-stretch">
+        <div
+          className={`rounded-[2rem] border p-8 ${
+            isDarkMode
+              ? 'border-white/10 bg-white/[0.04]'
+              : 'border-[#10307D]/5 bg-white'
           }`}
         >
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <div>
-              <p
-                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
-                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
-                }`}
-              >
-                Direction & Method
-              </p>
+          <p
+            className={`mb-8 text-xs font-black tracking-[0.35em] ${
+              isDarkMode ? 'text-white/35' : 'text-[#10307D]/40'
+            }`}
+          >
+            01
+          </p>
 
-              <h2
-                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
-                  isDarkMode ? 'text-white' : 'text-[#10307D]'
-                }`}
-              >
-                방향은 기준이고,
-                <br />
-                방법은 도구입니다.
-              </h2>
-            </div>
+          <h3
+            className={`mb-3 text-3xl font-black tracking-[-0.04em] md:text-4xl ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            Direction
+          </h3>
 
-            <div
-              className={`space-y-7 break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-xl md:leading-10 ${
-                isDarkMode ? 'text-white/70' : 'text-slate-600'
-              }`}
-            >
-              <p>
-                방향은 매장이 고객에게 어떤 인상으로 기억될지 정하는 기준입니다.
-                방법은 그 기준을 고객에게 전하기 위한 실행입니다.
-              </p>
+          <p
+            className={`mb-8 text-sm font-black uppercase tracking-[0.22em] ${
+              isDarkMode ? 'text-blue-200/70' : 'text-blue-700/65'
+            }`}
+          >
+            방향
+          </p>
 
-              <p>
-                릴스, 광고, 블로그, 플레이스 관리, 이벤트는 모두 필요합니다.
-                다만 방향이 없는 실행은 쉽게 흩어지고 오래 남지 않습니다.
-              </p>
-
-              <p>
-                그래서 올라운더커피랩은 무엇을 할지보다 먼저,
-                왜 해야 하는지와 어디로 향해야 하는지를 정리합니다.
-              </p>
-            </div>
+          <div className={`space-y-3 text-base font-light leading-7 ${mutedText(isDarkMode)}`}>
+            <p>브랜드 기준</p>
+            <p>고객 인상</p>
+            <p>경험 설계</p>
           </div>
-        </section>
+        </div>
 
-        <section
-          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
-            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+        <div className="hidden items-center justify-center lg:flex">
+          <span className={`text-4xl font-light ${isDarkMode ? 'text-white/25' : 'text-[#10307D]/25'}`}>
+            →
+          </span>
+        </div>
+
+        <div
+          className={`rounded-[2rem] border p-8 ${
+            isDarkMode
+              ? 'border-white/10 bg-white/[0.04]'
+              : 'border-[#10307D]/5 bg-white'
           }`}
         >
+          <p
+            className={`mb-8 text-xs font-black tracking-[0.35em] ${
+              isDarkMode ? 'text-white/35' : 'text-[#10307D]/40'
+            }`}
+          >
+            02
+          </p>
+
+          <h3
+            className={`mb-3 text-3xl font-black tracking-[-0.04em] md:text-4xl ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            Method
+          </h3>
+
+          <p
+            className={`mb-8 text-sm font-black uppercase tracking-[0.22em] ${
+              isDarkMode ? 'text-blue-200/70' : 'text-blue-700/65'
+            }`}
+          >
+            방법
+          </p>
+
+          <div className={`space-y-3 text-base font-light leading-7 ${mutedText(isDarkMode)}`}>
+            <p>릴스 · 광고</p>
+            <p>블로그 · 플레이스</p>
+            <p>이벤트 · 콘텐츠</p>
+          </div>
+        </div>
+
+        <div className="hidden items-center justify-center lg:flex">
+          <span className={`text-4xl font-light ${isDarkMode ? 'text-white/25' : 'text-[#10307D]/25'}`}>
+            →
+          </span>
+        </div>
+
+        <div
+          className={`rounded-[2rem] border p-8 ${
+            isDarkMode
+              ? 'border-white/10 bg-white/[0.04]'
+              : 'border-[#10307D]/5 bg-white'
+          }`}
+        >
+          <p
+            className={`mb-8 text-xs font-black tracking-[0.35em] ${
+              isDarkMode ? 'text-white/35' : 'text-[#10307D]/40'
+            }`}
+          >
+            03
+          </p>
+
+          <h3
+            className={`mb-3 text-3xl font-black tracking-[-0.04em] md:text-4xl ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            Result
+          </h3>
+
+          <p
+            className={`mb-8 text-sm font-black uppercase tracking-[0.22em] ${
+              isDarkMode ? 'text-blue-200/70' : 'text-blue-700/65'
+            }`}
+          >
+            결과
+          </p>
+
+          <div className={`space-y-3 text-base font-light leading-7 ${mutedText(isDarkMode)}`}>
+            <p>일관된 브랜딩</p>
+            <p>운영 흐름</p>
+            <p>매장의 자생력</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10 flex flex-col items-start justify-between gap-5 border-t border-[#10307D]/10 pt-8 md:flex-row md:items-center">
+        <p
+          className={`break-keep text-lg font-light leading-8 md:text-xl ${
+            isDarkMode ? 'text-white/68' : 'text-slate-600'
+          }`}
+        >
+          방향이 먼저 서야, 방법이 흩어지지 않습니다.
+        </p>
+
+        <p
+          className={`text-xs font-black uppercase tracking-[0.35em] ${
+            isDarkMode ? 'text-white/35' : 'text-[#10307D]/40'
+          }`}
+        >
+          Direction → Method → Growth
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
           <div className="mx-auto max-w-7xl">
             <div className="mb-16">
               <p
