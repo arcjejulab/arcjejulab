@@ -1095,13 +1095,18 @@ const PhilosophyPage = () => {
               </h1>
 
               <p
-                className={`mt-10 max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
-                  isDarkMode ? 'text-white/70' : 'text-slate-600'
-                }`}
-              >
-                인스타그램, 릴스, 광고, 이벤트는 매장을 알리는 데 꼭 필요한 도구입니다.
-                하지만 도구가 힘을 가지려면 먼저 매장이 나아가야 할 방향이 분명해야 합니다.
-              </p>
+  className={`mt-10 max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+    isDarkMode ? 'text-white/70' : 'text-slate-600'
+  }`}
+>
+  인스타, 릴스, 광고, 블로그, 인플루언서 섭외와 리뷰 이벤트까지.
+  <br className="hidden md:block" />
+  안 해본 게 없는데 왜 안 될까요.
+  <br className="hidden md:block" />
+  방향을 정하지 않으면 아무리 열심히 걷고 뛰어도 엉뚱한 곳에 서 있게 됩니다.
+  <br className="hidden md:block" />
+  올라운더커피랩은 방법보다 매장이 나아가야 할 방향을 먼저 잡습니다.
+</p>
             </motion.div>
           </div>
         </section>
