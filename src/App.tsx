@@ -210,7 +210,7 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
         isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
       }`}
       style={{
-  backgroundImage: "url('/images/hero-branding-banner.png')",
+  backgroundImage: "url('/images/hero-banner-test.png')",
   backgroundSize: 'cover',
   backgroundPosition: 'center center',
   backgroundRepeat: 'no-repeat',
