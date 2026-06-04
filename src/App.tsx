@@ -21,7 +21,9 @@ const sectionGap = 'py-24 md:py-28';
 
 const ArcLogo = ({ isDark = false }: { isDark?: boolean }) => (
   <button
-    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    onClick={() => {
+      window.location.href = '/';
+    }}
     className="flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none"
     aria-label="Allrounder Coffee Lab home"
   >
