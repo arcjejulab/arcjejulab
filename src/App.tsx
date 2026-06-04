@@ -269,13 +269,12 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
                 : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'
             }`}
           >
-            <div className="relative h-[520px] overflow-hidden">
+            <div className="relative h-[620px] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=1600"
-                alt="제주 카페 브랜딩과 매장 운영 컨설팅"
-                className={`h-full w-full object-cover ${isDarkMode ? 'grayscale-[45%] opacity-60' : 'opacity-95'}`}
-                referrerPolicy="no-referrer"
-              />
+  src="/images/hero-branding-banner.png"
+  alt="올라운더커피랩 브랜딩 배너"
+  className="h-full w-full object-cover object-right"
+/>
               <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/88 via-black/25 to-transparent p-10">
                 <div className="space-y-4 text-white">
                   <p className="text-[10px] font-black uppercase tracking-[0.35em] text-white/55">
