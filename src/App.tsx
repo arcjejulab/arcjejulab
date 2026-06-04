@@ -1270,6 +1270,12 @@ const PhilosophyPage = () => {
     </div>
   </div>
 </section>
+
+        <section
+          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
           <div className="mx-auto max-w-7xl">
             <div className="mb-16">
               <p
