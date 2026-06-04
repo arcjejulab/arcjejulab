@@ -214,11 +214,11 @@ const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
       <div
         className="absolute inset-x-6 top-6 bottom-6 md:inset-x-10 md:top-8 md:bottom-8"
         style={{
-          backgroundImage: "url('/images/hero-banner-test.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-        }}
+  backgroundImage: "url('/images/hero-banner-test.png')",
+  backgroundSize: 'cover',
+  backgroundPosition: 'center bottom',
+  backgroundRepeat: 'no-repeat',
+}}
       />
 
       {/* 오버레이 */}
