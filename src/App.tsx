@@ -206,90 +206,68 @@ const Header = ({
 const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <section
-      className={`px-6 py-20 transition-colors duration-500 md:px-10 md:py-24 ${
+      className={`relative overflow-hidden px-6 py-20 transition-colors duration-500 md:px-10 md:py-24 ${
         isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
       }`}
+      style={{
+        backgroundImage: "url('/images/hero-branding-banner.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+      }}
     >
-      <div className="mx-auto grid min-h-[78vh] max-w-7xl grid-cols-1 items-center gap-14 lg:grid-cols-2">
-        <div className="space-y-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
-            <div
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-widest ${
-                isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'
-              }`}
-            >
-              <span className={`h-2 w-2 rounded-full ${isDarkMode ? 'bg-white' : 'bg-[#10307D]'}`} />
-              Jeju Local Brand Partner
-            </div>
+      <div
+        className={`absolute inset-0 ${
+          isDarkMode ? 'bg-[#0f1118]/55' : 'bg-[#EBEBEB]/20'
+        }`}
+      />
 
-            <h1
-              className={`break-keep text-4xl font-black leading-[1.08] tracking-tight md:text-6xl xl:text-6xl ${
-                isDarkMode ? 'text-white' : 'text-[#10307D]'
-              }`}
-            >
-              누구나 스스로
-              <br />
-              할 수 있게.
-            </h1>
-
-            <p
-              className={`max-w-3xl break-keep text-base font-light leading-8 tracking-[-0.01em] md:text-xl md:leading-relaxed ${mutedText(
-                isDarkMode
-              )}`}
-            >
-              올라운더커피랩이 생각하는 브랜딩의 끝에는 사장님의{' '}
-              <span className="text-xl font-black text-[#10307D] md:text-2xl">자생력</span>
-              이 있습니다. 도움 없이도 스스로 해낼 수 있는 실무 능력과 운영 노하우,
-              그것이 우리가 만들어나가는 진짜 브랜딩의 가치입니다.
-            </p>
-
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-2xl bg-[#10307D] px-8 py-5 text-xs font-black uppercase tracking-widest text-white shadow-2xl shadow-[#10307D]/20 transition-all hover:scale-[1.02] active:scale-95"
-              >
-                우리 매장 상담하기
-              </button>
-            </div>
-          </motion.div>
-        </div>
-
+      <div className="relative z-10 mx-auto flex min-h-[78vh] max-w-7xl items-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-2xl space-y-8"
         >
           <div
-            className={`overflow-hidden rounded-[3rem] border shadow-2xl ${
-              isDarkMode
-                ? 'border-white/10 bg-white/5 shadow-black/30'
-                : 'border-[#10307D]/5 bg-white shadow-[#10307D]/10'
+            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-widest ${
+              isDarkMode ? 'bg-white/10 text-white' : 'bg-[#10307D]/5 text-[#10307D]'
             }`}
           >
-            <div className="relative h-[620px] overflow-hidden">
-              <img
-  src="/images/hero-branding-banner.png"
-  alt="올라운더커피랩 브랜딩 배너"
-  className="h-full w-full object-cover object-right"
-/>
-              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/88 via-black/25 to-transparent p-10">
-                <div className="space-y-4 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-[0.35em] text-white/55">
-                    Allrounder Coffee Lab
-                  </p>
-                  <h2 className="break-keep text-3xl font-black leading-tight">
-                    좋은 매장은
-                    <br />
-                    경험으로부터
-                  </h2>
-                </div>
-              </div>
-            </div>
+            <span className={`h-2 w-2 rounded-full ${isDarkMode ? 'bg-white' : 'bg-[#10307D]'}`} />
+            Jeju Local Brand Partner
+          </div>
+
+          <h1
+            className={`break-keep text-4xl font-black leading-[1.08] tracking-tight md:text-6xl xl:text-6xl ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            누구나 스스로
+            <br />
+            할 수 있게.
+          </h1>
+
+          <p
+            className={`max-w-xl break-keep text-base font-light leading-8 tracking-[-0.01em] md:text-xl md:leading-relaxed ${mutedText(
+              isDarkMode
+            )}`}
+          >
+            올라운더커피랩이 생각하는 브랜딩의 끝에는 사장님의{' '}
+            <span className={`text-xl font-black md:text-2xl ${isDarkMode ? 'text-white' : 'text-[#10307D]'}`}>
+              자생력
+            </span>
+            이 있습니다. 도움 없이도 스스로 해낼 수 있는 실무 능력과 운영 노하우,
+            그것이 우리가 만들어나가는 진짜 브랜딩의 가치입니다.
+          </p>
+
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="rounded-2xl bg-[#10307D] px-8 py-5 text-xs font-black uppercase tracking-widest text-white shadow-2xl shadow-[#10307D]/20 transition-all hover:scale-[1.02] active:scale-95"
+            >
+              우리 매장 상담하기
+            </button>
           </div>
         </motion.div>
       </div>
