@@ -103,9 +103,9 @@ const Header = ({
     }
 
     if (subItem === '브랜드 철학') {
-      window.location.href = '/about#direction';
-      return;
-    }
+  window.location.href = '/philosophy';
+  return;
+}
 
     moveToSection(parentId);
   };
@@ -995,6 +995,282 @@ const AboutPage = () => {
 
                   <p className={`break-keep text-sm leading-7 ${mutedText(isDarkMode)}`}>
                     창업 준비, 운영 흐름, 브랜딩 방향, 검색과 콘텐츠까지 현재 상황에 맞게 정리합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer isDarkMode={isDarkMode} />
+    </div>
+  );
+};
+const PhilosophyPage = () => {
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
+
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    document.body.style.backgroundColor = isDarkMode ? DARK_BG : LIGHT_BG;
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
+  const standards = [
+    {
+      number: '01',
+      title: 'Brand Direction',
+      korean: '브랜드 방향',
+      description:
+        '매장이 고객에게 어떤 인상으로 기억되어야 하는지 정합니다. 메뉴, 공간, 응대, 콘텐츠가 따로 움직이지 않도록 먼저 기준을 세웁니다.',
+    },
+    {
+      number: '02',
+      title: 'Operation Flow',
+      korean: '운영 흐름',
+      description:
+        '좋은 경험은 감각만으로 유지되지 않습니다. 레시피, 동선, 응대, 직원의 움직임이 반복 가능한 기준으로 정리되어야 합니다.',
+    },
+    {
+      number: '03',
+      title: 'Search & Content',
+      korean: '검색과 콘텐츠',
+      description:
+        '고객은 매장에 오기 전 이미 온라인에서 매장을 만납니다. 네이버플레이스, 블로그, 인스타그램, 홈페이지가 같은 방향을 말할 때 신뢰가 쌓입니다.',
+    },
+    {
+      number: '04',
+      title: 'Self-Sustaining Growth',
+      korean: '자생력',
+      description:
+        '외부의 힘에만 기대지 않고, 사장님이 스스로 판단하고 실행할 수 있는 구조를 매장 안에 남기는 것이 올라운더커피랩의 목표입니다.',
+    },
+  ];
+
+  return (
+    <div
+      className={`min-h-screen font-sans transition-colors duration-500 selection:bg-[#10307D] selection:text-white ${
+        isDarkMode ? 'bg-[#0f1118] text-white' : 'bg-[#EBEBEB] text-[#10307D]'
+      }`}
+    >
+      <Header isDarkMode={isDarkMode} toggleDarkMode={() => setIsDarkMode(!isDarkMode)} />
+
+      <main>
+        <section
+          className={`relative overflow-hidden px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
+          <div
+            className={`pointer-events-none absolute -right-24 top-20 select-none text-[16vw] font-black leading-none tracking-[-0.08em] opacity-[0.035] ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            PHILOSOPHY
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 36 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-5xl"
+            >
+              <p
+                className={`mb-8 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/40' : 'text-[#10307D]/45'
+                }`}
+              >
+                Brand Philosophy
+              </p>
+
+              <h1
+                className={`break-keep text-5xl font-black leading-[1.05] tracking-[-0.06em] md:text-7xl xl:text-8xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                방법보다 먼저,
+                <br />
+                방향을 세웁니다.
+              </h1>
+
+              <p
+                className={`mt-10 max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+                  isDarkMode ? 'text-white/70' : 'text-slate-600'
+                }`}
+              >
+                인스타그램, 릴스, 광고, 이벤트는 매장을 알리는 데 꼭 필요한 도구입니다.
+                하지만 도구가 힘을 가지려면 먼저 매장이 나아가야 할 방향이 분명해야 합니다.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        <section
+          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+            isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
+          }`}
+        >
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <div>
+              <p
+                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                }`}
+              >
+                Direction & Method
+              </p>
+
+              <h2
+                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                방향은 기준이고,
+                <br />
+                방법은 도구입니다.
+              </h2>
+            </div>
+
+            <div
+              className={`space-y-7 break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-xl md:leading-10 ${
+                isDarkMode ? 'text-white/70' : 'text-slate-600'
+              }`}
+            >
+              <p>
+                방향은 매장이 고객에게 어떤 인상으로 기억될지 정하는 기준입니다.
+                방법은 그 기준을 고객에게 전하기 위한 실행입니다.
+              </p>
+
+              <p>
+                릴스, 광고, 블로그, 플레이스 관리, 이벤트는 모두 필요합니다.
+                다만 방향이 없는 실행은 쉽게 흩어지고 오래 남지 않습니다.
+              </p>
+
+              <p>
+                그래서 올라운더커피랩은 무엇을 할지보다 먼저,
+                왜 해야 하는지와 어디로 향해야 하는지를 정리합니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className={`px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-16">
+              <p
+                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                }`}
+              >
+                Our Standard
+              </p>
+
+              <h2
+                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                우리는 네 가지 기준으로
+                <br />
+                매장의 방향을 만듭니다.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {standards.map((item) => (
+                <div
+                  key={item.number}
+                  className={`rounded-[2rem] border p-8 transition-all duration-300 hover:-translate-y-1 ${
+                    isDarkMode
+                      ? 'border-white/10 bg-white/[0.045]'
+                      : 'border-[#10307D]/5 bg-white shadow-sm'
+                  }`}
+                >
+                  <p
+                    className={`mb-8 text-xs font-black tracking-[0.35em] ${
+                      isDarkMode ? 'text-white/35' : 'text-[#10307D]/40'
+                    }`}
+                  >
+                    {item.number}
+                  </p>
+
+                  <h3
+                    className={`mb-3 text-2xl font-black tracking-[-0.03em] md:text-3xl ${
+                      isDarkMode ? 'text-white' : 'text-[#10307D]'
+                    }`}
+                  >
+                    {item.korean}
+                  </h3>
+
+                  <p
+                    className={`mb-6 text-sm font-black uppercase tracking-[0.22em] ${
+                      isDarkMode ? 'text-blue-200/70' : 'text-blue-700/65'
+                    }`}
+                  >
+                    {item.title}
+                  </p>
+
+                  <p className={`break-keep text-base font-light leading-8 ${mutedText(isDarkMode)}`}>
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="contact"
+          className={`px-6 py-24 transition-colors duration-500 md:px-10 ${
+            isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
+          }`}
+        >
+          <div className="mx-auto max-w-7xl">
+            <div
+              className={`rounded-[3rem] border p-10 md:p-14 ${
+                isDarkMode
+                  ? 'border-white/10 bg-white/[0.055]'
+                  : 'border-[#10307D]/5 bg-white shadow-sm'
+              }`}
+            >
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <div>
+                  <p
+                    className={`mb-5 text-xs font-black uppercase tracking-[0.42em] ${
+                      isDarkMode ? 'text-blue-300' : 'text-blue-600'
+                    }`}
+                  >
+                    Start With Us
+                  </p>
+
+                  <h2
+                    className={`break-keep text-3xl font-black leading-tight md:text-5xl ${
+                      isDarkMode ? 'text-white' : 'text-[#10307D]'
+                    }`}
+                  >
+                    우리 매장이 나아갈 방향을
+                    <br />
+                    먼저 정리해보세요.
+                  </h2>
+                </div>
+
+                <div className="space-y-5">
+                  <button
+                    onClick={() => {
+                      window.location.href = '/#contact';
+                    }}
+                    className="w-full rounded-2xl bg-[#10307D] px-8 py-5 text-xs font-black uppercase tracking-widest text-white shadow-2xl shadow-[#10307D]/20 transition-all hover:scale-[1.02] active:scale-95"
+                  >
+                    상담 문의하기
+                  </button>
+
+                  <p className={`break-keep text-sm leading-7 ${mutedText(isDarkMode)}`}>
+                    현재 매장의 고민, 운영 흐름, 검색 노출, 콘텐츠 방향까지 상황에 맞게 정리합니다.
                   </p>
                 </div>
               </div>
