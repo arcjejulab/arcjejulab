@@ -206,22 +206,29 @@ const Header = ({
 const Hero = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <section
-      className={`relative overflow-hidden px-6 py-20 transition-colors duration-500 md:px-10 md:py-24 ${
+      className={`relative overflow-hidden px-6 py-10 transition-colors duration-500 md:px-10 md:py-12 ${
         isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
       }`}
-      style={{
-  backgroundImage: "url('/images/hero-banner-test.png')",
-  backgroundSize: 'cover',
-  backgroundPosition: 'center center',
-  backgroundRepeat: 'no-repeat',
-}}
     >
+      {/* 배경 이미지 레이어 */}
       <div
-        className={`absolute inset-0 ${
-          isDarkMode ? 'bg-[#0f1118]/55' : 'bg-[#EBEBEB]/20'
+        className="absolute inset-x-6 top-6 bottom-6 md:inset-x-10 md:top-8 md:bottom-8"
+        style={{
+          backgroundImage: "url('/images/hero-banner-test.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+
+      {/* 오버레이 */}
+      <div
+        className={`absolute inset-x-6 top-6 bottom-6 md:inset-x-10 md:top-8 md:bottom-8 ${
+          isDarkMode ? 'bg-[#0f1118]/45' : 'bg-[#EBEBEB]/10'
         }`}
       />
 
+      {/* 실제 텍스트 */}
       <div className="relative z-10 mx-auto flex min-h-[78vh] max-w-7xl items-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
