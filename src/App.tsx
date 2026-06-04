@@ -1101,9 +1101,7 @@ const PhilosophyPage = () => {
 >
   인스타, 릴스, 광고, 블로그, 인플루언서 섭외와 리뷰 이벤트까지.
   <br className="hidden md:block" />
-  안 해본 게 없는데 왜 안 될까요.
-  <br className="hidden md:block" />
-  방향을 정하지 않으면 아무리 열심히 걷고 뛰어도 엉뚱한 곳에 서 있게 됩니다.
+  방향을 정하지 않고 아무리 열심히 걷고 뛰어도, 엉뚱한 곳에 서 있게 됩니다.
   <br className="hidden md:block" />
   올라운더커피랩은 방법보다 매장이 나아가야 할 방향을 먼저 잡습니다.
 </p>
