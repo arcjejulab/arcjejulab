@@ -1529,23 +1529,20 @@ const BrandDirectionPage = () => {
               className="max-w-5xl"
             >
               <p
-                className={`mb-8 text-xs font-black uppercase tracking-[0.45em] ${
-                  isDarkMode ? 'text-white/40' : 'text-[#10307D]/45'
-                }`}
-              >
-                Brand Direction
-              </p>
+  className={`mb-8 text-xs font-black uppercase tracking-[0.45em] ${
+    isDarkMode ? 'text-white/40' : 'text-[#103070]/45'
+  }`}
+>
+  Brand Positioning
+</p>
 
-              <h1
-                className={`break-keep text-5xl font-black leading-[1.05] tracking-[-0.06em] md:text-7xl xl:text-8xl ${
-                  isDarkMode ? 'text-white' : 'text-[#10307D]'
-                }`}
-              >
-                무엇을 더할지보다
-                <br />
-                무엇으로 기억될지 정합니다.
-              </h1>
-
+<h1
+  className={`break-keep text-5xl font-black leading-[1.05] tracking-[-0.06em] md:text-7xl xl:text-8xl ${
+    isDarkMode ? 'text-white' : 'text-[#103070]'
+  }`}
+>
+  브랜드 포지셔닝
+</h1>
               <p
   className={`mt-10 max-w-4xl break-keep [text-wrap:balance] text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
     isDarkMode ? 'text-white/70' : 'text-slate-600'
