@@ -97,18 +97,23 @@ const Header = ({
   };
 
   const handleDropdownClick = (subItem: string, parentId: string) => {
-    if (subItem === '올라운더커피랩') {
-      window.location.href = '/about';
-      return;
-    }
+  if (subItem === '올라운더커피랩') {
+    window.location.href = '/about';
+    return;
+  }
 
-    if (subItem === '브랜드 철학') {
-  window.location.href = '/philosophy';
-  return;
-}
+  if (subItem === '브랜드 철학') {
+    window.location.href = '/philosophy';
+    return;
+  }
 
-    moveToSection(parentId);
-  };
+  if (subItem === '브랜드 방향 정리') {
+    window.location.href = '/brand-direction';
+    return;
+  }
+
+  moveToSection(parentId);
+};
 
   return (
     <nav
@@ -1399,6 +1404,437 @@ const PhilosophyPage = () => {
     </div>
   );
 };
+
+const BrandDirectionPage = () => {
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => localStorage.getItem('theme') === 'dark'
+  );
+
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    document.body.style.backgroundColor = isDarkMode ? DARK_BG : LIGHT_BG;
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
+  const concerns = [
+    '장점은 많지만 매장을 한마디로 설명하기 어렵습니다.',
+    '메뉴와 공간, 콘텐츠가 서로 다른 분위기를 보여줍니다.',
+    '경쟁 매장과 비교했을 때 선택해야 할 이유가 분명하지 않습니다.',
+    '광고와 콘텐츠를 반복해도 고객에게 남는 인상이 흐릿합니다.',
+    '새로운 메뉴와 이벤트는 계속 생기지만 브랜드는 쌓이지 않습니다.',
+    '직원마다 매장을 설명하고 응대하는 방식이 다릅니다.',
+  ];
+
+  const standards = [
+    {
+      number: '01',
+      english: 'Customer',
+      title: '고객',
+      description:
+        '누구에게 선택받아야 하는지 정합니다. 연령과 성별을 넘어 어떤 상황과 필요를 가진 고객인지 구체적으로 파악합니다.',
+    },
+    {
+      number: '02',
+      english: 'Core Value',
+      title: '핵심 가치',
+      description:
+        '매장이 고객에게 남기고 싶은 가치와 약속을 찾고, 실제 경험으로 이어질 수 있도록 기준을 세웁니다.',
+    },
+    {
+      number: '03',
+      english: 'Brand Impression',
+      title: '기억될 인상',
+      description:
+        '고객이 매장을 떠난 뒤 어떤 감정과 이미지로 기억해야 하는지 정합니다.',
+    },
+    {
+      number: '04',
+      english: 'Brand Language',
+      title: '브랜드 언어',
+      description:
+        '슬로건, 소개 문구, 메뉴 설명, 홈페이지와 콘텐츠의 말투가 하나의 방향으로 이어지도록 만듭니다.',
+    },
+    {
+      number: '05',
+      english: 'Customer Experience',
+      title: '고객 경험',
+      description:
+        '정해진 방향이 말로만 남지 않도록 공간, 메뉴, 응대와 운영의 실제 경험으로 연결합니다.',
+    },
+  ];
+
+  const process = [
+    {
+      number: '01',
+      title: '현재 매장 파악',
+      description:
+        '메뉴, 공간, 서비스, 운영 방식과 온라인 콘텐츠를 살펴 지금 고객에게 어떤 인상으로 보이는지 확인합니다.',
+    },
+    {
+      number: '02',
+      title: '강점과 문제 발견',
+      description:
+        '고객이 선택할 이유와 놓치고 있는 가치를 찾고, 브랜드를 흐리게 만드는 요소를 구분합니다.',
+    },
+    {
+      number: '03',
+      title: '브랜드 방향 설정',
+      description:
+        '핵심 고객, 브랜드 가치, 기억될 인상과 언어의 기준을 하나의 방향으로 연결합니다.',
+    },
+    {
+      number: '04',
+      title: '실행 기준 연결',
+      description:
+        '정해진 방향을 메뉴, 홈페이지, 콘텐츠, 고객 응대와 운영에 적용할 수 있도록 구체화합니다.',
+    },
+  ];
+
+  return (
+    <div
+      className={`min-h-screen font-sans transition-colors duration-500 selection:bg-[#10307D] selection:text-white ${
+        isDarkMode
+          ? 'bg-[#0f1118] text-white'
+          : 'bg-[#EBEBEB] text-[#10307D]'
+      }`}
+    >
+      <Header
+        isDarkMode={isDarkMode}
+        toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+      />
+
+      <main>
+        {/* 히어로 */}
+        <section
+          className={`relative overflow-hidden px-6 py-28 transition-colors duration-500 md:px-10 md:py-36 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
+          <div
+            className={`pointer-events-none absolute -right-24 top-20 select-none text-[14vw] font-black leading-none tracking-[-0.08em] opacity-[0.035] ${
+              isDarkMode ? 'text-white' : 'text-[#10307D]'
+            }`}
+          >
+            DIRECTION
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 36 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="max-w-5xl"
+            >
+              <p
+                className={`mb-8 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/40' : 'text-[#10307D]/45'
+                }`}
+              >
+                Brand Direction
+              </p>
+
+              <h1
+                className={`break-keep text-5xl font-black leading-[1.05] tracking-[-0.06em] md:text-7xl xl:text-8xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                흩어진 매장의 장점을
+                <br />
+                하나의 방향으로 묶습니다.
+              </h1>
+
+              <p
+                className={`mt-10 max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+                  isDarkMode ? 'text-white/70' : 'text-slate-600'
+                }`}
+              >
+                메뉴, 공간, 서비스, 콘텐츠가 서로 다른 말을 하면 고객에게
+                남는 인상도 흐려집니다.
+                <br className="hidden md:block" />
+                매장이 가진 강점을 찾아 고객에게 어떤 모습으로 기억되어야
+                할지 기준을 세웁니다.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 필요한 순간 */}
+        <section
+          className={`px-6 py-24 transition-colors duration-500 md:px-10 md:py-32 ${
+            isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
+          }`}
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-14">
+              <p
+                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                }`}
+              >
+                When Direction Is Needed
+              </p>
+
+              <h2
+                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                이런 고민이 있다면
+                <br />
+                방향부터 다시 살펴야 합니다.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {concerns.map((item, index) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: index * 0.06 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  className={`rounded-[2rem] border p-7 ${
+                    isDarkMode
+                      ? 'border-white/10 bg-white/[0.045]'
+                      : 'border-[#10307D]/5 bg-[#F7F7F7]'
+                  }`}
+                >
+                  <p
+                    className={`mb-6 text-xs font-black tracking-[0.32em] ${
+                      isDarkMode ? 'text-white/30' : 'text-[#10307D]/35'
+                    }`}
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+
+                  <p
+                    className={`break-keep text-base font-medium leading-8 ${
+                      isDarkMode ? 'text-white/72' : 'text-slate-600'
+                    }`}
+                  >
+                    {item}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 다섯 가지 기준 */}
+        <section
+          className={`px-6 py-24 transition-colors duration-500 md:px-10 md:py-32 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-16">
+              <p
+                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                }`}
+              >
+                Direction Standard
+              </p>
+
+              <h2
+                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                브랜드의 방향은
+                <br />
+                다섯 가지 기준으로 구체화됩니다.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {standards.map((item, index) => (
+                <motion.div
+                  key={item.number}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.07 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  className={`rounded-[2rem] border p-8 ${
+                    index === standards.length - 1 ? 'md:col-span-2' : ''
+                  } ${
+                    isDarkMode
+                      ? 'border-white/10 bg-white/[0.045]'
+                      : 'border-[#10307D]/5 bg-white shadow-sm'
+                  }`}
+                >
+                  <p
+                    className={`mb-7 text-xs font-black tracking-[0.35em] ${
+                      isDarkMode ? 'text-white/35' : 'text-[#10307D]/40'
+                    }`}
+                  >
+                    {item.number}
+                  </p>
+
+                  <h3
+                    className={`mb-3 text-2xl font-black tracking-[-0.03em] md:text-3xl ${
+                      isDarkMode ? 'text-white' : 'text-[#10307D]'
+                    }`}
+                  >
+                    {item.title}
+                  </h3>
+
+                  <p
+                    className={`mb-6 text-sm font-black uppercase tracking-[0.22em] ${
+                      isDarkMode ? 'text-blue-200/70' : 'text-blue-700/65'
+                    }`}
+                  >
+                    {item.english}
+                  </p>
+
+                  <p
+                    className={`break-keep text-base font-light leading-8 ${mutedText(
+                      isDarkMode
+                    )}`}
+                  >
+                    {item.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 진행 과정 */}
+        <section
+          className={`px-6 py-24 transition-colors duration-500 md:px-10 md:py-32 ${
+            isDarkMode ? 'bg-[#1a1e29]' : 'bg-white'
+          }`}
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-16">
+              <p
+                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
+                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
+                }`}
+              >
+                Process
+              </p>
+
+              <h2
+                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+                  isDarkMode ? 'text-white' : 'text-[#10307D]'
+                }`}
+              >
+                감으로 정하지 않고
+                <br />
+                현장과 고객을 기준으로 찾습니다.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+              {process.map((item) => (
+                <div
+                  key={item.number}
+                  className={`rounded-[2rem] border p-7 ${
+                    isDarkMode
+                      ? 'border-white/10 bg-white/[0.035]'
+                      : 'border-[#10307D]/5 bg-[#F7F7F7]'
+                  }`}
+                >
+                  <p
+                    className={`mb-10 text-xs font-black tracking-[0.35em] ${
+                      isDarkMode ? 'text-white/30' : 'text-[#10307D]/35'
+                    }`}
+                  >
+                    {item.number}
+                  </p>
+
+                  <h3
+                    className={`mb-6 break-keep text-2xl font-black tracking-[-0.03em] ${
+                      isDarkMode ? 'text-white' : 'text-[#10307D]'
+                    }`}
+                  >
+                    {item.title}
+                  </h3>
+
+                  <p
+                    className={`break-keep text-sm font-light leading-7 ${mutedText(
+                      isDarkMode
+                    )}`}
+                  >
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section
+          id="contact"
+          className={`px-6 py-24 transition-colors duration-500 md:px-10 ${
+            isDarkMode ? 'bg-[#0f1118]' : 'bg-[#EBEBEB]'
+          }`}
+        >
+          <div className="mx-auto max-w-7xl">
+            <div
+              className={`rounded-[3rem] border p-10 md:p-14 ${
+                isDarkMode
+                  ? 'border-white/10 bg-white/[0.055]'
+                  : 'border-[#10307D]/5 bg-white shadow-sm'
+              }`}
+            >
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <div>
+                  <p
+                    className={`mb-5 text-xs font-black uppercase tracking-[0.42em] ${
+                      isDarkMode ? 'text-blue-300' : 'text-blue-600'
+                    }`}
+                  >
+                    Start With Direction
+                  </p>
+
+                  <h2
+                    className={`break-keep text-3xl font-black leading-tight md:text-5xl ${
+                      isDarkMode ? 'text-white' : 'text-[#10307D]'
+                    }`}
+                  >
+                    방향이 분명해지면
+                    <br />
+                    무엇을 해야 할지도 선명해집니다.
+                  </h2>
+                </div>
+
+                <div className="space-y-5">
+                  <button
+                    onClick={() => {
+                      window.location.href = '/#contact';
+                    }}
+                    className="w-full rounded-2xl bg-[#10307D] px-8 py-5 text-xs font-black uppercase tracking-widest text-white shadow-2xl shadow-[#10307D]/20 transition-all hover:scale-[1.02] active:scale-95"
+                  >
+                    우리 매장 방향 상담하기
+                  </button>
+
+                  <p
+                    className={`break-keep text-sm leading-7 ${mutedText(
+                      isDarkMode
+                    )}`}
+                  >
+                    매장 안에 이미 있는 강점과 가능성을 찾아 고객에게 더
+                    분명하게 전달될 수 있도록 방향을 세웁니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer isDarkMode={isDarkMode} />
+    </div>
+  );
+};
+
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
 
@@ -1430,6 +1866,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/philosophy" element={<PhilosophyPage />} />
+        <Route path="/brand-direction" element={<BrandDirectionPage />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
           path="/admin/dashboard"
