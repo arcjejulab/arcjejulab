@@ -1636,14 +1636,14 @@ const BrandDirectionPage = () => {
               </p>
 
               <h2
-                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
-                  isDarkMode ? 'text-white' : 'text-[#10307D]'
-                }`}
-              >
-                브랜드의 방향을
-                <br />
-                다섯 가지 기준으로 정합니다.
-              </h2>
+  className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+    isDarkMode ? 'text-white' : 'text-[#103070]'
+  }`}
+>
+  브랜드의 방향을 정하는
+  <br />
+  5가지 기준
+</h2>
             </div>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
