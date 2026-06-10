@@ -1543,20 +1543,20 @@ const BrandDirectionPage = () => {
               >
                 무엇을 더할지보다
                 <br />
-                무엇으로 기억될지 정합니.
+                무엇으로 기억될지 정합니다.
               </h1>
 
               <div
-  className={`mt-10 max-w-4xl space-y-2 break-keep [text-wrap:balance] text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+  className={`mt-10 max-w-4xl space-y-3 break-keep [text-wrap:balance] text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
     isDarkMode ? 'text-white/70' : 'text-slate-600'
   }`}
 >
   <p>
-    메뉴, 공간, 서비스, 콘텐츠가 서로 다른 인상을 주면 고객에게 남는 인상도 흐려집니다.
+    메뉴, 공간, 서비스, 콘텐츠가 서로 다른 인상을 주면 고객에게 남는 이미지도 흐려집니다.
   </p>
 
   <p>
-    매장이 이미 가진 강점을 찾아 누구에게, 어떤 모습으로 어떻게 기억되어야 할지 하나의 기준을 세웁니다.
+    매장이 이미 가진 강점을 찾아 누구에게, 어떤 모습으로, 어떻게 기억되어야 할지 하나의 기준을 세웁니다.
   </p>
 </div>
             </motion.div>
