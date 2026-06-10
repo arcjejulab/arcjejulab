@@ -1546,15 +1546,13 @@ const BrandDirectionPage = () => {
                 무엇으로 기억될지 정합니다.
               </h1>
 
-              <div
-  <p
+              <p
   className={`mt-10 max-w-4xl break-keep [text-wrap:balance] text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
     isDarkMode ? 'text-white/70' : 'text-slate-600'
   }`}
 >
   매장이 이미 가진 강점을 찾아 누구에게, 어떤 모습으로, 어떻게 기억되어야 할지 하나의 기준을 세웁니다.
 </p>
-</div>
             </motion.div>
           </div>
         </section>
