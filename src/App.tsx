@@ -1717,12 +1717,10 @@ const BrandDirectionPage = () => {
 
               <h2
   className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
-    isDarkMode ? 'text-white' : 'text-[#10307D]'
+    isDarkMode ? 'text-white' : 'text-[#103070]'
   }`}
 >
-  메뉴, 공간, 운영의 흐름을 파악하고
-  <br />
-  고객의 반응에서 방향을 찾습니다.
+  매장 진단 프로세스
 </h2>
             </div>
 
