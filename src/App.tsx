@@ -1419,10 +1419,10 @@ const BrandDirectionPage = () => {
   const concerns = [
     '장점은 많지만 매장을 한마디로 설명하기 어렵습니다.',
     '메뉴와 공간, 콘텐츠가 서로 다른 분위기를 보여줍니다.',
-    '경쟁 매장과 비교했을 때 선택해야 할 이유가 분명하지 않습니다.',
+    '경쟁 매장과 비교했을 때 고객이 찾아와야 할 이유가 분명하지 않습니다.',
     '광고와 콘텐츠를 반복해도 고객에게 남는 인상이 흐릿합니다.',
-    '새로운 메뉴와 이벤트는 계속 생기지만 브랜드는 쌓이지 않습니다.',
-    '직원마다 매장을 설명하고 응대하는 방식이 다릅니다.',
+    '새로운 메뉴와 이벤트는 계속 진행하지만 효과가 없습니다.',
+    '직원마다 고객을 응대하는 방식이 다릅니다.',
   ];
 
   const standards = [
@@ -1431,36 +1431,36 @@ const BrandDirectionPage = () => {
       english: 'Customer',
       title: '고객',
       description:
-        '누구에게 선택받아야 하는지 정합니다. 연령과 성별을 넘어 어떤 상황과 필요를 가진 고객인지 구체적으로 파악합니다.',
+  '고객이 우리 매장을 찾는 이유와 머무는 동안 기대하는 경험을 구체적으로 파악합니다.',
     },
     {
       number: '02',
       english: 'Core Value',
       title: '핵심 가치',
       description:
-        '매장이 고객에게 남기고 싶은 가치와 약속을 찾고, 실제 경험으로 이어질 수 있도록 기준을 세웁니다.',
+  '매장의 핵심 가치를 분명히 하고, 그 가치가 공간과 메뉴, 서비스 안에서 자연스럽게 드러나도록 연결합니다.',
     },
     {
-      number: '03',
-      english: 'Brand Impression',
-      title: '기억될 인상',
-      description:
-        '고객이 매장을 떠난 뒤 어떤 감정과 이미지로 기억해야 하는지 정합니다.',
-    },
+  number: '03',
+  english: 'Brand Impression',
+  title: '기억될 모습',
+  description:
+    '우리 매장이 고객에게 어떤 모습과 느낌으로 기억되길 바라는지 분명히 하고, 공간과 메뉴, 응대와 콘텐츠에 자연스럽게 담아냅니다.',
+},
     {
       number: '04',
       english: 'Brand Language',
       title: '브랜드 언어',
       description:
-        '슬로건, 소개 문구, 메뉴 설명, 홈페이지와 콘텐츠의 말투가 하나의 방향으로 이어지도록 만듭니다.',
+        '슬로건, 소개 문구, 메뉴 설명, 홈페이지와 콘텐츠의 언어가 하나의 방향으로 이어지도록 만듭니다.',
     },
     {
-      number: '05',
-      english: 'Customer Experience',
-      title: '고객 경험',
-      description:
-        '정해진 방향이 말로만 남지 않도록 공간, 메뉴, 응대와 운영의 실제 경험으로 연결합니다.',
-    },
+  number: '05',
+  english: 'Customer Experience',
+  title: '고객 경험',
+  description:
+    '공간과 메뉴, 응대와 운영이 서로 어긋나지 않도록 고객이 경험하는 모든 흐름을 하나로 연결합니다.',
+},
   ];
 
   const process = [
@@ -1468,7 +1468,7 @@ const BrandDirectionPage = () => {
       number: '01',
       title: '현재 매장 파악',
       description:
-        '메뉴, 공간, 서비스, 운영 방식과 온라인 콘텐츠를 살펴 지금 고객에게 어떤 인상으로 보이는지 확인합니다.',
+        '메뉴, 공간, 서비스, 운영 방식과 온라인 콘텐츠를 살펴 지금 고객에게 어떤 모습으로 보이는지 확인합니다.',
     },
     {
       number: '02',
@@ -1480,7 +1480,7 @@ const BrandDirectionPage = () => {
       number: '03',
       title: '브랜드 방향 설정',
       description:
-        '핵심 고객, 브랜드 가치, 기억될 인상과 언어의 기준을 하나의 방향으로 연결합니다.',
+        '핵심 고객, 브랜드 가치, 기억될 모습과 언어의 기준을 하나의 선으로 연결합니다.',
     },
     {
       number: '04',
@@ -1541,22 +1541,24 @@ const BrandDirectionPage = () => {
                   isDarkMode ? 'text-white' : 'text-[#10307D]'
                 }`}
               >
-                흩어진 매장의 장점을
+                무엇을 더할지보다
                 <br />
-                하나의 방향으로 묶습니다.
+                무엇으로 기억될지 정합니.
               </h1>
 
-              <p
-                className={`mt-10 max-w-3xl break-keep text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
-                  isDarkMode ? 'text-white/70' : 'text-slate-600'
-                }`}
-              >
-                메뉴, 공간, 서비스, 콘텐츠가 서로 다른 말을 하면 고객에게
-                남는 인상도 흐려집니다.
-                <br className="hidden md:block" />
-                매장이 가진 강점을 찾아 고객에게 어떤 모습으로 기억되어야
-                할지 기준을 세웁니다.
-              </p>
+              <div
+  className={`mt-10 max-w-4xl space-y-2 break-keep [text-wrap:balance] text-lg font-light leading-9 tracking-[-0.015em] md:text-2xl md:leading-10 ${
+    isDarkMode ? 'text-white/70' : 'text-slate-600'
+  }`}
+>
+  <p>
+    메뉴, 공간, 서비스, 콘텐츠가 서로 다른 인상을 주면 고객에게 남는 인상도 흐려집니다.
+  </p>
+
+  <p>
+    매장이 이미 가진 강점을 찾아 누구에게, 어떤 모습으로 어떻게 기억되어야 할지 하나의 기준을 세웁니다.
+  </p>
+</div>
             </motion.div>
           </div>
         </section>
@@ -1584,7 +1586,7 @@ const BrandDirectionPage = () => {
               >
                 이런 고민이 있다면
                 <br />
-                방향부터 다시 살펴야 합니다.
+                방향부터 다시 살펴봐야 합니다.
               </h2>
             </div>
 
@@ -1644,9 +1646,9 @@ const BrandDirectionPage = () => {
                   isDarkMode ? 'text-white' : 'text-[#10307D]'
                 }`}
               >
-                브랜드의 방향은
+                브랜드의 방향을
                 <br />
-                다섯 가지 기준으로 구체화됩니다.
+                다섯 가지 기준으로 정합니다.
               </h2>
             </div>
 
@@ -1720,14 +1722,14 @@ const BrandDirectionPage = () => {
               </p>
 
               <h2
-                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
-                  isDarkMode ? 'text-white' : 'text-[#10307D]'
-                }`}
-              >
-                감으로 정하지 않고
-                <br />
-                현장과 고객을 기준으로 찾습니다.
-              </h2>
+  className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+    isDarkMode ? 'text-white' : 'text-[#10307D]'
+  }`}
+>
+  메뉴, 공간, 운영의 흐름을 파악하고
+  <br />
+  고객의 반응에서 방향을 찾습니다.
+</h2>
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
@@ -1799,9 +1801,9 @@ const BrandDirectionPage = () => {
                       isDarkMode ? 'text-white' : 'text-[#10307D]'
                     }`}
                   >
-                    방향이 분명해지면
+                    방향이 정해지면
                     <br />
-                    무엇을 해야 할지도 선명해집니다.
+                    무엇을 해야 할지도 보입니다.
                   </h2>
                 </div>
 
@@ -1812,7 +1814,7 @@ const BrandDirectionPage = () => {
                     }}
                     className="w-full rounded-2xl bg-[#10307D] px-8 py-5 text-xs font-black uppercase tracking-widest text-white shadow-2xl shadow-[#10307D]/20 transition-all hover:scale-[1.02] active:scale-95"
                   >
-                    우리 매장 방향 상담하기
+                    우리 매장 상담하기
                   </button>
 
                   <p
@@ -1820,8 +1822,9 @@ const BrandDirectionPage = () => {
                       isDarkMode
                     )}`}
                   >
-                    매장 안에 이미 있는 강점과 가능성을 찾아 고객에게 더
-                    분명하게 전달될 수 있도록 방향을 세웁니다.
+                    매장 안에 이미 있는 강점과 가능성을 찾아
+고객이 이해하고 기억할 수 있는 모습으로 다듬습니다.
+
                   </p>
                 </div>
               </div>
