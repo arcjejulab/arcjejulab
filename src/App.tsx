@@ -1566,22 +1566,20 @@ const BrandDirectionPage = () => {
           <div className="mx-auto max-w-7xl">
             <div className="mb-14">
               <p
-                className={`mb-6 text-xs font-black uppercase tracking-[0.45em] ${
-                  isDarkMode ? 'text-white/35' : 'text-[#10307D]/45'
-                }`}
-              >
-                When Direction Is Needed
-              </p>
+  className={`mb-6 text-xs font-semibold uppercase tracking-[0.35em] ${
+    isDarkMode ? 'text-white/35' : 'text-[#103070]/45'
+  }`}
+>
+  Brand Check Signals
+</p>
 
-              <h2
-                className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
-                  isDarkMode ? 'text-white' : 'text-[#10307D]'
-                }`}
-              >
-                이런 고민이 있다면
-                <br />
-                방향부터 다시 살펴봐야 합니다.
-              </h2>
+<h2
+  className={`break-keep text-4xl font-black leading-tight tracking-[-0.04em] md:text-6xl ${
+    isDarkMode ? 'text-white' : 'text-[#103070]'
+  }`}
+>
+  브랜드 점검이 필요한 신호
+</h2>
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
